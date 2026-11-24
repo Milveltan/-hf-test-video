@@ -1,125 +1,15 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-<style>
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  width: 1080px;
-  height: 1920px;
-  overflow: hidden;
-  background: #101022;
-}
-#root {
-  position: relative;
-  width: 1080px;
-  height: 1920px;
-  overflow: hidden;
-  font-family: Arial, sans-serif;
-}
-#scene {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-#title {
-  position: absolute;
-  top: 170px;
-  width: 100%;
-  text-align: center;
-  color: white;
-  font-size: 76px;
-  font-weight: bold;
-}
-#title span {
-  color: #77aaff;
-}
-#caption {
-  position: absolute;
-  bottom: 220px;
-  left: 140px;
-  right: 140px;
-  padding: 30px;
-  background: #ffd43b;
-  border-radius: 24px;
-  text-align: center;
-  font-size: 48px;
-  font-weight: bold;
-  color: #171717;
-}
-</style>
-</head>
-<body>
-<div id="root" data-composition-id="main"
-data-start="0" data-duration="5"
-data-width="1080" data-height="1920">
-
-<svg id="scene" viewBox="0 0 1080 1920">
-<defs>
-  <radialGradient id="light">
-    <stop offset="0%" stop-color="#ffe6a1"/>
-    <stop offset="100%" stop-color="#ffe6a1" stop-opacity="0"/>
-  </radialGradient>
-  <linearGradient id="bg" x2="0" y2="1">
-    <stop stop-color="#17142d"/>
-    <stop offset="1" stop-color="#443124"/>
-  </linearGradient>
-</defs>
-
-<rect width="1080" height="1920" fill="url(#bg)"/>
-
-<path d="M0 0 L360 0 L280 550 L400 940 L230 1500 L0 1920Z" fill="#201b30"/>
-<path d="M1080 0 L730 0 L800 620 L680 1020 L860 1500 L1080 1920Z" fill="#292237"/>
-
-<ellipse id="glow" cx="540" cy="1050" rx="410" ry="480" fill="url(#light)" opacity=".5"/>
-
-<path d="M0 1500 Q540 1300 1080 1500 L1080 1920 L0 1920Z" fill="#302a28"/>
-
-<g id="door">
-  <rect x="400" y="790" width="280" height="550" rx="120" fill="#191921" stroke="#967954" stroke-width="22"/>
-  <path d="M540 800 V1330" stroke="#f7c978" stroke-width="9"/>
-</g>
-
-<g id="explorer">
-  <circle cx="540" cy="1370" r="45" fill="#ddb58c"/>
-  <rect x="495" y="1410" width="90" height="135" rx="28" fill="#7796a6"/>
-  <path d="M518 1540 L505 1650 M562 1540 L575 1650" stroke="#24252e" stroke-width="30" stroke-linecap="round"/>
-</g>
-</svg>
-
-<div id="title">
-  Encontraron algo<br><span>BAJO TIERRA</span>
-</div>
-
-<div id="caption">
-  Nadie sabía qué había dentro
-</div>
-
-</div>
-
-<script>
-window.__timelines = window.__timelines || {};
-const tl = gsap.timeline({paused:true});
-
-tl.fromTo("#scene",
-  {scale:1},
-  {scale:1.15,duration:5,ease:"none"},0);
-
-tl.from("#title",
-  {opacity:0,y:-60,duration:0.8},0);
-
-tl.from("#explorer",
-  {y:100,opacity:0,duration:1.4},0.5);
-
-tl.to("#glow",
-  {opacity:0.95,duration:3},1);
-
-tl.from("#caption",
-  {opacity:0,y:70,duration:0.7},2);
-
-window.__timelines.main = tl;
-</script>
-</body>
-</html>
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=720"><script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script><style>
+*{box-sizing:border-box}html,body{margin:0;width:720px;height:1280px;overflow:hidden;background:#0a1729;font-family:Arial,sans-serif}#main{position:relative;width:720px;height:1280px;overflow:hidden;background:radial-gradient(ellipse at 50% 38%,#244d64,#101f36 65%,#091321)}.shot{position:absolute;inset:0;opacity:0}.art{position:absolute;top:180px;left:0;width:720px;height:780px}.tag{position:absolute;top:120px;left:54px;color:#7bd9e8;font-size:22px;letter-spacing:4px;font-weight:700}.heading{position:absolute;top:160px;left:54px;right:54px;font-size:50px;line-height:1.04;color:#eef9ff;font-weight:800;letter-spacing:-1px}.sub{position:absolute;top:970px;left:54px;right:54px;text-align:center;font-weight:800;font-size:48px;line-height:1.12;min-height:110px;color:white;text-shadow:0 3px 7px #000;background:#091321e8;border-radius:22px;padding:20px 12px;opacity:0}.word{display:inline-block;margin:0 5px 2px;color:#f1f5fa}.progress{position:absolute;bottom:99px;left:54px;width:612px;height:4px;background:#ffffff25;border-radius:4px}.fill{height:4px;background:#65d7e3;transform-origin:left;transform:scaleX(0)}.foot{position:absolute;bottom:63px;left:54px;font-size:15px;letter-spacing:3px;color:#a3bbc9}.ring{fill:none;stroke:#5dd7e6;stroke-width:2;opacity:.35}</style></head><body><div id="main" data-composition-id="main" data-start="0" data-duration="62.5" data-width="720" data-height="1280"><audio id="voice" src="voice.mp3" data-start="0" data-duration="62.4848" data-track-index="1"></audio><div id="shots"></div><div id="subs"></div><div class="progress"><div class="fill"></div></div><div class="foot">BIOLOGÍA · EN MOVIMIENTO</div></div><script>
+const lines=["El agua fría en tu cara.", "No es solo una sorpresa.", "Es un botón de supervivencia.", "Activa un antiguo reflejo.", "Y tu cuerpo comienza a reaccionar.", "El frío golpea tu rostro.", "El nervio trigémino lo siente.", "Envía una señal al cerebro.", "Es una respuesta de emergencia.", "El cerebro activa el freno.", "Se llama reflejo de inmersión.", "Tu corazón puede bajar la velocidad.", "Sus latidos se vuelven más lentos.", "La sangre se redistribuye.", "Disminuye la circulación en tus extremidades.", "Priorizando tu cerebro.", "Y tu corazón.", "Es una estrategia de supervivencia.", "Pero hay algo más.", "El frío también despierta tus sentidos.", "Es un estímulo repentino.", "Tu atención cambia de inmediato.", "El estrés puede disminuir.", "La ansiedad puede perder intensidad.", "Vuelves al presente.", "No necesitas una ducha.", "Solo un poco de agua fresca.", "Cierra los ojos y salpica suavemente.", "Respira con naturalidad.", "Y descubre cómo un estímulo tan simple...", "Puede cambiar la respuesta de tu cuerpo."], times=[0, 1.66, 3.21, 5.17, 7.08, 9.31, 11.17, 13.21, 14.94, 17.5, 19.35, 21.58, 23.6, 25.91, 27.55, 30.21, 31.72, 33.07, 35.02, 36.22, 38.91, 40.79, 42.84, 44.73, 47.15, 48.82, 50.31, 52.2, 55.0, 56.65, 59.68, 62.4848];
+const scenes=[[0,'EL IMPACTO','face'],[2,'UN REFLEJO ANTIGUO','switch'],[4,'LA RESPUESTA','body'],[5,'CONTACTO CON EL FRÍO','splash'],[6,'NERVIO TRIGÉMINO','nerve'],[7,'SEÑAL AL CEREBRO','signal'],[9,'EL FRENO NATURAL','brain'],[10,'REFLEJO DE INMERSIÓN','body'],[11,'EL RITMO CARDÍACO','heart'],[12,'LATIDOS MÁS LENTOS','ecg'],[13,'FLUJO SANGUÍNEO','flow'],[14,'CIRCULACIÓN PERIFÉRICA','limbs'],[15,'ÓRGANOS VITALES','brain'],[16,'EL CORAZÓN','heart'],[17,'SUPERVIVENCIA','body'],[18,'ALGO MÁS','ripple'],[19,'LOS SENTIDOS','eyes'],[21,'ATENCIÓN','focus'],[22,'MENOS TENSIÓN','stress'],[24,'EL PRESENTE','face'],[25,'AGUA FRESCA','sink'],[27,'UN ESTÍMULO SIMPLE','splash'],[28,'RESPIRA','breath'],[30,'TU CUERPO RESPONDE','body']];
+const defs=`<defs><linearGradient id="skin" x1="0" x2="1" y2="1"><stop stop-color="#f5c5a2"/><stop offset="1" stop-color="#b87965"/></linearGradient><linearGradient id="shirt" x2="0" y2="1"><stop stop-color="#477e94"/><stop offset="1" stop-color="#17354e"/></linearGradient><radialGradient id="water"><stop stop-color="#d9fbff"/><stop offset="1" stop-color="#46bfdc"/></radialGradient></defs>`;
+function face(eyes=false){return `<g class="subject"><path d="M125 620 Q130 465 275 455 L445 455 Q590 465 595 620 L595 730 H125Z" fill="url(#shirt)"/><path d="M300 405 L300 495 Q360 540 420 495 L420 405" fill="#bd806c"/><ellipse cx="360" cy="300" rx="146" ry="185" fill="url(#skin)"/><path d="M216 277 Q178 118 300 105 Q450 66 503 196 L506 281 Q478 198 442 185 Q335 230 240 193Z" fill="#202d40"/><ellipse cx="213" cy="313" rx="20" ry="36" fill="#c78d76"/><ellipse cx="507" cy="313" rx="20" ry="36" fill="#c78d76"/><path d="M262 269 Q296 250 326 270 M394 270 Q425 250 458 269" fill="none" stroke="#563f3b" stroke-width="8" stroke-linecap="round"/><path d="M260 304 Q294 323 326 304 M394 304 Q427 323 459 304" stroke="#403641" stroke-width="5" fill="none" stroke-linecap="round"/>${eyes?'<ellipse cx="294" cy="304" rx="12" ry="15" fill="#304453"/><ellipse cx="426" cy="304" rx="12" ry="15" fill="#304453"/>':''}<path d="M359 307 L346 354 Q359 363 375 354" fill="none" stroke="#a86c5d" stroke-width="5" stroke-linecap="round"/><path d="M327 395 Q360 410 393 395" fill="none" stroke="#874c4b" stroke-width="6" stroke-linecap="round"/></g>`}
+function brain(x=360,y=305,s=1){return `<g class="organ" transform="translate(${x} ${y}) scale(${s})"><path d="M-8 -100 C-48 -145 -105 -104 -105 -65 C-148 -45 -132 18 -108 35 C-112 84 -51 111 -9 79 C25 118 98 88 104 40 C151 12 131 -49 106 -66 C95 -117 37 -137 -8 -100Z" fill="#d98d9c" stroke="#f5b5c0" stroke-width="5"/><path d="M0 -100 V75 M-95 -58 Q-32 -86 -47 -20 T-62 54 M96 -58 Q32 -86 47 -20 T62 54 M-108 10 Q-80 -4 -54 14 M108 10 Q80 -4 54 14" stroke="#8d496a" stroke-width="7" fill="none" stroke-linecap="round"/></g>`}
+function heart(x=360,y=390,s=1){return `<g transform="translate(${x} ${y}) scale(${s})"><g class="beat"><path d="M-15 -90 C-105 -160 -180 -32 -110 55 L0 155 L115 42 C180 -40 88 -150 0 -80Z" fill="#d95870" stroke="#ff9b9f" stroke-width="5"/><path d="M-20 -90 L-32 -155 Q-35 -185 -5 -185 L25 -185 L25 -110 M35 -100 L65 -158" fill="none" stroke="#ed8290" stroke-width="26" stroke-linecap="round"/><path d="M-75 10 Q-20 -55 25 -15 T85 35" fill="none" stroke="#f3a6aa" stroke-width="6"/></g></g>`}
+function body(kind){return `<g class="subject"><ellipse cx="360" cy="150" rx="73" ry="90" fill="#35536d" stroke="#82aebd" stroke-width="3"/><path d="M307 232 Q251 236 224 300 L164 494 Q158 521 183 531 L220 528 L275 380 L278 520 L246 735 H320 L360 550 L400 735 H474 L442 520 L445 380 L500 528 L537 531 Q562 521 556 494 L496 300 Q469 236 413 232Z" fill="#35536d" stroke="#82aebd" stroke-width="3"/><g fill="none" stroke="#f47b89" stroke-width="8" stroke-linecap="round" opacity="${kind==='limbs'?'.3':'.8'}"><path d="M360 340 V220 M360 340 L258 320 L194 507 M360 340 L462 320 L526 507 M360 340 V510 L286 712 M360 510 L434 712"/></g>${brain(360,145,.39)}${heart(367,343,.37)}</g>`}
+function drops(){return Array.from({length:19},(_,i)=>`<ellipse class="drop" cx="${90+(i*83)%540}" cy="${160+(i*47)%380}" rx="${6+i%5*2}" ry="${12+i%4*5}" transform="rotate(${i%2?35:-35} ${90+(i*83)%540} ${160+(i*47)%380})" fill="url(#water)" opacity=".85"/>`).join('')}
+function visual(k){let a='';if(['face','eyes','splash','nerve','signal','focus','stress','breath','switch'].includes(k))a=face(['eyes','focus'].includes(k));if(['face','splash'].includes(k))a+=drops();if(k==='nerve'||k==='signal')a+=`<g class="pulse" fill="none" stroke="#ffe17c" stroke-width="6" stroke-linecap="round"><path d="M360 195 Q420 220 446 271 L490 293 M446 271 L452 353 L398 383 M360 195 Q300 220 274 271 L230 293 M274 271 L268 353 L322 383"/><circle cx="360" cy="195" r="17" fill="#fff3ad"/></g>`;if(k==='switch')a+=`<g class="pulse"><rect x="240" y="540" width="240" height="85" rx="43" fill="#10253b" stroke="#68e4ef" stroke-width="3"/><circle cx="429" cy="582" r="33" fill="#72e6d3"/><text x="270" y="592" fill="white" font-size="24" font-weight="bold">ACTIVO</text></g>`;if(['body','limbs','flow'].includes(k))a=body(k);if(k==='brain')a=brain(360,345,1.65)+`<circle class="pulse ring" cx="360" cy="345" r="245"/>`;if(['heart','ecg'].includes(k))a=heart(360,315,1.35)+`<path class="pulse" d="M75 590 H205 L230 560 L255 650 L282 510 L310 590 H445 L470 560 L495 650 L522 510 L550 590 H645" fill="none" stroke="#71e6d7" stroke-width="7" stroke-linejoin="round"/>`;if(k==='ripple')a=face()+`<circle class="pulse ring" cx="360" cy="320" r="250"/><circle class="pulse ring" cx="360" cy="320" r="290"/>`;if(k==='focus')a+=`<path class="pulse" d="M110 235 V190 H165 M555 190 H610 V235 M110 410 V455 H165 M555 455 H610 V410" stroke="#70e5df" fill="none" stroke-width="6"/>`;if(k==='stress')a+=`<g class="pulse" fill="none" stroke="#e57b8e" stroke-width="5" opacity=".65"><path d="M140 220 Q70 150 155 100 M580 220 Q650 150 565 100"/></g>`;if(k==='breath')a+=`<circle class="pulse ring" cx="360" cy="520" r="140"/>`;if(k==='sink')a=`<g class="subject"><path d="M215 420 V205 Q215 125 300 125 H415 Q490 125 490 205 V250" fill="none" stroke="#a5b9c8" stroke-width="42" stroke-linecap="round"/><path d="M490 270 V485" stroke="#69dce7" stroke-width="23" stroke-linecap="round" class="pulse"/><ellipse cx="360" cy="545" rx="280" ry="115" fill="#b0c9d3"/><ellipse cx="360" cy="525" rx="245" ry="77" fill="#30536c"/><path d="M80 550 Q100 720 360 720 Q620 720 640 550" fill="#789bab"/><path d="M185 440 Q250 410 310 470 L370 510 Q320 558 260 530 L175 490Z M540 440 Q475 410 415 470 L355 510 Q405 558 465 530 L550 490Z" fill="#e4b092"/></g>`;return `<svg class="art" viewBox="0 0 720 780">${defs}<circle cx="360" cy="365" r="294" fill="#75d8e6" opacity=".045"/><circle cx="360" cy="365" r="272" class="ring"/>${a}</svg>`}
+const tl=gsap.timeline({paused:true});window.__timelines=window.__timelines||{};window.__timelines.main=tl;
+scenes.forEach(([idx,title,k],j)=>{let start=times[idx],end=j+1<scenes.length?times[scenes[j+1][0]]:62.5,d=end-start;let el=document.createElement('div');el.className='shot';el.innerHTML=`<div class="tag">${String(j+1).padStart(2,'0')} / CUERPO HUMANO</div><div class="heading">${title}</div>${visual(k)}`;document.querySelector('#shots').append(el);tl.set(el,{opacity:1},start);if(j)tl.fromTo(el,{opacity:0},{opacity:1,duration:.16},start);tl.fromTo(el.querySelector('.art'),{scale:.94,y:12},{scale:1.035,y:0,duration:d,ease:'sine.inOut'},start);tl.fromTo(el.querySelector('.heading'),{y:15,opacity:0},{y:0,opacity:1,duration:.26},start);el.querySelectorAll('.drop').forEach((x,i)=>tl.fromTo(x,{x:i%2?90:-90,y:-90,opacity:0},{x:0,y:65,opacity:.9,duration:Math.min(d,.65),ease:'power2.out'},start+i*.035));el.querySelectorAll('.pulse').forEach(x=>tl.fromTo(x,{opacity:.3},{opacity:1,duration:.45,repeat:Math.max(0,Math.floor(d/.45)-1),yoyo:true},start));el.querySelectorAll('.beat').forEach(x=>tl.fromTo(x,{scale:.96,transformOrigin:'50% 50%'},{scale:1.07,duration:.38,repeat:Math.max(0,Math.floor(d/.38)-1),yoyo:true},start));if(j+1<scenes.length)tl.set(el,{opacity:0},end);});
+lines.forEach((line,i)=>{let el=document.createElement('div');el.className='sub';let words=line.split(' ');words.forEach(w=>{let x=document.createElement('span');x.className='word';x.textContent=w;el.append(x)});document.querySelector('#subs').append(el);let s=times[i],e=times[i+1],sum=words.reduce((a,w)=>a+Math.max(2,w.length),0),t=s;tl.set(el,{opacity:1},s);[...el.children].forEach((x,j)=>{let dt=(e-s-.06)*Math.max(2,words[j].length)/sum;tl.set(x,{color:'#ffe17a'},t);tl.set(x,{color:'#f1f5fa'},t+dt);t+=dt});tl.set(el,{opacity:0},e)});tl.to('.fill',{scaleX:1,duration:62.5,ease:'none'},0);
+</script></body></html>
