@@ -6,7 +6,7 @@ on:
 jobs:
   render:
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 45
 
     steps:
       - name: Checkout
@@ -26,8 +26,8 @@ jobs:
             echo "$HOME/ffmpeg" >> "$GITHUB_PATH"
             export PATH="$HOME/ffmpeg:$PATH"
           fi
-          ffmpeg -version
-          ffprobe -version
+          ffmpeg -version | head -1
+          ffprobe -version | head -1
 
       - name: Cache dependencies
         uses: actions/cache@v4
@@ -36,10 +36,37 @@ jobs:
             ~/.npm
             ~/.cache/hyperframes
             ~/.cache/puppeteer
-          key: hyperframes-linux-v1
+          key: hyperframes-linux-v2-0.9.91
+
+      - name: Unpack project ZIP
+        working-directory: ./video
+        run: |
+          if [ -f proyecto.zip ]; then
+            unzip -o proyecto.zip
+            echo "proyecto.zip descomprimido"
+          else
+            echo "No hay proyecto.zip; se usan los archivos sueltos"
+          fi
+          ls -la
 
       - name: Install HyperFrames
-        run: npm install -g hyperframes
+        run: npm install -g hyperframes@0.9.91
+
+      - name: Sync captions with real audio
+        working-directory: ./video
+        continue-on-error: true
+        run: |
+          if [ -f script.txt ] && [ -f tools/align.mjs ]; then
+            hyperframes transcribe voice.mp3 --language es --model medium --engine whisper --timeout 900000
+            node tools/align.mjs
+          else
+            echo "Sin script.txt: se omite la sincronizacion"
+          fi
+
+      - name: Check composition
+        working-directory: ./video
+        continue-on-error: true
+        run: hyperframes lint .
 
       - name: Render video
         working-directory: ./video
@@ -49,5 +76,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: rendered-video
-          path: video/output.mp4
+          path: |
+            video/output.mp4
+            video/sync-report.txt
           if-no-files-found: error
