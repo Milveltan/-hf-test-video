@@ -1,0 +1,35 @@
+name: Render HyperFrames Video
+
+on:
+  workflow_dispatch:
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Install HyperFrames
+        run: npm install -g hyperframes
+
+      - name: Render video
+        working-directory: ./video
+        run: npx hyperframes render
+
+      - name: Upload video
+        uses: actions/upload-artifact@v4
+        with:
+          name: rendered-video
+          path: video/**/*.mp4
+          if-no-files-found: error
