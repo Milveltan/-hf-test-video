@@ -2,9 +2,12 @@
    Lee: window.WORDS (captions.js), window.SCENES (scenes.js), window.EPISODE_KEYWORDS, data-duration de #main.
    Hace: escenas por capas bg/mid/fg, cámara con paralaje (scene.cam), transiciones (scene.tr: fade|cut|flash|whip|glitch|zoom|wipe),
          títulos narrativos (scene.title / titleAt), grano animado, SHAKE(), subtítulos palabra por palabra (máx. 3 por grupo).
+   Formato: marco de escena = data-width × data-height de #main (sobrebarrido de 80 u por lado).
    Expone: WT(i) = inicio real de la palabra i · SHAKE(_,t,dur,amp) · window.__timelines.main */
 (function(){
-const W=window.WORDS, S=window.SCENES, DUR=+document.getElementById('main').dataset.duration;
+const W=window.WORDS, S=window.SCENES, MAIN=document.getElementById('main'), DUR=+MAIN.dataset.duration;
+/* formato variable (v2): lee data-width/data-height de #main · 1080x1920 (9:16) o 1080x1080 (1:1) */
+const MW=+MAIN.dataset.width||1080, MH=+MAIN.dataset.height||1920; window.FRAME={w:MW,h:MH};
 window.WT=i=>W[Math.max(0,Math.min(i,W.length-1))].s;
 const tl=gsap.timeline({paused:true});
 window.__timelines=window.__timelines||{};window.__timelines.main=tl;
@@ -15,7 +18,7 @@ window.SHAKE=(t,t0,dur,amp)=>{const n=Math.max(3,Math.round(dur/.04));for(let i=
 const times=S.map((s,i)=>i===0?0:Math.max(0,WT(s.w)-0.06));
 let html='';
 S.forEach((s,i)=>{
-  const lay=['bg','mid','fg'].map(L=>`<div class="L" id="${s.k}_${L}"><svg viewBox="-80 -80 1240 2080" xmlns="http://www.w3.org/2000/svg">${s[L]?s[L]():''}</svg></div>`).join('');
+  const lay=['bg','mid','fg'].map(L=>`<div class="L" id="${s.k}_${L}"><svg viewBox="-80 -80 ${MW+160} ${MH+160}" xmlns="http://www.w3.org/2000/svg">${s[L]?s[L]():''}</svg></div>`).join('');
   html+=`<div class="sc" id="sc_${s.k}">${lay}</div>`;
 });
 stage.innerHTML=html;

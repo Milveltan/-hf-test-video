@@ -51,6 +51,10 @@ Efectos de sonido en `index.html`: `<audio id="sfxNN" src="assets/sfx/x.wav" dat
 | dev2 | Programador de pelo corto, suéter verde olivo | gta-vi-13-anios |
 | publicista | Traje oscuro, camisa blanca | gta-vi-13-anios |
 | hacker | Sudadera con capucha, luz cian | gta-vi-13-anios |
+| hotspanish | Afro rizado, lentes, conjunto rosa, manga corta (ilustración propia) | hotspanish-antes-de-la-fama |
+| hotspanishNino | Versión infantil: afro, sin lentes, camisa roja (`kid`) | hotspanish-antes-de-la-fama |
+| hotspanishYT | Época de YouTube: sudadera gris con capucha | hotspanish-antes-de-la-fama |
+| tia · papa · senor | Tía cálida (pelo largo) · papá con gorra · señor de las tortas (canoso, barba) | hotspanish-antes-de-la-fama |
 
 ## lib/props.js — DLP
 - **Vehículos:** `car(id,{c1,c2,type:'sedan'|'sport',police,lights,rim})` (ruedas `id_wa/id_wb`, sirenas `id_lr/id_lb`) · `topCar({c,police})` vista cenital.
@@ -64,10 +68,12 @@ Filtros: `fSoft4/8/16/30 fGlow fNeon fWall fWood`. Materiales: `mMetal mChrome m
 Halos: `gGlowW gGlowR gGlowB gGlowC gGlowP gGlowA gShadow`. Desvanecidos: `gFadeB gFadeT`.
 
 ## lib/engine.js — motor
+**Formato variable (v2):** el marco de escena es `data-width × data-height` de `#main` (viewBox `-80 -80 W+160 H+160`). 9:16 = 1080×1920 · 1:1 = 1080×1080. En 1:1 el `index.html` ajusta `.L` a 1240×1240, título en top 70 px y subtítulos en top 800 px (62 px). `window.FRAME={w,h}` disponible en escenas.
 Transiciones: `fade cut flash whip glitch zoom wipe`. Cámara por capas con paralaje. `SHAKE(_,t,dur,amp)`. Títulos con barra dorada. Grano animado + viñeta. Subtítulos: máx. 3 palabras, amarilla la que suena, cian las de `EPISODE_KEYWORDS`.
 
 ## assets/sfx — efectos
 `boom cash click_ui coins crash engine flip glitch impact ping rain reveal_swell riser shutter siren stamp tick typing whoosh` + `music_bed.wav` (100 s, se regenera a la duración de cada video con `tools/music_bed.py`).
 
 ## Historial
+- 2026-11-25 · hotspanish-antes-de-la-fama (1:1): motor con formato variable; fichas HotSpanish (3 épocas), tía, papá, señor; utilería local en scenes.js candidata a props: `casita`, `iglesia`, `torta`, `camara`, `tripode`, `pantallaPlay`, `dust`.
 - 2026-11-24 · gta-vi-13-anios: base inicial (rig v3, vehículos, ciudades, motor modular, 20 efectos, música).
