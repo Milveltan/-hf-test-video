@@ -138,3 +138,40 @@ def(lg('mShelf',[[0,'#d8b38a'],[1,'#7a5236']]));
 
 window.DLP={car,topCar,skyline,isoBlock,palm,pine,cactus,mountains,rain,stars,crt,topMap,gameBox,bill,coin,phone,laptop,bigBen,parliament,newspaper,calendarPage,magnifier,trophy,mic,chip,server,shelf,winPattern};
 })();
+
+/* ===== v2 (25-nov-2026 · hotspanish) — utilería ampliada. Firmas estables; agregar, nunca borrar ===== */
+(function(){
+const {lg,rg,def,PRNG}=DL;
+const G=(id,x,y,s,inner,r=0)=>`<g transform="translate(${x} ${y}) scale(${s})${r?` rotate(${r})`:''}"><g id="${id}">${inner}</g></g>`;
+def(rg('p2_lens',[[0,'#7fd6ff'],[.6,'#1d3a6a'],[1,'#05070c']],.4,.35,.7));
+def(rg('p2_chile',[[0,'#ff7a5a'],[.6,'#d81e1e'],[1,'#6a0808']],.35,.3,.8));
+const P2={
+  /* casita(x,y,w,h,color,techo,luzVentana?) — fachada de pueblo con ventana y puerta (origen: base centro) */
+  casita:(x,y,w,h,c,roof,lit)=>`<g transform="translate(${x} ${y})"><rect x="${-w/2}" y="${-h}" width="${w}" height="${h}" fill="${c}" filter="url(#fWall)"/><rect x="${-w/2}" y="${-h}" width="${w}" height="10" fill="#00000030"/><path d="M${-w/2-14} ${-h} L${w/2+14} ${-h} L${w/2} ${-h-26} L${-w/2} ${-h-26}Z" fill="${roof}"/><rect x="${-w*.32}" y="${-h*.62}" width="${w*.22}" height="${h*.3}" rx="4" fill="${lit||'#2a1c1a'}"/><rect x="${w*.1}" y="${-h*.55}" width="${w*.2}" height="${h*.55}" rx="3" fill="#4a2c22"/></g>`,
+  /* torta(id,x,y,s) — torta mexicana */
+  torta:(id,x,y,s=1)=>G(id,x,y,s,`<path d="M-70 4 Q-60 -46 0 -46 Q60 -46 70 4Z" fill="#e3ad64"/><path d="M-40 -26 l10 -3 M2 -32 l10 2 M30 -20 l10 2" stroke="#fbe1aa" stroke-width="4"/><path d="M-72 6 Q-46 20 -20 6 T30 6 T74 6" fill="none" stroke="#7cae5c" stroke-width="10"/><path d="M-70 15 H70" stroke="#d0705a" stroke-width="11"/><path d="M-70 22 H70" stroke="#f3d27a" stroke-width="6"/><path d="M-72 26 Q0 52 72 26Z" fill="#c78c4e"/>`),
+  /* camara(id,x,y,s) — videocámara; luz REC = id_rec */
+  camara:(id,x,y,s=1)=>G(id,x,y,s,`<rect x="-90" y="-60" width="150" height="110" rx="16" fill="#23262f"/><rect x="-90" y="-60" width="150" height="110" rx="16" fill="none" stroke="url(#mMetal)" stroke-width="4"/><circle cx="74" cy="-5" r="46" fill="#14161c" stroke="url(#mMetal)" stroke-width="6"/><circle cx="74" cy="-5" r="26" fill="url(#p2_lens)"/><circle cx="64" cy="-15" r="7" fill="#fff" opacity=".7"/><rect x="-70" y="-80" width="50" height="22" rx="6" fill="#2e323c"/><circle id="${id}_rec" cx="-62" cy="-36" r="9" fill="#ff3b3b"/>`),
+  tripode:(x,y)=>`<path d="M${x} ${y} L${x-70} ${y+330} M${x} ${y} L${x+70} ${y+330} M${x} ${y} V${y+330}" stroke="#2a2d36" stroke-width="10"/>`,
+  /* pantallaPlay(color) — contenido de pantalla para laptop() con botón play genérico */
+  pantallaPlay:(c='#2b3550')=>`<rect x="-240" y="-302" width="480" height="286" fill="${c}"/><rect x="-60" y="-200" width="120" height="84" rx="22" fill="#f4f4f8"/><path d="M-16 -178 L24 -158 L-16 -138Z" fill="${c}"/>`,
+  /* dust(seed,n,w,h,color) — partículas flotantes; grupo id 'd'+seed */
+  dust:(seed,n,w,h,c='#ffe8c0')=>{const R=PRNG(seed);let s='';for(let i=0;i<n;i++)s+=`<circle cx="${(R()*w).toFixed(0)}" cy="${(R()*h).toFixed(0)}" r="${(1.5+R()*3.5).toFixed(1)}" fill="${c}" opacity="${(.25+R()*.5).toFixed(2)}"/>`;return `<g id="${'d'+seed}">${s}</g>`;},
+  /* bocadillo(id,x,y,w,txt,{s,c,bg,tail}) — globo de diálogo; tail 'l'|'r' */
+  bocadillo:(id,x,y,w,txt,o={})=>{o=Object.assign({s:40,c:'#1a1a26',bg:'#ffffff',tail:'l'},o);const h=o.s*2.2,tx=o.tail==='l'?-w*.25:w*.25;return G(id,x,y,1,`<rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" rx="${h/2}" fill="${o.bg}"/><path d="M${tx-14} ${h/2-2} L${tx+(o.tail==='l'?-26:26)} ${h/2+34} L${tx+14} ${h/2-2}Z" fill="${o.bg}"/><text y="${o.s*.36}" font-family="DatoSans" font-weight="900" font-size="${o.s}" fill="${o.c}" text-anchor="middle">${txt}</text>`);},
+  /* neon(id,x,y,txt,s,color) — letrero de neón (texto con brillo) */
+  neon:(id,x,y,txt,s=110,c='#ff4fb4')=>G(id,x,y,1,`<rect x="${-txt.length*s*.36}" y="${-s*.95}" width="${txt.length*s*.72}" height="${s*1.25}" rx="20" fill="#0c0612" stroke="#2a1a34" stroke-width="8"/><text font-family="DatoSans" font-weight="900" font-size="${s}" fill="${c}" text-anchor="middle" filter="url(#fNeon)" letter-spacing="6">${txt}</text><text font-family="DatoSans" font-weight="900" font-size="${s}" fill="#fff3fb" text-anchor="middle" letter-spacing="6">${txt}</text>`),
+  /* chile(id,x,y,s) — chile rojo brillante */
+  chile:(id,x,y,s=1)=>G(id,x,y,s,`<path d="M-10 -80 Q40 -60 30 20 Q20 90 -40 120 Q-10 60 -20 0 Q-30 -50 -10 -80Z" fill="url(#p2_chile)"/><path d="M-6 -70 Q20 -50 18 0" stroke="#fff" stroke-width="6" opacity=".4" fill="none"/><path d="M-12 -80 q-4 -30 20 -40" stroke="#3a8a3a" stroke-width="12" fill="none" stroke-linecap="round"/>`),
+  /* maquinita(id,x,y,s) — máquina para rapar */
+  maquinita:(id,x,y,s=1)=>G(id,x,y,s,`<rect x="-40" y="-120" width="80" height="220" rx="34" fill="url(#mMetal)"/><rect x="-46" y="-150" width="92" height="40" rx="8" fill="#2a2d36"/>${[0,1,2,3,4,5,6].map(i=>`<rect x="${-40+i*12}" y="-162" width="6" height="16" fill="#c8ccd4"/>`).join('')}<circle cy="20" r="12" fill="#2a2d36"/>`),
+  /* ruleta(id,x,y,r,colores[]) — ruleta de premios; girar '#id_w' con svgOrigin '0 0' */
+  ruleta:(id,x,y,r=200,cs=['#ff4fb4','#ffd24f','#5ff3ff','#7dffb0','#ff7a5a','#9a7aff'])=>{const n=cs.length;let w='';for(let i=0;i<n;i++){const a0=i/n*Math.PI*2,a1=(i+1)/n*Math.PI*2;w+=`<path d="M0 0 L${(Math.cos(a0)*r).toFixed(1)} ${(Math.sin(a0)*r).toFixed(1)} A${r} ${r} 0 0 1 ${(Math.cos(a1)*r).toFixed(1)} ${(Math.sin(a1)*r).toFixed(1)}Z" fill="${cs[i]}"/><text x="${(Math.cos((a0+a1)/2)*r*.66).toFixed(1)}" y="${(Math.sin((a0+a1)/2)*r*.66+14).toFixed(1)}" font-family="DatoSans" font-weight="900" font-size="${r*.18}" fill="#1a1020" text-anchor="middle">$</text>`;}
+    return `<g transform="translate(${x} ${y})"><g id="${id}"><circle r="${r+18}" fill="#2a1a34" stroke="url(#mMetal)" stroke-width="10"/><g id="${id}_w">${w}</g><circle r="${r*.12}" fill="url(#mCoin)"/><path d="M-18 ${-r-30} L18 ${-r-30} L0 ${-r+12}Z" fill="#fff"/></g></g>`;},
+  /* alcancia(id,x,y,s) — cochinito de ahorro */
+  alcancia:(id,x,y,s=1)=>G(id,x,y,s,`<ellipse rx="150" ry="110" fill="#ff8fb8"/><ellipse cx="-40" cy="-40" rx="70" ry="40" fill="#ffc0d8" opacity=".6"/><circle cx="150" cy="-10" r="44" fill="#ff7aa8"/><circle cx="140" cy="-14" r="7" fill="#7a2a4a"/><circle cx="162" cy="-14" r="7" fill="#7a2a4a"/><circle cx="90" cy="-50" r="9" fill="#2a1020"/><path d="M60 -110 l20 -40 l20 40z" fill="#ff7aa8"/><rect x="-40" y="-112" width="80" height="12" rx="6" fill="#7a2a4a"/>${[-90,-30,40,100].map(v=>`<rect x="${v-14}" y="90" width="28" height="44" rx="8" fill="#ff7aa8"/>`).join('')}`),
+  /* mansion(id,x,y,s,luz) — mansión moderna genérica de noche */
+  mansion:(id,x,y,s=1,lit='#ffd88a')=>G(id,x,y,s,`<rect x="-420" y="-260" width="840" height="260" fill="#2a2638"/><rect x="-300" y="-420" width="600" height="170" fill="#332e44"/><rect x="-440" y="-276" width="880" height="22" fill="#1a1626"/><rect x="-320" y="-436" width="640" height="22" fill="#1a1626"/>${[-380,-250,-120,10,140,270].map(v=>`<rect x="${v}" y="-220" width="100" height="160" fill="${lit}" opacity=".9"/>`).join('')}${[-260,-120,20,160].map(v=>`<rect x="${v}" y="-390" width="100" height="110" fill="${lit}" opacity=".8"/>`).join('')}<rect x="-60" y="-120" width="120" height="120" fill="#5a4030"/><rect x="-470" y="0" width="940" height="30" fill="#4a7ad8" opacity=".6"/>`)
+};
+Object.assign(window.DLP,P2);
+})();

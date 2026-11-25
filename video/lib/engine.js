@@ -50,7 +50,7 @@ S.forEach((s,i)=>{
     tl.set('#titleT',{textContent:s.title},tt);
     tl.fromTo('#title',{opacity:0,y:-30},{opacity:1,y:0,duration:.35,ease:'back.out(2)',immediateRender:false},tt);
     tl.fromTo('#titleBar',{width:0},{width:360,duration:.5,ease:'power3.out',immediateRender:false},tt+.1);
-    if(i<S.length-1)tl.to('#title',{opacity:0,y:-20,duration:.3},Math.min(tt+2.2,t1-.1));}
+    tl.to('#title',{opacity:0,y:-20,duration:.3},tt+2.2);} /* v3: el título siempre se va a los 2.2 s (antes se quedaba pegado si la escena era corta) */
 });
 tl.to('#black',{opacity:0,duration:.35},0);
 /* ---- defs compartidos (materiales) ---- */
@@ -71,9 +71,10 @@ groups.forEach((G,gi)=>{
   const e=Math.min(nx,last+.6);
   tl.fromTo('#cg'+gi,{opacity:0,y:26,scale:.9},{opacity:1,y:0,scale:1,duration:.14,ease:'back.out(2.4)',immediateRender:false},s);
   tl.set('#cg'+gi,{opacity:0},e);
-  G.forEach(i=>{const k=KEY.has(norm(W[i].t));
-    tl.set('#w'+i,{color:'#ffe14f',scale:1.08},W[i].s);
-    tl.set('#w'+i,{color:k?'#5ff3ff':'#ffffff',scale:1},Math.min(W[i].e+.02,i<W.length-1?W[i+1].s:W[i].e+.2));});
+  /* v3: un solo color (blanco) por defecto; la palabra activa solo hace "pop". window.CAPTION_HIGHLIGHT=true recupera amarillo/cian */
+  G.forEach(i=>{const k=KEY.has(norm(W[i].t)), HL=window.CAPTION_HIGHLIGHT===true, off=Math.min(W[i].e+.02,i<W.length-1?W[i+1].s:W[i].e+.2);
+    tl.set('#w'+i,HL?{color:'#ffe14f',scale:1.08}:{scale:1.1},W[i].s);
+    tl.set('#w'+i,HL?{color:k?'#5ff3ff':'#ffffff',scale:1}:{scale:1},off);});
 });
 tl.set({},{},DUR);
 })();

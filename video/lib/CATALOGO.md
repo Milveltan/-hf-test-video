@@ -36,6 +36,7 @@ S.push({k:'clave', w:<índice de palabra donde arranca>, tr:'fade|cut|flash|whip
 Efectos de sonido en `index.html`: `<audio id="sfxNN" src="assets/sfx/x.wav" data-word="N" data-offset="-0.1" data-start="0" data-duration=".." data-volume=".." data-track-index="único">`.
 
 ## lib/characters.js — Rig v3
+- **v3.1:** `hairStyle:'afro'` (afro voluminoso, usado por las fichas HotSpanish).
 - `makeChar(id, spec)` → SVG. Origen en los pies, alto ≈ 640 u, 3/4 hacia la derecha (escala negativa en `N()` = espejo).
 - spec: `skin[3] hair[2] hairStyle(short|curly|long|bald) top[2] top2 pants[2] shoes iris rim hood glasses beard cap headphones silhouette sleeve(long|short) kid scale`.
 - Grupos animables (`id_` + ): `torso head thF shF thB shB uaF faF hF uaB faB hB eyes iris blink brows mN mO mS`.
@@ -63,17 +64,24 @@ Efectos de sonido en `index.html`: `<audio id="sfxNN" src="assets/sfx/x.wav" dat
 - **Pantallas:** `crt(id,screenSvg)` · `phone(id,screenSvg)` · `laptop(id,screenSvg)` · `topMap(seed)` (mapa cenital de calles).
 - **Objetos:** `gameBox(id,{title,sub,c1,c2,art})` · `newspaper(id,head,sub)` · `calendarPage(id,num,label,color)` · `bill()` · `coin(r)` · `magnifier` · `trophy` · `mic` · `chip(id,color)` · `server(x,y,h)` · `shelf(x,y,w)`.
 
+## lib/props.js — v2 (DLP, 25-nov-2026)
+`casita(x,y,w,h,c,techo,luz)` · `torta(id,x,y,s)` · `camara(id,x,y,s)` (luz `id_rec`) · `tripode(x,y)` · `pantallaPlay(c)` · `dust(seed,n,w,h,c)` (grupo `d<seed>`) · `bocadillo(id,x,y,w,txt,{s,c,bg,tail})` · `neon(id,x,y,txt,s,c)` · `chile(id,x,y,s)` · `maquinita(id,x,y,s)` · `ruleta(id,x,y,r,colores)` (girar `#id_w`) · `alcancia(id,x,y,s)` · `mansion(id,x,y,s,luz)`.
+
 ## lib/core.js — materiales y luces (`url(#…)`)
 Filtros: `fSoft4/8/16/30 fGlow fNeon fWall fWood`. Materiales: `mMetal mChrome mGlass mWin mTire mPaper mBill mCoin mShelf`.
 Halos: `gGlowW gGlowR gGlowB gGlowC gGlowP gGlowA gShadow`. Desvanecidos: `gFadeB gFadeT`.
 
 ## lib/engine.js — motor
+**v3 (25-nov-2026):** subtítulos de UN solo color (blanco con contorno, misma fuente); la palabra activa solo hace pop (escala 1.1). `window.CAPTION_HIGHLIGHT=true` recupera amarillo/cian. Los títulos narrativos siempre desaparecen a los 2.2 s.
 **Formato variable (v2):** el marco de escena es `data-width × data-height` de `#main` (viewBox `-80 -80 W+160 H+160`). 9:16 = 1080×1920 · 1:1 = 1080×1080. En 1:1 el `index.html` ajusta `.L` a 1240×1240, título en top 70 px y subtítulos en top 800 px (62 px). `window.FRAME={w,h}` disponible en escenas.
 Transiciones: `fade cut flash whip glitch zoom wipe`. Cámara por capas con paralaje. `SHAKE(_,t,dur,amp)`. Títulos con barra dorada. Grano animado + viñeta. Subtítulos: máx. 3 palabras, amarilla la que suena, cian las de `EPISODE_KEYWORDS`.
 
 ## assets/sfx — efectos
+**Normalizados (25-nov-2026)** a ≈ −21/−24 LUFS. Regla de mezcla: voz `voice.mp3` normalizada a −16 LUFS con `tools/voice_norm.sh` y `data-volume="1"`; TODOS los efectos `data-volume="0.5"`; música 0.12. Todo sonido nuevo se normaliza igual antes de sumarlo.
 `boom cash click_ui coins crash engine flip glitch impact ping rain reveal_swell riser shutter siren stamp tick typing whoosh` + `music_bed.wav` (100 s, se regenera a la duración de cada video con `tools/music_bed.py`).
 
 ## Historial
+- 2026-11-25 · hotspanish-parte-2-la-transformacion (1:1, 81 s, 21 escenas): props v2 (utilería del episodio 1 promovida + bocadillo, neon, chile, maquinita, ruleta, alcancia, mansion); primera mezcla con voz −16 LUFS y efectos al 50 %.
+- 2026-11-25 · ajustes de calidad: engine v3 (subtítulos un color, títulos que se van), afro en el rig, sfx normalizados, `tools/voice_norm.sh`.
 - 2026-11-25 · hotspanish-antes-de-la-fama (1:1): motor con formato variable; fichas HotSpanish (3 épocas), tía, papá, señor; utilería local en scenes.js candidata a props: `casita`, `iglesia`, `torta`, `camara`, `tripode`, `pantallaPlay`, `dust`.
 - 2026-11-24 · gta-vi-13-anios: base inicial (rig v3, vehículos, ciudades, motor modular, 20 efectos, música).

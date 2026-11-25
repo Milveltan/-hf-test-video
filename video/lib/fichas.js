@@ -11,9 +11,9 @@ window.FICHAS=Object.assign(window.FICHAS||{},{
   hacker:{skin:['#d9a07a','#9a6448','#4a2a22'],hair:['#151012','#050405'],hairStyle:'short',top:['#2a2e3a','#0a0b10'],pants:['#1e2230','#08090e'],iris:'#2a1a12',rim:'#5ff3ff',hood:true},
 
   /* [hotspanish-antes-de-la-fama] — personaje ilustrado propio (no retrato) */
-  hotspanish:{skin:['#e3a57c','#b06f4e','#62382c'],hair:['#3a2418','#140a06'],hairStyle:'curly',top:['#ff5fb4','#a3196a'],pants:['#ff6fbd','#a3196a'],shoes:'#f6f6f6',iris:'#2a1810',rim:'#ffb0e0',glasses:true,sleeve:'short'},
-  hotspanishNino:{skin:['#e3a57c','#b06f4e','#62382c'],hair:['#3a2418','#140a06'],hairStyle:'curly',top:['#d8362f','#7a1414'],pants:['#3a4258','#161a28'],shoes:'#f2f2f2',iris:'#2a1810',rim:'#ffd59a',kid:true,sleeve:'short'},
-  hotspanishYT:{skin:['#e3a57c','#b06f4e','#62382c'],hair:['#3a2418','#140a06'],hairStyle:'curly',top:['#9aa0ab','#4a4f5a'],pants:['#2c3550','#121626'],shoes:'#f2f2f2',iris:'#2a1810',rim:'#7fd6ff',hood:true},
+  hotspanish:{skin:['#e3a57c','#b06f4e','#62382c'],hair:['#3a2418','#140a06'],hairStyle:'afro',top:['#ff5fb4','#a3196a'],pants:['#ff6fbd','#a3196a'],shoes:'#f6f6f6',iris:'#2a1810',rim:'#ffb0e0',glasses:true,sleeve:'short'},
+  hotspanishNino:{skin:['#e3a57c','#b06f4e','#62382c'],hair:['#3a2418','#140a06'],hairStyle:'afro',top:['#d8362f','#7a1414'],pants:['#3a4258','#161a28'],shoes:'#f2f2f2',iris:'#2a1810',rim:'#ffd59a',kid:true,sleeve:'short'},
+  hotspanishYT:{skin:['#e3a57c','#b06f4e','#62382c'],hair:['#3a2418','#140a06'],hairStyle:'afro',top:['#9aa0ab','#4a4f5a'],pants:['#2c3550','#121626'],shoes:'#f2f2f2',iris:'#2a1810',rim:'#7fd6ff',hood:true},
   tia:{skin:['#e0a07a','#a86a4c','#5e3628'],hair:['#2a1a14','#0c0806'],hairStyle:'long',top:['#3f8a7a','#16403a'],pants:['#4a3a5a','#1e1626'],iris:'#2a1810',rim:'#ffcf8a'},
   papa:{skin:['#d99a72','#a0644a','#583226'],hair:['#1e1612','#080604'],hairStyle:'short',top:['#4a6a9a','#1c2c48'],pants:['#3a3a46','#14141c'],iris:'#2a1810',rim:'#ffd59a',cap:'#8a3a2a'},
   senor:{skin:['#d9a07a','#a0644a','#5a3428'],hair:['#d8d0c4','#8a8278'],hairStyle:'short',top:['#f2efe6','#bdb6a6'],pants:['#3a3328','#16130e'],iris:'#2a1810',rim:'#ffcf8a',beard:true},
