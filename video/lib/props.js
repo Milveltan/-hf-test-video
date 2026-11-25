@@ -175,3 +175,64 @@ const P2={
 };
 Object.assign(window.DLP,P2);
 })();
+
+/* ===== v3 (25-nov-2026 · yamaguchi-dos-bombas) — historia, guerra, oficina antigua, hogar japonés. Firmas estables; agregar, nunca borrar ===== */
+(function(){
+const {lg,rg,def,PRNG}=DL;
+const G=(id,x,y,s,inner,r=0)=>`<g transform="translate(${x} ${y}) scale(${s})${r?` rotate(${r})`:''}"><g id="${id}">${inner}</g></g>`;
+def(rg('p3_cap',[[0,'#fff4d8'],[.35,'#f2b872'],[.7,'#9a6a5a'],[1,'#4a3a44']],.45,.4,.7));
+def(lg('p3_stem',[[0,'#7a5a5a'],[.5,'#d8a27a'],[1,'#5a4448']],0,0,1,0));
+def(rg('p3_fire',[[0,'#ffffff'],[.3,'#fff2b0'],[.7,'#ff8a3a',.8],[1,'#ff4a1a',0]]));
+def(lg('p3_wood',[[0,'#8a5a36'],[1,'#4a2c18']],0,0,0,1));
+def(lg('p3_roof',[[0,'#4a4a56'],[1,'#1e1e26']],0,0,0,1));
+def(lg('p3_blue',[[0,'#1f4f8a'],[1,'#0f2a52']],0,0,1,1));
+def(lg('p3_conc',[[0,'#a8a4a0'],[1,'#5a5652']],0,0,1,1));
+def(rg('p3_flame',[[0,'#fffbe0'],[.45,'#ffd04a'],[1,'#ff7a1a',0]],.5,.65,.6));
+const P3={
+  /* hongo(id,x,y,s) — nube de hongo atómica (origen: base). Grupos: id_stem, id_cap, id_ring, id_fire. Alto ≈ 760 u */
+  hongo:(id,x,y,s=1,seed=7)=>{const R=PRNG(seed);let cap='',ring='';
+    for(let i=0;i<34;i++){const a=R()*Math.PI*2,d=Math.sqrt(R());const cx=Math.cos(a)*230*d,cy=-640+Math.sin(a)*110*d,r=60+R()*55;cap+=`<circle cx="${cx.toFixed(0)}" cy="${cy.toFixed(0)}" r="${r.toFixed(0)}" fill="url(#p3_cap)"/>`;}
+    for(let i=0;i<14;i++){const a=i/14*Math.PI*2,cx=Math.cos(a)*150,cy=-470+Math.sin(a)*26,r=36+R()*18;ring+=`<circle cx="${cx.toFixed(0)}" cy="${cy.toFixed(0)}" r="${r.toFixed(0)}" fill="#b8907e" opacity=".9"/>`;}
+    let base='';for(let i=0;i<16;i++){const cx=-360+i*48+R()*20,r=50+R()*40;base+=`<circle cx="${cx.toFixed(0)}" cy="${(-20-R()*40).toFixed(0)}" r="${r.toFixed(0)}" fill="#8a6a62"/>`;}
+    return G(id,x,y,s,`<ellipse cx="0" cy="-640" rx="420" ry="260" fill="url(#gGlowA)" opacity=".6"/><g id="${id}_stem"><path d="M-70 0 Q-40 -260 -60 -540 L60 -540 Q40 -260 70 0 Z" fill="url(#p3_stem)"/></g>`+
+      `<g id="${id}_base">${base}</g><g id="${id}_ring">${ring}</g><g id="${id}_cap">${cap}<ellipse cx="-40" cy="-690" rx="120" ry="50" fill="#fff6e0" opacity=".45"/></g>`+
+      `<g id="${id}_fire" opacity=".9"><ellipse cx="0" cy="-600" rx="150" ry="90" fill="url(#p3_fire)"/></g>`);},
+  /* destello(id,x,y,r) — bola de luz de la explosión (escalar #id) */
+  destello:(id,x,y,r=300)=>G(id,x,y,1,`<circle r="${r*2.2}" fill="url(#gGlowW)"/><circle r="${r}" fill="url(#p3_fire)"/><circle r="${r*.45}" fill="#fff"/>`),
+  /* reloj(id,x,y,r) — reloj de pared; manecillas #id_h y #id_m giran con svgOrigin '0 0' (0° = 12 en punto) */
+  reloj:(id,x,y,r=160)=>{let t='';for(let i=0;i<12;i++){const a=i/12*Math.PI*2;t+=`<path d="M${(Math.sin(a)*r*.78).toFixed(1)} ${(-Math.cos(a)*r*.78).toFixed(1)} L${(Math.sin(a)*r*.9).toFixed(1)} ${(-Math.cos(a)*r*.9).toFixed(1)}" stroke="#2a2230" stroke-width="${i%3?5:10}" stroke-linecap="round"/>`;}
+    return G(id,x,y,1,`<circle r="${r+26}" fill="url(#p3_wood)"/><circle r="${r+26}" fill="none" stroke="#2a180c" stroke-width="6"/><circle r="${r}" fill="url(#mPaper)"/>${t}`+
+      `<g id="${id}_h"><path d="M-7 10 L0 ${-r*.5} L7 10 Z" fill="#1a1420"/></g><g id="${id}_m"><path d="M-5 12 L0 ${-r*.78} L5 12 Z" fill="#1a1420"/></g><circle r="10" fill="#c0392b"/><path d="M${-r*.7} ${-r*.4} a${r*.8} ${r*.8} 0 0 1 ${r*.6} ${-r*.4}" stroke="#fff" stroke-width="8" fill="none" opacity=".35"/>`);},
+  /* plano(id,w,h) — plano azul de un barco petrolero; las líneas #id_l se dibujan con strokeDashoffset 2600→0 (origen: centro) */
+  plano:(id,w=560,h=360)=>`<g id="${id}"><rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" rx="6" fill="url(#p3_blue)"/><g stroke="#ffffff18" stroke-width="2">${Array.from({length:Math.floor(w/40)},(_,i)=>`<path d="M${-w/2+i*40} ${-h/2} V${h/2}"/>`).join('')}${Array.from({length:Math.floor(h/40)},(_,i)=>`<path d="M${-w/2} ${-h/2+i*40} H${w/2}"/>`).join('')}</g>`+
+    `<g id="${id}_l" fill="none" stroke="#e8f4ff" stroke-width="5" stroke-dasharray="2600" stroke-dashoffset="2600"><path d="M${-w*.42} ${h*.05} L${w*.38} ${h*.05} Q${w*.46} ${h*.05} ${w*.42} ${h*.22} L${-w*.36} ${h*.22} Q${-w*.44} ${h*.2} ${-w*.42} ${h*.05} Z M${w*.18} ${h*.05} V${-h*.2} H${w*.34} V${h*.05} M${w*.22} ${-h*.12} h${w*.08} M${w*.25} ${-h*.2} V${-h*.32} M${-w*.34} ${h*.05} V${-h*.02} H${w*.12} V${h*.05} M${-w*.2} ${-h*.02} v${h*.07} M${-w*.05} ${-h*.02} v${h*.07}"/><path d="M${-w*.42} ${h*.34} H${w*.42} M${-w*.42} ${h*.31} v${h*.06} M${w*.42} ${h*.31} v${h*.06}" stroke-width="3"/></g>`+
+    `<text x="${w*.42}" y="${-h*.38}" font-family="DatoSans" font-weight="900" font-size="22" fill="#cfe6ff" text-anchor="end">PETROLERO · 5000 T</text></g>`,
+  /* maleta(id,x,y,s) — maleta de cuero con correas */
+  maleta:(id,x,y,s=1)=>G(id,x,y,s,`<rect x="-46" y="-150" width="92" height="40" rx="14" fill="none" stroke="#3a2010" stroke-width="14"/><rect x="-150" y="-120" width="300" height="200" rx="22" fill="url(#p3_wood)"/><rect x="-150" y="-120" width="300" height="200" rx="22" fill="none" stroke="#2a1608" stroke-width="5"/><path d="M-90 -120 v200 M90 -120 v200" stroke="#2a1608" stroke-width="16"/><rect x="-104" y="-30" width="28" height="22" rx="4" fill="url(#mCoin)"/><rect x="76" y="-30" width="28" height="22" rx="4" fill="url(#mCoin)"/><path d="M-130 -100 h120" stroke="#ffffff30" stroke-width="6"/>`),
+  /* bebe(id,x,y,s) — bebé envuelto en manta (origen: centro) */
+  bebe:(id,x,y,s=1,c='#f2e6c8')=>G(id,x,y,s,`<ellipse cx="0" cy="10" rx="110" ry="58" fill="${c}"/><path d="M-100 0 q60 30 130 -20 M-80 40 q60 10 120 -30" stroke="#00000020" stroke-width="5" fill="none"/><circle cx="78" cy="-10" r="46" fill="#f2cca8"/><path d="M50 -40 q30 -24 60 -4" stroke="#1a1410" stroke-width="10" fill="none" stroke-linecap="round"/><path d="M70 -6 q6 -4 12 0 M94 -6 q6 -4 12 0" stroke="#3a2418" stroke-width="3" fill="none"/><path d="M84 12 q6 4 12 0" stroke="#a04a4a" stroke-width="3" fill="none"/><ellipse cx="104" cy="4" rx="8" ry="5" fill="#ff7a73" opacity=".4"/><path d="M40 -30 Q78 -80 124 -20" stroke="${c}" stroke-width="22" fill="none"/>`),
+  /* casaJaponesa(x,y,w,h,luz) — casa de madera con techo de teja curvo y shoji iluminado (origen: base centro) */
+  casaJaponesa:(x,y,w=420,h=260,lit='#ffd88a')=>`<g transform="translate(${x} ${y})"><rect x="${-w/2}" y="${-h}" width="${w}" height="${h}" fill="url(#p3_wood)" filter="url(#fWood)"/>`+
+    `<rect x="${-w*.36}" y="${-h*.78}" width="${w*.4}" height="${h*.56}" fill="${lit}" opacity=".9"/><g stroke="#3a2410" stroke-width="5">${[1,2,3].map(i=>`<path d="M${-w*.36+i*w*.1} ${-h*.78} v${h*.56}"/>`).join('')}${[1,2].map(i=>`<path d="M${-w*.36} ${-h*.78+i*h*.187} h${w*.4}"/>`).join('')}</g>`+
+    `<rect x="${w*.12}" y="${-h*.7}" width="${w*.22}" height="${h*.7}" fill="#2a1608"/><path d="M${-w*.62} ${-h} Q0 ${-h-30} ${w*.62} ${-h} L${w*.42} ${-h-h*.5} Q0 ${-h-h*.58} ${-w*.42} ${-h-h*.5} Z" fill="url(#p3_roof)"/><path d="M${-w*.62} ${-h} Q0 ${-h-30} ${w*.62} ${-h}" stroke="#6a6a7a" stroke-width="8" fill="none"/>${Array.from({length:9},(_,i)=>`<path d="M${-w*.5+i*w*.125} ${-h-14} l${w*.04} ${-h*.44}" stroke="#00000040" stroke-width="4"/>`).join('')}</g>`,
+  /* ventana(id,x,y,w,h,cielo) — ventana de madera; el cielo interior es #id_sky (animar fill/opacity) */
+  ventana:(id,x,y,w=360,h=300,c='#8ec8ff')=>G(id,x,y,1,`<rect x="${-w/2-22}" y="${-h/2-22}" width="${w+44}" height="${h+44}" fill="url(#p3_wood)"/><rect id="${id}_sky" x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" fill="${c}"/><path d="M0 ${-h/2} V${h/2} M${-w/2} 0 H${w/2}" stroke="#4a2c18" stroke-width="14"/><path d="M${-w/2+20} ${h/2-30} L${-w/2+80} ${-h/2+20}" stroke="#ffffff50" stroke-width="10"/><rect x="${-w/2-34}" y="${h/2+18}" width="${w+68}" height="22" fill="#3a2010"/>`),
+  /* escritorio(x,y,w) — escritorio de madera (origen: borde superior izquierdo) */
+  escritorio:(x,y,w=600)=>`<g transform="translate(${x} ${y})"><rect x="0" y="0" width="${w}" height="34" fill="url(#p3_wood)" filter="url(#fWood)"/><rect x="0" y="34" width="${w}" height="10" fill="#00000070"/><rect x="20" y="44" width="${w*.3}" height="220" fill="#4a2c18"/><rect x="${w-40}" y="44" width="24" height="260" fill="#3a2010"/><path d="M36 100 h${w*.3-30} M36 170 h${w*.3-30}" stroke="#2a160a" stroke-width="5"/><circle cx="${20+w*.15}" cy="80" r="6" fill="url(#mCoin)"/><circle cx="${20+w*.15}" cy="150" r="6" fill="url(#mCoin)"/></g>`,
+  /* vela(id,x,y,s) — vela encendida; llama #id_f (escalar con svgOrigin '0 -150') */
+  vela:(id,x,y,s=1)=>G(id,x,y,s,`<ellipse cx="0" cy="-160" rx="120" ry="120" fill="url(#gGlowA)" opacity=".7"/><rect x="-34" y="-130" width="68" height="130" rx="8" fill="#f4ecd8"/><path d="M-34 -120 q20 14 30 0 q4 30 12 34" stroke="#e0d4b8" stroke-width="6" fill="none"/><path d="M0 -130 v-14" stroke="#2a2a2a" stroke-width="4"/><g id="${id}_f"><path d="M0 -196 Q22 -160 0 -140 Q-22 -160 0 -196 Z" fill="url(#p3_flame)"/></g>`),
+  /* marco(id,x,y,s,contenido) — portarretratos de madera 300×380 con contenido dentro (origen: centro) */
+  marco:(id,x,y,s,inner)=>G(id,x,y,s,`<rect x="-170" y="-210" width="340" height="420" rx="10" fill="url(#p3_wood)"/><rect x="-150" y="-190" width="300" height="380" fill="#e8dcc4"/><clipPath id="${id}_c"><rect x="-150" y="-190" width="300" height="380"/></clipPath><g clip-path="url(#${id}_c)">${inner}</g><path d="M-150 -190 L40 -190 L-150 120 Z" fill="#ffffff14"/>`),
+  /* certificado(id,x,y,s,titulo,sub) — documento oficial con sello #id_st (entra con escala) */
+  certificado:(id,x,y,s,title,sub)=>G(id,x,y,s,`<rect x="-260" y="-340" width="520" height="680" fill="url(#mPaper)"/><rect x="-236" y="-316" width="472" height="632" fill="none" stroke="#a8843a" stroke-width="6"/><text x="0" y="-220" font-family="DatoSans" font-weight="900" font-size="44" fill="#2a2230" text-anchor="middle">${title}</text><text x="0" y="-170" font-family="DatoSans" font-weight="700" font-size="26" fill="#5a4a3a" text-anchor="middle">${sub||''}</text>${[0,1,2,3,4,5].map(i=>`<path d="M-190 ${-100+i*46} h${380-(i%3)*60}" stroke="#bcae96" stroke-width="10" stroke-linecap="round"/>`).join('')}<g id="${id}_st"><circle cx="120" cy="220" r="80" fill="none" stroke="#c0392b" stroke-width="12"/><circle cx="120" cy="220" r="58" fill="#c0392b" opacity=".85"/><path d="M90 220 l22 22 l40 -46" stroke="#fff" stroke-width="12" fill="none" stroke-linecap="round"/></g>`),
+  /* atril(x,y,s) — atril de conferencias con micrófono (origen: base centro) */
+  atril:(x,y,s=1)=>`<g transform="translate(${x} ${y}) scale(${s})"><path d="M-130 0 L-110 -300 L110 -300 L130 0 Z" fill="url(#p3_wood)"/><path d="M-150 -300 L150 -300 L130 -340 L-130 -340 Z" fill="#5a3620"/><path d="M-96 -260 L-80 -30" stroke="#ffffff20" stroke-width="10"/><path d="M40 -340 q10 -60 -30 -110" stroke="#2a2a30" stroke-width="8" fill="none"/><rect x="-28" y="-480" width="36" height="56" rx="16" fill="url(#mMetal)" transform="rotate(-30 -10 -450)"/></g>`,
+  /* vendaje(id) — vendaje blanco alrededor de la cabeza sobre la oreja izquierda. Uso: addToGroup(makeChar(id,..), id+'_head', DLP.vendaje(id)) — no tapa ojos, cejas ni el peinado */
+  vendaje:id=>`<g id="${id}_vend"><path d="M-60 -62 Q-66 -118 -40 -134 Q8 -152 60 -140 L60 -131 Q8 -142 -36 -126 Q-56 -110 -52 -64 Z" fill="#f6f3ea" stroke="#cfc8b6" stroke-width="2.5"/><ellipse cx="-52" cy="-82" rx="15" ry="20" fill="#f6f3ea" stroke="#cfc8b6" stroke-width="2.5"/><path d="M-60 -90 l14 4 M-60 -78 l14 4" stroke="#d8d2c2" stroke-width="2"/><ellipse cx="-50" cy="-78" rx="5" ry="6" fill="#c0392b" opacity=".35"/></g>`,
+  /* colinas(seed,base,alto,c1,c2) — cordillera de colinas suaves (bahía de Nagasaki); llena hasta abajo */
+  colinas:(seed,base,h,c1,c2)=>{const R=PRNG(seed);let d=`M-100 ${base}`;for(let x=-100;x<=1180;x+=60){d+=` Q${x+30} ${(base-h*(.5+R()*.5)).toFixed(0)} ${x+60} ${(base-h*(.3+R()*.4)).toFixed(0)}`;}d+=` L1180 1200 L-100 1200 Z`;const gid='col'+seed;def(lg(gid,[[0,c1],[1,c2]]));return `<path d="${d}" fill="url(#${gid})"/>`;},
+  /* escalera(id,x,y,s) — corte de un cubo de escalera de concreto reforzado (origen: base izquierda) */
+  escalera:(id,x,y,s=1)=>G(id,x,y,s,`<rect x="0" y="-460" width="340" height="460" fill="url(#p3_conc)"/><rect x="0" y="-460" width="340" height="460" fill="none" stroke="#3a3632" stroke-width="18"/>${Array.from({length:8},(_,i)=>`<path d="M${30+i*36} ${-20-i*52} h40 v-52" stroke="#d8d4ce" stroke-width="10" fill="none"/>`).join('')}<path d="M0 -460 v460" stroke="#c0392b" stroke-width="6" stroke-dasharray="20 14"/><path d="M340 -460 v460" stroke="#c0392b" stroke-width="6" stroke-dasharray="20 14"/>`),
+};
+Object.assign(window.DLP,P3);
+})();

@@ -19,4 +19,11 @@ window.FICHAS=Object.assign(window.FICHAS||{},{
   tia:{skin:['#e0a07a','#a86a4c','#5e3628'],hair:['#2a1a14','#0c0806'],hairStyle:'long',top:['#3f8a7a','#16403a'],pants:['#4a3a5a','#1e1626'],iris:'#2a1810',rim:'#ffcf8a'},
   papa:{skin:['#d99a72','#a0644a','#583226'],hair:['#1e1612','#080604'],hairStyle:'short',top:['#4a6a9a','#1c2c48'],pants:['#3a3a46','#14141c'],iris:'#2a1810',rim:'#ffd59a',cap:'#8a3a2a'},
   senor:{skin:['#d9a07a','#a0644a','#5a3428'],hair:['#d8d0c4','#8a8278'],hairStyle:'short',top:['#f2efe6','#bdb6a6'],pants:['#3a3328','#16130e'],iris:'#2a1810',rim:'#ffcf8a',beard:true},
+
+  /* [yamaguchi-dos-bombas] — personaje ilustrado propio (no retrato). Rasgos firma: cabello negro corto con raya al lado, camisa blanca de manga larga,
+     pantalón gris, zapatos cafés; herido = vendaje sobre la oreja izquierda (DLP.vendaje); anciano = canoso, lentes, cárdigan beige */
+  yamaguchi:{skin:['#f0c8a0','#c8946c','#7a5040'],hair:['#16120f','#050404'],hairStyle:'short',top:['#f4f1ea','#b8b2a6'],top2:'#e8e4da',pants:['#5a5e66','#26282e'],shoes:'#4a3022',iris:'#2a1a12',rim:'#ffd59a'},
+  yamaguchiAnciano:{skin:['#ecc4a0','#c08e6c','#74503e'],hair:['#d8d6d0','#8a8884'],hairStyle:'short',top:['#c8b48a','#7a6a4a'],top2:'#f4f1ea',pants:['#4a4a50','#1e1e22'],shoes:'#3a2a20',iris:'#2a1a12',rim:'#ffd59a',glasses:true},
+  hisako:{skin:['#f2cca8','#cc9a74','#7e5444'],hair:['#14100e','#040303'],hairStyle:'long',top:['#8a9ab8','#34405e'],pants:['#5a4a3a','#261e16'],shoes:'#3a2a20',iris:'#2a1a12',rim:'#ffcf8a'},
+  jefeNagasaki:{skin:['#e8bc94','#b8845e','#6e4834'],hair:['#9a9894','#4a4846'],hairStyle:'short',top:['#3a3f4a','#14161c'],top2:'#f4f1ea',pants:['#2e3240','#0e1016'],shoes:'#1e1a18',iris:'#2a1a12',rim:'#ffe2b0',glasses:true},
 });

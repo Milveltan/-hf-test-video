@@ -57,6 +57,9 @@ Efectos de sonido en `index.html`: `<audio id="sfxNN" src="assets/sfx/x.wav" dat
 | hotspanishNino | Versión infantil: afro, sin lentes, camisa roja (`kid`) | hotspanish-antes-de-la-fama |
 | hotspanishYT | Época de YouTube: sudadera gris con capucha | hotspanish-antes-de-la-fama |
 | hotspanishYTLentes | Época YouTube con lentes oscuros (desde que se pone el nombre) | hotspanish-parte-2-la-transformacion |
+| yamaguchi | Ingeniero 1945: pelo negro corto, camisa blanca, pantalón gris; herido = `DLP.vendaje(id)` en la cabeza | yamaguchi-dos-bombas |
+| yamaguchiAnciano | Canoso, lentes, cárdigan beige | yamaguchi-dos-bombas |
+| hisako · jefeNagasaki | Esposa (pelo largo negro, blusa azul) · jefe canoso con lentes y saco oscuro | yamaguchi-dos-bombas |
 | tia · papa · senor | Tía cálida (pelo largo) · papá con gorra · señor de las tortas (canoso, barba) | hotspanish-antes-de-la-fama |
 
 ## lib/props.js — DLP
@@ -69,6 +72,9 @@ Efectos de sonido en `index.html`: `<audio id="sfxNN" src="assets/sfx/x.wav" dat
 ## lib/props.js — v2 (DLP, 25-nov-2026)
 `casita(x,y,w,h,c,techo,luz)` · `torta(id,x,y,s)` · `camara(id,x,y,s)` (luz `id_rec`) · `tripode(x,y)` · `pantallaPlay(c)` · `dust(seed,n,w,h,c)` (grupo `d<seed>`) · `bocadillo(id,x,y,w,txt,{s,c,bg,tail})` · `neon(id,x,y,txt,s,c)` · `chile(id,x,y,s)` · `maquinita(id,x,y,s)` · `ruleta(id,x,y,r,colores)` (girar `#id_w`) · `alcancia(id,x,y,s)` · `mansion(id,x,y,s,luz)`.
 
+## lib/props.js — v3 (DLP, 25-nov-2026 · historia/guerra)
+`hongo(id,x,y,s,seed)` nube atómica (grupos `id_stem id_cap id_ring id_fire`) · `destello(id,x,y,r)` · `reloj(id,x,y,r)` (manecillas `id_h id_m`, 0° = 12) · `plano(id,w,h)` plano azul de petrolero (líneas `id_l`, dashoffset 2600→0) · `maleta` · `bebe` · `casaJaponesa(x,y,w,h,luz)` · `ventana(id,x,y,w,h,cielo)` (cielo `id_sky`) · `escritorio(x,y,w)` · `vela(id,x,y,s)` (llama `id_f`) · `marco(id,x,y,s,contenido)` · `certificado(id,x,y,s,titulo,sub)` (sello `id_st`) · `atril(x,y,s)` · `vendaje(id)` (meter en `id_head`) · `colinas(seed,base,alto,c1,c2)` · `escalera(id,x,y,s)`.
+
 ## lib/core.js — materiales y luces (`url(#…)`)
 Filtros: `fSoft4/8/16/30 fGlow fNeon fWall fWood`. Materiales: `mMetal mChrome mGlass mWin mTire mPaper mBill mCoin mShelf`.
 Halos: `gGlowW gGlowR gGlowB gGlowC gGlowP gGlowA gShadow`. Desvanecidos: `gFadeB gFadeT`.
@@ -80,9 +86,11 @@ Transiciones: `fade cut flash whip glitch zoom wipe`. Cámara por capas con para
 
 ## assets/sfx — efectos
 **Normalizados (25-nov-2026)** a ≈ −21/−24 LUFS. Regla de mezcla: voz `voice.mp3` normalizada a −16 LUFS con `tools/voice_norm.sh` y `data-volume="1"`; TODOS los efectos `data-volume="0.5"`; música 0.12. Todo sonido nuevo se normaliza igual antes de sumarlo.
+`music_drone.wav` (sombría, re menor, latido grave; `python3 tools/music_drone.py <segundos>`; para historia/tragedia/misterio).
 `boom cash click_ui coins crash engine flip glitch impact ping rain reveal_swell riser shutter siren stamp tick typing whoosh` + `music_bed.wav` (100 s, se regenera a la duración de cada video con `tools/music_bed.py`).
 
 ## Historial
+- 2026-11-25 · yamaguchi-dos-bombas (1:1, 75 s, 23 escenas): props v3 (hongo, reloj, plano, casa japonesa, vela, certificado, escalera, vendaje…), fichas Yamaguchi joven/anciano, Hisako, jefe; música sombría `music_drone`.
 - 2026-11-25 · hotspanish-parte-3-la-mansion-vip (1:1, 79 s, 21 escenas): contadores animados (premio, espectadores), claqueta, cuerda floja, cuarto de control; HotSpanish con `headphones` sobre el afro.
 - 2026-11-25 · hotspanish-parte-2-la-transformacion (1:1, 81 s, 21 escenas): props v2 (utilería del episodio 1 promovida + bocadillo, neon, chile, maquinita, ruleta, alcancia, mansion); primera mezcla con voz −16 LUFS y efectos al 50 %.
 - 2026-11-25 · ajustes de calidad: engine v3 (subtítulos un color, títulos que se van), afro en el rig, sfx normalizados, `tools/voice_norm.sh`.
