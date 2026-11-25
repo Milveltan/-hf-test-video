@@ -83,6 +83,7 @@ Transiciones: `fade cut flash whip glitch zoom wipe`. Cámara por capas con para
 `boom cash click_ui coins crash engine flip glitch impact ping rain reveal_swell riser shutter siren stamp tick typing whoosh` + `music_bed.wav` (100 s, se regenera a la duración de cada video con `tools/music_bed.py`).
 
 ## Historial
+- 2026-11-25 · hotspanish-parte-3-la-mansion-vip (1:1, 79 s, 21 escenas): contadores animados (premio, espectadores), claqueta, cuerda floja, cuarto de control; HotSpanish con `headphones` sobre el afro.
 - 2026-11-25 · hotspanish-parte-2-la-transformacion (1:1, 81 s, 21 escenas): props v2 (utilería del episodio 1 promovida + bocadillo, neon, chile, maquinita, ruleta, alcancia, mansion); primera mezcla con voz −16 LUFS y efectos al 50 %.
 - 2026-11-25 · ajustes de calidad: engine v3 (subtítulos un color, títulos que se van), afro en el rig, sfx normalizados, `tools/voice_norm.sh`.
 - 2026-11-25 · hotspanish-antes-de-la-fama (1:1): motor con formato variable; fichas HotSpanish (3 épocas), tía, papá, señor; utilería local en scenes.js candidata a props: `casita`, `iglesia`, `torta`, `camara`, `tripode`, `pantallaPlay`, `dust`.
