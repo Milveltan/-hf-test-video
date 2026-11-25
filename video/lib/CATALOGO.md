@@ -36,6 +36,7 @@ S.push({k:'clave', w:<índice de palabra donde arranca>, tr:'fade|cut|flash|whip
 Efectos de sonido en `index.html`: `<audio id="sfxNN" src="assets/sfx/x.wav" data-word="N" data-offset="-0.1" data-start="0" data-duration=".." data-volume=".." data-track-index="único">`.
 
 ## lib/characters.js — Rig v3
+- **v3.2:** afro con masa DETRÁS de la cara + línea frontal alta (ya no tapa ojos ni cejas). Nuevas opciones: `shades` (lentes oscuros), `grin` (sonrisa con dientes; id `_mG`, se oculta con A.mouth O/S), `chain` (cadena dorada), `pattern:'#color'` (estampado en la ropa).
 - **v3.1:** `hairStyle:'afro'` (afro voluminoso, usado por las fichas HotSpanish).
 - `makeChar(id, spec)` → SVG. Origen en los pies, alto ≈ 640 u, 3/4 hacia la derecha (escala negativa en `N()` = espejo).
 - spec: `skin[3] hair[2] hairStyle(short|curly|long|bald) top[2] top2 pants[2] shoes iris rim hood glasses beard cap headphones silhouette sleeve(long|short) kid scale`.
@@ -55,6 +56,7 @@ Efectos de sonido en `index.html`: `<audio id="sfxNN" src="assets/sfx/x.wav" dat
 | hotspanish | Afro rizado, lentes, conjunto rosa, manga corta (ilustración propia) | hotspanish-antes-de-la-fama |
 | hotspanishNino | Versión infantil: afro, sin lentes, camisa roja (`kid`) | hotspanish-antes-de-la-fama |
 | hotspanishYT | Época de YouTube: sudadera gris con capucha | hotspanish-antes-de-la-fama |
+| hotspanishYTLentes | Época YouTube con lentes oscuros (desde que se pone el nombre) | hotspanish-parte-2-la-transformacion |
 | tia · papa · senor | Tía cálida (pelo largo) · papá con gorra · señor de las tortas (canoso, barba) | hotspanish-antes-de-la-fama |
 
 ## lib/props.js — DLP
