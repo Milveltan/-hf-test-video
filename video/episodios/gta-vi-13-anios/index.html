@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<!-- DATOLOGO · "¿Por qué GTA VI tardó trece años en salir?" · 1080x1920 · 30 fps · Premium Cinematic Stylized Vector 2.5D -->
+<script src="assets/gsap.min.js"></script>
+<script src="captions.js"></script>
+<script src="lib/core.js"></script>
+<script src="lib/characters.js"></script>
+<script src="lib/props.js"></script>
+<script src="lib/kit.js"></script>
+<script src="lib/fichas.js"></script>
+<style>
+@font-face{font-family:"DatoSans";src:url("assets/fonts/Montserrat.ttf") format("truetype");font-weight:100 900}
+*{box-sizing:border-box}
+html,body{margin:0;background:#000}
+#main{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000;font-family:"DatoSans",Arial,sans-serif}
+#stage{position:absolute;inset:0}
+.sc{position:absolute;inset:0;overflow:hidden;visibility:hidden;opacity:0}
+.L{position:absolute;left:-80px;top:-80px;width:1240px;height:2080px;transform-origin:50% 50%}
+.L svg{width:1240px;height:2080px;display:block}
+#grain{position:absolute;left:-60px;top:-60px;width:1200px;height:2040px;pointer-events:none;opacity:.07;mix-blend-mode:overlay}
+#vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 85% 65% at 50% 46%,transparent 55%,rgba(6,3,10,.62) 100%)}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+#gbars{position:absolute;inset:0;opacity:0;pointer-events:none}
+#gbars div{position:absolute;left:0;right:0;mix-blend-mode:screen}
+#streak{position:absolute;inset:0;opacity:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.0) 0 30px,rgba(255,255,255,.18) 30px 34px)}
+#title{position:absolute;left:0;right:0;top:250px;text-align:center;opacity:0}
+#title .t{display:inline-block;font-weight:900;font-size:92px;letter-spacing:10px;color:#fff;-webkit-text-stroke:8px rgba(8,6,14,.9);paint-order:stroke fill;text-shadow:0 8px 24px rgba(0,0,0,.6)}
+#title .bar{width:0;height:10px;margin:18px auto 0;background:#ffd24f;border-radius:5px}
+#caps{position:absolute;left:90px;right:90px;top:1290px;height:260px}
+.cg{position:absolute;left:0;right:0;top:0;text-align:center;opacity:0;line-height:1.08}
+.w{display:inline-block;margin:0 17px;font-weight:900;font-size:80px;color:#fff;-webkit-text-stroke:11px rgba(8,6,14,.95);paint-order:stroke fill;text-shadow:0 6px 18px rgba(0,0,0,.55)}
+#black{position:absolute;inset:0;background:#000;opacity:1;pointer-events:none}
+</style>
+</head>
+<body>
+<div id="main" data-composition-id="main" data-start="0" data-duration="100.1" data-width="1080" data-height="1920">
+<audio id="voice" src="voice.mp3" data-start="0" data-duration="100.1" data-track-index="1"></audio>
+<audio id="music" src="assets/sfx/music_bed.wav" data-start="0" data-duration="100.1" data-volume="0.13" data-track-index="2"></audio>
+<!--SFX-->
+<audio id="sfx01" src="assets/sfx/reveal_swell.wav" data-word="3" data-offset="-0.25" data-start="0.813" data-duration="1.6" data-volume="0.35" data-track-index="3"></audio>
+<audio id="sfx02" src="assets/sfx/whoosh.wav" data-word="9" data-offset="-0.15" data-start="3.030" data-duration="0.7" data-volume="0.3" data-track-index="4"></audio>
+<audio id="sfx03" src="assets/sfx/flip.wav" data-word="18" data-offset="-0.2" data-start="6.086" data-duration="1.4" data-volume="0.35" data-track-index="5"></audio>
+<audio id="sfx04" src="assets/sfx/glitch.wav" data-word="27" data-offset="-0.05" data-start="9.584" data-duration="0.7" data-volume="0.4" data-track-index="6"></audio>
+<audio id="sfx05" src="assets/sfx/shutter.wav" data-word="28" data-offset="-0.1" data-start="10.700" data-duration="0.35" data-volume="0.35" data-track-index="7"></audio>
+<audio id="sfx06" src="assets/sfx/rain.wav" data-word="28" data-offset="0" data-start="10.800" data-duration="3.2" data-volume="0.28" data-track-index="8"></audio>
+<audio id="sfx07" src="assets/sfx/whoosh.wav" data-word="31" data-offset="-0.1" data-start="13.271" data-duration="0.7" data-volume="0.25" data-track-index="9"></audio>
+<audio id="sfx08" src="assets/sfx/typing.wav" data-word="33" data-offset="0" data-start="14.122" data-duration="2.2" data-volume="0.25" data-track-index="10"></audio>
+<audio id="sfx09" src="assets/sfx/glitch.wav" data-word="47" data-offset="-0.05" data-start="20.763" data-duration="0.7" data-volume="0.35" data-track-index="11"></audio>
+<audio id="sfx10" src="assets/sfx/siren.wav" data-word="51" data-offset="0" data-start="22.925" data-duration="2.4" data-volume="0.2" data-track-index="12"></audio>
+<audio id="sfx11" src="assets/sfx/whoosh.wav" data-word="56" data-offset="-0.15" data-start="25.780" data-duration="0.7" data-volume="0.3" data-track-index="13"></audio>
+<audio id="sfx12" src="assets/sfx/engine.wav" data-word="56" data-offset="0.1" data-start="26.030" data-duration="2.0" data-volume="0.28" data-track-index="14"></audio>
+<audio id="sfx13" src="assets/sfx/crash.wav" data-word="60" data-offset="-0.05" data-start="27.481" data-duration="1.2" data-volume="0.5" data-track-index="15"></audio>
+<audio id="sfx14" src="assets/sfx/impact.wav" data-word="60" data-offset="-0.05" data-start="27.481" data-duration="0.9" data-volume="0.45" data-track-index="16"></audio>
+<audio id="sfx15" src="assets/sfx/shutter.wav" data-word="63" data-offset="-0.1" data-start="29.020" data-duration="0.35" data-volume="0.3" data-track-index="17"></audio>
+<audio id="sfx16" src="assets/sfx/stamp.wav" data-word="70" data-offset="0" data-start="31.744" data-duration="0.6" data-volume="0.3" data-track-index="18"></audio>
+<audio id="sfx17" src="assets/sfx/whoosh.wav" data-word="72" data-offset="-0.1" data-start="32.840" data-duration="0.7" data-volume="0.25" data-track-index="19"></audio>
+<audio id="sfx18" src="assets/sfx/reveal_swell.wav" data-word="73" data-offset="-0.1" data-start="33.145" data-duration="1.6" data-volume="0.3" data-track-index="20"></audio>
+<audio id="sfx19" src="assets/sfx/whoosh.wav" data-word="79" data-offset="-0.15" data-start="37.403" data-duration="0.7" data-volume="0.3" data-track-index="21"></audio>
+<audio id="sfx20" src="assets/sfx/shutter.wav" data-word="84" data-offset="0" data-start="40.032" data-duration="0.35" data-volume="0.35" data-track-index="22"></audio>
+<audio id="sfx21" src="assets/sfx/shutter.wav" data-word="84" data-offset="0.22" data-start="40.252" data-duration="0.35" data-volume="0.3" data-track-index="23"></audio>
+<audio id="sfx22" src="assets/sfx/shutter.wav" data-word="84" data-offset="0.44" data-start="40.472" data-duration="0.35" data-volume="0.3" data-track-index="24"></audio>
+<audio id="sfx23" src="assets/sfx/shutter.wav" data-word="84" data-offset="0.66" data-start="40.692" data-duration="0.35" data-volume="0.3" data-track-index="25"></audio>
+<audio id="sfx24" src="assets/sfx/stamp.wav" data-word="96" data-offset="0.15" data-start="47.297" data-duration="0.6" data-volume="0.55" data-track-index="26"></audio>
+<audio id="sfx25" src="assets/sfx/impact.wav" data-word="96" data-offset="0.15" data-start="47.297" data-duration="0.9" data-volume="0.35" data-track-index="27"></audio>
+<audio id="sfx26" src="assets/sfx/cash.wav" data-word="103" data-offset="-0.1" data-start="51.847" data-duration="1.0" data-volume="0.4" data-track-index="28"></audio>
+<audio id="sfx27" src="assets/sfx/coins.wav" data-word="103" data-offset="0" data-start="51.947" data-duration="1.6" data-volume="0.4" data-track-index="29"></audio>
+<audio id="sfx28" src="assets/sfx/shutter.wav" data-word="104" data-offset="-0.1" data-start="53.100" data-duration="0.35" data-volume="0.3" data-track-index="30"></audio>
+<audio id="sfx29" src="assets/sfx/reveal_swell.wav" data-word="113" data-offset="-0.05" data-start="58.026" data-duration="1.6" data-volume="0.3" data-track-index="31"></audio>
+<audio id="sfx30" src="assets/sfx/glitch.wav" data-word="118" data-offset="-0.1" data-start="60.280" data-duration="0.7" data-volume="0.3" data-track-index="32"></audio>
+<audio id="sfx31" src="assets/sfx/riser.wav" data-word="120" data-offset="0" data-start="61.310" data-duration="2.2" data-volume="0.25" data-track-index="33"></audio>
+<audio id="sfx32" src="assets/sfx/impact.wav" data-word="124" data-offset="0" data-start="62.720" data-duration="0.9" data-volume="0.35" data-track-index="34"></audio>
+<audio id="sfx33" src="assets/sfx/whoosh.wav" data-word="129" data-offset="-0.15" data-start="65.280" data-duration="0.7" data-volume="0.3" data-track-index="35"></audio>
+<audio id="sfx34" src="assets/sfx/engine.wav" data-word="130" data-offset="0" data-start="65.870" data-duration="2.0" data-volume="0.28" data-track-index="36"></audio>
+<audio id="sfx35" src="assets/sfx/click_ui.wav" data-word="135" data-offset="0" data-start="67.729" data-duration="0.12" data-volume="0.35" data-track-index="37"></audio>
+<audio id="sfx36" src="assets/sfx/whoosh.wav" data-word="139" data-offset="-0.1" data-start="68.881" data-duration="0.7" data-volume="0.25" data-track-index="38"></audio>
+<audio id="sfx37" src="assets/sfx/reveal_swell.wav" data-word="145" data-offset="-0.1" data-start="71.011" data-duration="1.6" data-volume="0.3" data-track-index="39"></audio>
+<audio id="sfx38" src="assets/sfx/glitch.wav" data-word="153" data-offset="0" data-start="74.289" data-duration="0.7" data-volume="0.2" data-track-index="40"></audio>
+<audio id="sfx39" src="assets/sfx/click_ui.wav" data-word="158" data-offset="0" data-start="76.825" data-duration="0.12" data-volume="0.4" data-track-index="41"></audio>
+<audio id="sfx40" src="assets/sfx/whoosh.wav" data-word="165" data-offset="0" data-start="79.903" data-duration="0.7" data-volume="0.3" data-track-index="42"></audio>
+<audio id="sfx41" src="assets/sfx/stamp.wav" data-word="167" data-offset="0" data-start="80.782" data-duration="0.6" data-volume="0.4" data-track-index="43"></audio>
+<audio id="sfx42" src="assets/sfx/shutter.wav" data-word="169" data-offset="-0.1" data-start="82.140" data-duration="0.35" data-volume="0.3" data-track-index="44"></audio>
+<audio id="sfx43" src="assets/sfx/cash.wav" data-word="174" data-offset="-0.2" data-start="83.105" data-duration="1.0" data-volume="0.4" data-track-index="45"></audio>
+<audio id="sfx44" src="assets/sfx/coins.wav" data-word="175" data-offset="0" data-start="83.427" data-duration="1.6" data-volume="0.35" data-track-index="46"></audio>
+<audio id="sfx45" src="assets/sfx/tick.wav" data-word="178" data-offset="0" data-start="84.097" data-duration="2.0" data-volume="0.3" data-track-index="47"></audio>
+<audio id="sfx46" src="assets/sfx/whoosh.wav" data-word="181" data-offset="-0.1" data-start="84.362" data-duration="0.7" data-volume="0.3" data-track-index="48"></audio>
+<audio id="sfx47" src="assets/sfx/reveal_swell.wav" data-word="188" data-offset="-0.1" data-start="86.051" data-duration="1.6" data-volume="0.35" data-track-index="49"></audio>
+<audio id="sfx48" src="assets/sfx/whoosh.wav" data-word="192" data-offset="-0.15" data-start="86.792" data-duration="0.7" data-volume="0.3" data-track-index="50"></audio>
+<audio id="sfx49" src="assets/sfx/coins.wav" data-word="198" data-offset="0" data-start="88.205" data-duration="1.6" data-volume="0.3" data-track-index="51"></audio>
+<audio id="sfx50" src="assets/sfx/tick.wav" data-word="201" data-offset="0" data-start="88.799" data-duration="2.0" data-volume="0.2" data-track-index="52"></audio>
+<audio id="sfx51" src="assets/sfx/glitch.wav" data-word="205" data-offset="-0.1" data-start="89.810" data-duration="0.7" data-volume="0.35" data-track-index="53"></audio>
+<audio id="sfx52" src="assets/sfx/typing.wav" data-word="207" data-offset="0" data-start="90.504" data-duration="2.2" data-volume="0.3" data-track-index="54"></audio>
+<audio id="sfx53" src="assets/sfx/glitch.wav" data-word="210" data-offset="-0.1" data-start="91.213" data-duration="0.7" data-volume="0.35" data-track-index="55"></audio>
+<audio id="sfx54" src="assets/sfx/whoosh.wav" data-word="216" data-offset="-0.1" data-start="92.499" data-duration="0.7" data-volume="0.3" data-track-index="56"></audio>
+<audio id="sfx55" src="assets/sfx/ping.wav" data-word="220" data-offset="-0.1" data-start="93.192" data-duration="0.6" data-volume="0.4" data-track-index="57"></audio>
+<audio id="sfx56" src="assets/sfx/ping.wav" data-word="223" data-offset="0" data-start="93.853" data-duration="0.6" data-volume="0.35" data-track-index="58"></audio>
+<audio id="sfx57" src="assets/sfx/shutter.wav" data-word="230" data-offset="-0.1" data-start="95.770" data-duration="0.35" data-volume="0.3" data-track-index="59"></audio>
+<audio id="sfx58" src="assets/sfx/flip.wav" data-word="230" data-offset="0.1" data-start="95.970" data-duration="1.4" data-volume="0.4" data-track-index="60"></audio>
+<audio id="sfx59" src="assets/sfx/riser.wav" data-word="233" data-offset="0" data-start="96.491" data-duration="2.2" data-volume="0.35" data-track-index="61"></audio>
+<audio id="sfx60" src="assets/sfx/impact.wav" data-word="236" data-offset="0.1" data-start="97.302" data-duration="0.9" data-volume="0.45" data-track-index="62"></audio>
+<audio id="sfx61" src="assets/sfx/boom.wav" data-word="240" data-offset="0" data-start="98.060" data-duration="1.9" data-volume="0.6" data-track-index="63"></audio>
+<!--/SFX-->
+<div id="stage"></div>
+<svg id="grain" width="1200" height="2040"><filter id="gn"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="3"/><feColorMatrix type="saturate" values="0"/></filter><rect width="1200" height="2040" filter="url(#gn)"/></svg>
+<div id="vig"></div>
+<div id="streak"></div>
+<div id="gbars"><div style="top:300px;height:40px;background:#ff2a4a"></div><div style="top:820px;height:18px;background:#00e5ff"></div><div style="top:1240px;height:56px;background:#ff2a4a"></div><div style="top:1600px;height:22px;background:#00e5ff"></div></div>
+<div id="flash"></div>
+<div id="title"><div class="t" id="titleT"></div><div class="bar" id="titleBar"></div></div>
+<div id="caps"></div>
+<div id="black"></div>
+</div>
+<script src="scenes.js"></script>
+<script src="lib/engine.js"></script>
+</body>
+</html>
