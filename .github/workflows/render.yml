@@ -3,6 +3,9 @@ name: Render HyperFrames Video
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   render:
     runs-on: ubuntu-24.04
@@ -43,7 +46,7 @@ jobs:
         run: |
           if [ -f proyecto.zip ]; then
             unzip -o proyecto.zip
-            echo "proyecto.zip descomprimido"
+            echo "proyecto.zip descomprimido sobre la biblioteca permanente"
           else
             echo "No hay proyecto.zip; se usan los archivos sueltos"
           fi
@@ -80,3 +83,28 @@ jobs:
             video/output.mp4
             video/sync-report.txt
           if-no-files-found: error
+
+      # NUEVO: guarda en el repo la biblioteca (lib, tools, assets) y el archivo del episodio.
+      # Corre solo si el render salió bien y nunca hace fallar el workflow.
+      - name: Save permanent library
+        if: success()
+        continue-on-error: true
+        run: |
+          SLUG=$(cat video/episodio.txt 2>/dev/null | tr -cd 'a-z0-9-' | head -c 60)
+          if [ -n "$SLUG" ]; then
+            mkdir -p "video/episodios/$SLUG"
+            for f in scenes.js script.txt captions.js index.html sync-report.txt; do
+              [ -f "video/$f" ] && cp "video/$f" "video/episodios/$SLUG/"
+            done
+          fi
+          git config user.name "datologo-bot"
+          git config user.email "datologo-bot@users.noreply.github.com"
+          for d in video/lib video/tools video/assets video/episodios; do
+            [ -e "$d" ] && git add "$d"
+          done
+          if git diff --cached --quiet; then
+            echo "Biblioteca sin cambios"
+          else
+            git commit -m "Biblioteca: recursos del video ${SLUG:-sin-nombre}"
+            git push
+          fi
