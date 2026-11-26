@@ -1,0 +1,11 @@
+episodio=sin-dormir
+fecha=2026-11-26T14:32:04Z
+ejecucion=45839419023
+nucleos=4
+duracion_video_s=28.821000
+fotogramas=865
+render_segundos=104
+fps_de_render=8.32
+sync_segundos=23
+clips_segundos=0
+inicio_job=2026-11-26T08:28:42-06:00
