@@ -1,8 +1,8 @@
 {
-  "slug": "olvido-puerta",
-  "composition": "OlvidoPuerta",
-  "voice": "public/audio/voz-olvido-puerta.wav",
-  "script": "src/episodes/olvido-puerta/script.txt",
+  "slug": "sin-dormir",
+  "composition": "SinDormir",
+  "voice": "public/audio/voz-sin-dormir.wav",
+  "script": "src/episodes/sin-dormir/script.txt",
   "sync": true,
-  "qaFrames": "3,119,150,224,450,621,692,927,982,1090,1211,1266,1304,1394,1441,1492,1614,1650,1704,1791"
+  "qaFrames": "4,41,103,158,226,309,403,465,555,599,745,801"
 }

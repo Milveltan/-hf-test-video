@@ -43,3 +43,7 @@ Episodio «Internet muerto» (81 s). Render en GitHub con `swangle` para todo: *
 - Piezas nuevas en la biblioteca: `environments/Home.tsx` (Kitchen, Sala, DoorWall, HouseWorld) y `film/Film.tsx` (Idea, FilmCard, Clapper). Añadidas al catálogo y al Showcase.
 - Ficha de persona `VIEWER` (suéter coral) en `episodes/olvido-puerta/scenes/palette.ts`.
 - Aprendizaje: `walkPose` necesita velocidad ≈ 0.115 (ciclo de ~17 fotogramas); a 0.35 los pasos se ven acelerados. Evitar poner al personaje bajo la lámpara colgante de la cocina (parece sombrero): usar x ≈ 400.
+
+## 2026-11-26 · Episodio sin-dormir («Qué pasa en tu cuerpo cuando no duermes en 24 horas», 27,6 s)
+- Composición `SinDormir`, 7 escenas. Dirección artística "Insomnio fluorescente" con cierre de amanecer.
+- Primer episodio corto (~28 s ≈ 82 palabras con la voz Drama 3). Reutiliza `Sala` (Home), `Brain`, `Sky`, `GodRays`, `HumanRig`.
