@@ -2,6 +2,15 @@
 Narrativa visual y retención del espectador. **Consultar antes de planificar cualquier episodio.**
 Es una capa de pensamiento previa a la programación: no cambia el motor, el workflow ni el formato (9:10, 1080 × 1200, 30 fps). Lo técnico vive en `CLAUDE.md`, `CATALOGO.md`, `CALIDAD.md`, `EFICIENCIA.md`; aquí no se repite.
 
+## 0. Narración (guion de voz) — se escribe antes que todo
+Duración objetivo ~60 s: **140–160 palabras**.
+1. **Gancho hablado (< 3 s):** la primera frase plantea una pregunta, un reto o una afirmación inesperada. Nada de presentaciones ("Hoy te voy a contar…").
+2. **Promesa (5–8 s):** queda claro qué va a descubrir el espectador si se queda.
+3. **Progresión:** cada frase sube la tensión o revela algo nuevo; sin relleno. Incluye un giro en la mitad o el último tercio.
+4. **Cierre obligatorio:** responde la pregunta del inicio y dice en palabras simples de qué trató el video. Prohibidos los finales abiertos o solo metafóricos que dejen dudas; una frase memorable se permite solo después de la explicación clara.
+5. **Lenguaje cotidiano:** se investiga y verifica todo, pero **no se narran cifras, estudios, fuentes, fechas ni tecnicismos**, salvo que un dato sea en sí el gancho. Lo técnico se explica con comparaciones y situaciones reconocibles.
+6. Comprobación antes de aprobar: ¿engancha la primera frase?, ¿hay promesa?, ¿cada frase aporta?, ¿el final deja claro de qué trató?, ¿suena a conversación y no a clase?
+
 ## 1. Filosofía audiovisual
 Una escena no existe solo porque se vea bonita. Debe cumplir al menos una función narrativa: despertar curiosidad, explicar, demostrar, revelar, sorprender, generar emoción, establecer contexto o hacer avanzar la historia. La sofisticación visual sirve a la narración.
 
@@ -16,7 +25,7 @@ El gancho debe funcionar visualmente aunque el espectador aún no haya escuchado
 ## 4. No lo cuentes: enséñalo
 Si la narración describe un proceso, mecanismo, acción, transformación o consecuencia, represéntalo visualmente. No basta mostrar un objeto con una explicación: diseña acciones que permitan comprender lo que ocurre.
 Recursos, cuando corresponda: despieces, cortes transversales, anatomía interna, transformaciones de materiales, visualización de fuerzas, flujos de partículas, comparaciones de tamaño, cambios físicos, gráficos dinámicos, metáforas visuales y representaciones de procesos invisibles.
-Rigor científico, histórico y factual siempre.
+Rigor factual siempre en la investigación; la narración usa lenguaje cotidiano (ver §0).
 
 ## 5. Causa, mecanismo y consecuencia
 Cuando sea narrativamente apropiado, estructura la secuencia como: acción inicial → mecanismo que la desencadena → transformación producida → consecuencia observable. El espectador debe entender la relación entre estos elementos solo con las animaciones. No impongas esta estructura a escenas con otra función narrativa.
@@ -58,6 +67,7 @@ Orden de trabajo: primero la mejor solución narrativa; después, cómo construi
 
 ## 13. Control de calidad creativo
 Se suma a la revisión artística de `CALIDAD.md` §3 (que ya cubre protagonista, luz, movimiento, transiciones y legibilidad); no es un proceso aparte. Comprobación breve antes de entregar:
+- ¿La narración cumple §0 (gancho hablado, promesa, progresión, cierre claro, sin datos técnicos)?
 - ¿El primer segundo genera curiosidad visual?
 - ¿Cada bloque cumple una función narrativa?
 - ¿Las animaciones muestran acciones y consecuencias?

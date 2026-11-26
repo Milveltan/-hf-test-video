@@ -1,7 +1,7 @@
 # Flujo de producción DROGMAN 7.0
 
 ## Pasos
-1. **Tema** (usuario) → **narración** creativa y verificada (Claude), con etiquetas de Fish Audio. Se aprueba antes de seguir.
+1. **Tema** (usuario) → **narración** (Claude) según `DIRECCION_CREATIVA.md` §0: gancho hablado, promesa, progresión, cierre claro, 140–160 palabras, lenguaje cotidiano sin cifras ni tecnicismos, con etiquetas de Fish Audio. Se aprueba antes de seguir.
 2. Usuario genera la voz en Fish Audio y entrega **MP3 + texto exacto**.
 3. Claude:
    1. Crea `src/episodes/<slug>/` copiando la estructura de `internet-muerto/` (Episode.tsx, scenes/, palette.ts, script.txt).
