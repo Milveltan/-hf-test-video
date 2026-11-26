@@ -64,8 +64,26 @@ jobs:
           test -s voice.mp3
           test -s tools/align.mjs
           rm -f transcript.json voice.json voice.transcript.json sync-report.txt captions/transcript.json
-          hyperframes transcribe voice.mp3 --language es --model medium --engine whisper --timeout 900000
+          python3 -m venv "$RUNNER_TEMP/whisper-env"
+          "$RUNNER_TEMP/whisper-env/bin/pip" install --disable-pip-version-check 'faster-whisper==1.2.1'
+          "$RUNNER_TEMP/whisper-env/bin/python" - <<'PY'
+          import json, math
+          from faster_whisper import WhisperModel
+          model = WhisperModel("medium", device="cpu", compute_type="int8", cpu_threads=4)
+          segments, _ = model.transcribe("voice.mp3", language="es", word_timestamps=True, beam_size=5, vad_filter=False, condition_on_previous_text=False)
+          words = []
+          for segment in segments:
+              for w in segment.words or []:
+                  if w.start is not None and w.end is not None and math.isfinite(w.start) and math.isfinite(w.end) and w.end >= w.start and w.word.strip():
+                      words.append({"word": w.word.strip(), "start": w.start, "end": w.end})
+          if not words:
+              raise SystemExit("No se obtuvieron marcas de palabras del audio")
+          print("Transcripcion real:", " ".join(w["word"] for w in words))
+          with open("transcript.json", "w") as f:
+              json.dump({"words": words}, f, ensure_ascii=False)
+          PY
           node tools/align.mjs
+          cat sync-report.txt
           python3 - <<'PY'
           import re
           from pathlib import Path
@@ -99,6 +117,17 @@ jobs:
           assert any(s["codec_type"]=="audio" for s in d["streams"]), "Sin audio"
           assert abs(float(d["format"]["duration"])-float(probe("voice.mp3")["format"]["duration"])) < 0.25, "Duracion incorrecta"
           PY
+
+      - name: Upload sync diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pilot-sync-diagnostics
+          path: |
+            video/transcript.json
+            video/sync-report.txt
+            video/captions.js
+          if-no-files-found: ignore
 
       - name: Upload video
         uses: actions/upload-artifact@v4
