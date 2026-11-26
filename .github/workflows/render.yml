@@ -41,17 +41,19 @@ jobs:
             ~/.cache/puppeteer
           key: hyperframes-linux-v2-0.9.91
 
-      - name: Unpack premium pilot
+      - name: Unpack hybrid episode
         working-directory: ./video
         run: |
           set -euo pipefail
-          test -s piloto.zip
-          unzip -t piloto.zip
-          unzip -o piloto.zip
-          test "$(cat episodio.txt)" = internet-muerto-premium-piloto
-          test -s pilot.js
+          test -s hibrido.zip
+          unzip -t hibrido.zip
+          unzip -o hibrido.zip
+          test "$(cat episodio.txt)" = internet-muerto-hibrido-9x10
+          test -s hybrid.js
           test -s assets/gsap.min.js
-          node --check pilot.js
+          node --check hybrid.js
+          for n in 01 02 03 04 05 06; do test -s "assets/art/$n.jpg"; done
+          test -s assets/fonts/Montserrat.ttf
 
       - name: Install HyperFrames
         run: npm install -g hyperframes@0.9.91
@@ -118,7 +120,7 @@ jobs:
               return json.loads(subprocess.check_output(["ffprobe","-v","error","-show_streams","-show_format","-of","json",p]))
           d=probe("output.mp4")
           v=next(s for s in d["streams"] if s["codec_type"]=="video")
-          assert (v["width"],v["height"])==(1080,1080), "Resolucion incorrecta"
+          assert (v["width"],v["height"])==(1080,1200), "Resolucion incorrecta"
           assert v["avg_frame_rate"]=="30/1", "FPS incorrectos"
           assert any(s["codec_type"]=="audio" for s in d["streams"]), "Sin audio"
           assert abs(float(d["format"]["duration"])-float(probe("voice.mp3")["format"]["duration"])) < 0.25, "Duracion incorrecta"
@@ -128,7 +130,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: pilot-sync-diagnostics
+          name: hybrid-sync-diagnostics
           path: |
             video/transcript.json
             video/sync-report.txt
