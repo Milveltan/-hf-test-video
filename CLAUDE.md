@@ -11,7 +11,7 @@ Rama de trabajo: **`datologo-7`** · respaldo estable: `datologo-7-estable` · s
 | Qué piezas existen y cómo se usan | `d7/CATALOGO.md` (índice) + `d7/catalog/hoja.jpg` (vista de todas) |
 | Flujo completo y entrega al usuario | `d7/docs/PRODUCCION.md` |
 | Reglas de render (3D, rendimiento) | `d7/docs/RENDER.md` |
-| **Planificar un episodio** (gancho, narrativa visual, retención) | `d7/docs/DIRECCION_CREATIVA.md` (**consultar antes de planificar cualquier episodio**) |
+| **Escribir la narración y planificar un episodio** (gancho, retención, cierre) | `d7/docs/DIRECCION_CREATIVA.md` (**consultar antes de planificar cualquier episodio**) |
 | Control de calidad técnico y artístico | `d7/docs/CALIDAD.md` |
 | Ahorro de uso: Sonnet/Opus, lectura mínima | `d7/docs/EFICIENCIA.md` (**leer en cada sesión de producción**) |
 | Historial de cambios y mediciones | `d7/docs/CAMBIOS.md` · `d7/registros/` |
@@ -23,7 +23,7 @@ Rama de trabajo: **`datologo-7`** · respaldo estable: `datologo-7-estable` · s
 3. **Escenas ancladas a palabras** (`lw(i)`), nunca a segundos.
 4. **3D real (three.js) solo dentro de `<Clip3D>`** y registrado en `src/clips.ts`. Por defecto: `ParticleForm` (Canvas 2D), CSS 3D y paralaje.
 5. **Render definitivo solo en GitHub Actions**. Aquí: `node tools/check.mjs` + hojas de fotogramas (`tools/qa-stills.mjs`), nunca el video completo.
-6. Datos reales y fieles a la fuente; cifras siempre con `SourceTag`.
+6. Datos reales y verificados en la investigación; la narración no recita cifras ni fuentes (DIRECCION_CREATIVA §0). `SourceTag` solo cuando una cifra aparezca en pantalla.
 7. El usuario trabaja **solo desde iPhone**: entrega en una sola acción (ver PRODUCCION.md).
 8. **Eficiencia permanente**: contexto mínimo, sin lecturas ni comandos redundantes; producción habitual apta para Sonnet, arquitectura para Opus (EFICIENCIA.md). Nunca a costa de la calidad.
 
