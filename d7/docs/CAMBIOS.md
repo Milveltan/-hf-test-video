@@ -52,3 +52,7 @@ Episodio «Internet muerto» (81 s). Render en GitHub con `swangle` para todo: *
 ## 2026-11-26 · Episodio huevo-prohibido (27,8 s)
 - Composición `HuevoProhibido`, 7 escenas. Dirección artística "Aduana de caramelo". Productos genéricos (sin marcas). Reutiliza `Conveyor`, `Stamp`, `SourceTag`.
 - Evitar `foreignObject` dentro de SVG: dibujar las piezas como `<g>` (CapsuleG, ToyG).
+
+## 2026-11-26 · Episodio sueno-comer (31,8 s)
+- Composición `SuenoComer`, 6 escenas. Dirección artística "Siesta de sobremesa". Pieza nueva: `anatomy/Stomach.tsx`.
+- Persona acostada en el sofá: `Person` con `rot={-90}` (gira sobre los pies), s ≈ 0.46, pies en x≈600, y≈770 de la `Sala`.

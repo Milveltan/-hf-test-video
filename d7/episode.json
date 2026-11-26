@@ -1,8 +1,8 @@
 {
-  "slug": "huevo-prohibido",
-  "composition": "HuevoProhibido",
-  "voice": "public/audio/voz-huevo-prohibido.wav",
-  "script": "src/episodes/huevo-prohibido/script.txt",
+  "slug": "sueno-comer",
+  "composition": "SuenoComer",
+  "voice": "public/audio/voz-sueno-comer.wav",
+  "script": "src/episodes/sueno-comer/script.txt",
   "sync": true,
-  "qaFrames": "4,51,129,177,228,278,343,399,504,577,693,801"
+  "qaFrames": "6,110,276,418,511,588,635,693,754,819,867,920"
 }

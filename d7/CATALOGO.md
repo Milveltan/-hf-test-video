@@ -60,6 +60,8 @@ Todas las piezas son funciones del fotograma (deterministas) y aceptan colores p
 
 **`Home.tsx`** (episodio olvido-puerta): `Kitchen` (cocina teal con vapor y lámpara colgante) · `Sala` (sofá, ventana nocturna, lámpara de pie, cuadros-fotograma) · `DoorWall` · `HouseWorld` (sala | puerta | cocina, 2160×1200; moverse por él con una cámara de mundo `translate/scale`). Cada cuarto acepta `lit` 0–1. Piso en y = 880.
 
+**`anatomy/Stomach.tsx`**: `Stomach` (estómago 2.5D; `churn` contracciones, `fill` comida, `glow`). Va bien dentro de `HumanRig` con `xray`.
+
 ## Cine · `film/Film.tsx`
 `Idea` (bombilla luminosa con rayos; `glow` < 1 la apaga en gris) · `FilmCard` (fotograma con perforaciones que encierra cualquier contenido 1080×1200 escalado a `w`; `glow`, `dim`) · `Clapper` (claqueta, `k` 0 abierta → 1 cerrada). Útiles para "capítulos", archivo, recuerdos, escenas dentro de escenas.
 
