@@ -62,3 +62,6 @@ En GitHub (4 núcleos) un video de 80 s tarda ≈ 5–9 min. three.js: usar con 
 
 ## Regla de render
 Render definitivo **solo en GitHub Actions**. En el entorno de Claude solo se hacen hojas de fotogramas sueltos para control de calidad (segundos), nunca el video completo.
+
+## Eficiencia de uso
+Objetivo permanente: producción habitual con Sonnet usando los estándares y piezas creados con Opus; lectura y ejecución mínimas. Reglas: `docs/EFICIENCIA.md`.

@@ -12,6 +12,7 @@ Rama de trabajo: **`datologo-7`** · respaldo estable: `datologo-7-estable` · s
 | Flujo completo y entrega al usuario | `d7/docs/PRODUCCION.md` |
 | Reglas de render (3D, rendimiento) | `d7/docs/RENDER.md` |
 | Control de calidad técnico y artístico | `d7/docs/CALIDAD.md` |
+| Ahorro de uso: Sonnet/Opus, lectura mínima | `d7/docs/EFICIENCIA.md` (**leer en cada sesión de producción**) |
 | Historial de cambios y mediciones | `d7/docs/CAMBIOS.md` · `d7/registros/` |
 | Ejemplo completo de episodio | `d7/src/episodes/internet-muerto/` (Episode.tsx = mapa de escenas) |
 
@@ -23,6 +24,7 @@ Rama de trabajo: **`datologo-7`** · respaldo estable: `datologo-7-estable` · s
 5. **Render definitivo solo en GitHub Actions**. Aquí: `node tools/check.mjs` + hojas de fotogramas (`tools/qa-stills.mjs`), nunca el video completo.
 6. Datos reales y fieles a la fuente; cifras siempre con `SourceTag`.
 7. El usuario trabaja **solo desde iPhone**: entrega en una sola acción (ver PRODUCCION.md).
+8. **Eficiencia permanente**: contexto mínimo, sin lecturas ni comandos redundantes; producción habitual apta para Sonnet, arquitectura para Opus (EFICIENCIA.md). Nunca a costa de la calidad.
 
 ## Arranque técnico de una sesión
 ```bash

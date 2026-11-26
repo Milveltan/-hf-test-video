@@ -22,3 +22,6 @@ Episodio «Internet muerto» (81 s). Render en GitHub con `swangle` para todo: *
   | Ejecución completa del workflow | ≈ 34 min | **≈ 7.7 min** ✅ |
   Guardado automático de clips y registros en la rama: ✅ funcionando.
 - El workflow ya no renderiza cuando solo cambian documentos (docs, .md, registros, catálogo).
+
+## v2.1 (26-nov-2026, 03:07)
+- Objetivo permanente de eficiencia de uso: `docs/EFICIENCIA.md` (reparto Sonnet/Opus, lectura mínima, QA acotado). Referenciado en CLAUDE.md y ARQUITECTURA.md.
