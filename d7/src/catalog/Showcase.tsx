@@ -23,10 +23,18 @@ import {ChatWindow, PostCard, PhoneFrame} from '../dl/ui/Social';
 import {Stamp} from '../dl/fx/Fx';
 import {Odometer, SlamWord} from '../dl/type/Type';
 import {Conveyor} from '../dl/mechanisms/Conveyor';
+import {Kitchen, Sala, HouseWorld} from '../dl/environments/Home';
+import {Idea, FilmCard, Clapper} from '../dl/film/Film';
 
 const C: React.FC<{children: React.ReactNode; bg?: string}> = ({children, bg = 'radial-gradient(80% 70% at 50% 40%, #13202B, #03060A 80%)'}) => <AbsoluteFill style={{background: bg, alignItems: 'center', justifyContent: 'center'}}>{children}</AbsoluteFill>;
 
 export const PIECES: {id: string; render: (f: number) => React.ReactNode}[] = [
+  {id: 'Home-cocina', render: (f) => <Kitchen f={f} />},
+  {id: 'Home-sala', render: (f) => <Sala f={f} />},
+  {id: 'Home-mundo-dos-cuartos', render: (f) => <AbsoluteFill style={{overflow: 'hidden'}}><div style={{transform: 'scale(0.5)', transformOrigin: '0 300px'}}><HouseWorld f={f} /></div></AbsoluteFill>},
+  {id: 'Film-idea', render: (f) => <C><Idea x={540} y={600} f={f} s={1.6} /></C>},
+  {id: 'Film-card', render: (f) => <C><FilmCard w={560} glow={1}><Sala f={f} /></FilmCard></C>},
+  {id: 'Film-claqueta', render: (f) => <C><Clapper k={f > 30 ? 1 : 0} x={540} y={600} s={1.7} /></C>},
   {id: 'HumanRig-idle', render: () => <C><HumanRig person={PERSONA_A} scale={1.15} /></C>},
   {id: 'HumanRig-contener-aire', render: (f) => <C><HumanRig person={ATLETA} pose={POSES.holdNose} expression="strain" cheeks={1} flush={0.7} breath={1} scale={1.15} /></C>},
   {id: 'HumanRig-rayosX', render: (f) => <C><HumanRig person={PERSONA_B} pose={POSES.idle} xray={1} breath={0.6} scale={1.15} inside={<g><g transform="translate(110 250) scale(0.45)"><Lungs frame={f} inflate={0.7} /></g><g transform="translate(185 340) scale(0.28)"><Heart frame={f} /></g></g>} /></C>},

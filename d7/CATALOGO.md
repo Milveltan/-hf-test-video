@@ -58,6 +58,11 @@ Todas las piezas son funciones del fotograma (deterministas) y aceptan colores p
 ## Escenarios · `environments/`
 `DarkRoom.tsx` → `Room`, `SCR` (cuarto nocturno con monitor, ventana con lluvia) · `GovBuilding.tsx` (edificio de gobierno genérico con ventanas que se encienden). `NightHouse.tsx` → `House` (casa nocturna: `off[i]` apaga ventanas una por una; 8 = ático) · `ApartmentBlock` (edificio cols×rows con siluetas que se sacuden: `lit(i)`, `jolt(i)`).
 
+**`Home.tsx`** (episodio olvido-puerta): `Kitchen` (cocina teal con vapor y lámpara colgante) · `Sala` (sofá, ventana nocturna, lámpara de pie, cuadros-fotograma) · `DoorWall` · `HouseWorld` (sala | puerta | cocina, 2160×1200; moverse por él con una cámara de mundo `translate/scale`). Cada cuarto acepta `lit` 0–1. Piso en y = 880.
+
+## Cine · `film/Film.tsx`
+`Idea` (bombilla luminosa con rayos; `glow` < 1 la apaga en gris) · `FilmCard` (fotograma con perforaciones que encierra cualquier contenido 1080×1200 escalado a `w`; `glow`, `dim`) · `Clapper` (claqueta, `k` 0 abierta → 1 cerrada). Útiles para "capítulos", archivo, recuerdos, escenas dentro de escenas.
+
 ## Mecanismos · `mechanisms/`
 `Conveyor.tsx` (banda transportadora con rodillos y objetos que viajan).
 

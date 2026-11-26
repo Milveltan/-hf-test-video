@@ -37,3 +37,9 @@ Episodio «Internet muerto» (81 s). Render en GitHub con `swangle` para todo: *
 - Narración con las reglas nuevas de DIRECCION_CREATIVA §0 (gancho hablado, cierre explícito, sin datos técnicos).
 - Piezas nuevas en la biblioteca: `environments/NightHouse.tsx` (House, ApartmentBlock) y `fx/FallVoid.tsx`.
 - Con la voz Relator Narrativo Dinámico (Drama 3), ~150 palabras = 51 s; 199 palabras = 75 s.
+
+## 2026-11-26 · Episodio olvido-puerta («Por qué se te olvida lo que ibas a hacer al entrar a un cuarto»)
+- Composición `OlvidoPuerta`, 13 escenas, 60,8 s. Dirección artística "Cine de hogar" (grading teal/tungsteno, cuartos como fotogramas, la puerta como claqueta).
+- Piezas nuevas en la biblioteca: `environments/Home.tsx` (Kitchen, Sala, DoorWall, HouseWorld) y `film/Film.tsx` (Idea, FilmCard, Clapper). Añadidas al catálogo y al Showcase.
+- Ficha de persona `VIEWER` (suéter coral) en `episodes/olvido-puerta/scenes/palette.ts`.
+- Aprendizaje: `walkPose` necesita velocidad ≈ 0.115 (ciclo de ~17 fotogramas); a 0.35 los pasos se ven acelerados. Evitar poner al personaje bajo la lámpara colgante de la cocina (parece sombrero): usar x ≈ 400.

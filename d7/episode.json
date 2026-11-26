@@ -1,8 +1,8 @@
 {
-  "slug": "sacudida-al-dormir",
-  "composition": "SacudidaDormir",
-  "voice": "public/audio/voz-sacudida-al-dormir.wav",
-  "script": "src/episodes/sacudida-al-dormir/script.txt",
+  "slug": "olvido-puerta",
+  "composition": "OlvidoPuerta",
+  "voice": "public/audio/voz-olvido-puerta.wav",
+  "script": "src/episodes/olvido-puerta/script.txt",
   "sync": true,
-  "qaFrames": "8,95,240,620,800,1020,1150,1300,1420,1530,1620,1760,1900,2050,2190,2290"
+  "qaFrames": "3,119,150,224,450,621,692,927,982,1090,1211,1266,1304,1394,1441,1492,1614,1650,1704,1791"
 }
