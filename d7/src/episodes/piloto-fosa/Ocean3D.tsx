@@ -54,7 +54,7 @@ export const Ocean3D: React.FC = () => {
       <RockSurface w={420} h={140} seg={170} amp={9} scale={0.05} seed={5} position={[0, floorY + 60, -46]} colors={['#18242A', '#34444A', '#5E6C6A']} />
       <RockSurface w={260} h={140} seg={140} amp={9} scale={0.05} seed={8} position={[78, floorY + 60, 0]} rotation={[0, -Math.PI / 2, 0]} colors={['#18242A', '#34444A', '#5E6C6A']} />
       {/* Everest sumergido */}
-      <Mountain height={EVEREST} radius={40} seed={7} position={[MX, floorY + EVEREST / 2, 0]} snow={0.84} colors={['#4E5A60', '#9AA3A2']} />
+      <Mountain height={EVEREST} radius={44} seed={7} position={[MX, floorY, 0]} snow={0.84} colors={['#4E5A60', '#9AA3A2']} />
       {/* marcas de profundidad */}
       <group position={[-16, -38, 22]}>
         <mesh rotation={[Math.PI / 2, 0, 0]}><torusGeometry args={[9, 0.06, 6, 90]} /><meshBasicMaterial color="#6FE6FF" fog={false} transparent opacity={0.8 * lab(170, 200) * (1 - lab(250, 270))} /></mesh>
@@ -63,8 +63,8 @@ export const Ocean3D: React.FC = () => {
       <Label3D text="EVEREST" sub="SU CIMA, AÚN BAJO EL AGUA" position={[MX - 3, floorY + EVEREST + 2.4 + reveal * 8, 2]} height={1.8 + reveal * 14} opacity={lab(110, 140) * (1 - lab(230, 250)) + reveal} />
       <Label3D text="≈ 10.900 m" sub="FOSA DE LAS MARIANAS" position={[-30, floorY + 6, 14]} height={2.4 + reveal * 11} accent="#FF6B6B" opacity={lab(300, 325)} />
       {/* medidas del final */}
-      <MeasureLine from={[MX + 46, floorY, 0]} to={[MX + 46, floorY + EVEREST, 0]} progress={lab(370, 410)} cap={4} />
-      <MeasureLine from={[MX + 46, floorY + EVEREST, 0]} to={[MX + 46, 0, 0]} color="#6FE6FF" progress={lab(405, 430)} cap={4} />
+      <MeasureLine from={[MX + 46, floorY, 0]} to={[MX + 46, floorY + EVEREST, 0]} progress={lab(370, 410)} cap={6} thick={0.45} />
+      <MeasureLine from={[MX + 46, floorY + EVEREST, 0]} to={[MX + 46, 0, 0]} color="#6FE6FF" progress={lab(405, 430)} cap={6} thick={0.45} />
       <Label3D text="8.849 m" sub="ALTURA DEL EVEREST" position={[MX + 76, floorY + EVEREST / 2, 0]} height={18} opacity={lab(395, 415)} />
       <Label3D text="+2 km" sub="DE AGUA ENCIMA" position={[MX + 76, floorY + EVEREST + 12, 0]} height={15} accent="#6FE6FF" opacity={lab(420, 440)} />
       <mesh position={[0, 0.1, 0]} rotation={[-Math.PI / 2, 0, 0]} visible={reveal > 0}><planeGeometry args={[500, 500]} /><meshBasicMaterial color="#5FC8E8" transparent opacity={0.35 * reveal} side={THREE.DoubleSide} fog={false} /></mesh>

@@ -103,20 +103,27 @@ export const RockSurface: React.FC<{w: number; h: number; seg?: number; amp?: nu
   return <mesh geometry={geo} position={position} rotation={rotation}><meshStandardMaterial vertexColors roughness={0.95} metalness={0.02} side={THREE.DoubleSide} /></mesh>;
 };
 
-export const Mountain: React.FC<{height: number; radius: number; seed?: number; position?: [number, number, number]; snow?: number; colors?: [string, string]}> = ({height, radius, seed = 3, position, snow = 0.82, colors = ['#4A4440', '#8C857C']}) => {
+/** Montaña procedural como relieve sobre un plano (no usa ConeGeometry: en WebGL por software pierde triángulos).
+ *  La base queda en `position` (y) y la cima exactamente a `height` sobre ella, en el centro. */
+export const Mountain: React.FC<{height: number; radius: number; seed?: number; position?: [number, number, number]; snow?: number; colors?: [string, string]; seg?: number}> = ({height, radius, seed = 3, position, snow = 0.82, colors = ['#4A4440', '#8C857C'], seg = 220}) => {
   const geo = useMemo(() => {
-    const g = new THREE.ConeGeometry(radius, height, 220, 120, true);
+    const W = radius * 2.6;
+    const g = new THREE.PlaneGeometry(W, W, seg, seg);
     const pos = g.attributes.position as THREE.BufferAttribute;
     const col = new Float32Array(pos.count * 3);
     const a = new THREE.Color(colors[0]), b = new THREE.Color(colors[1]), sn = new THREE.Color('#EEF4FF'), tmp = new THREE.Color();
+    const sc = 3 / radius;
     for (let i = 0; i < pos.count; i++) {
-      const x = pos.getX(i), y = pos.getY(i), z = pos.getZ(i);
-      const h01 = (y + height / 2) / height;
-      const ang = Math.atan2(z, x);
-      const n = fbm3(Math.cos(ang) * 2.2 + seed, h01 * 3, Math.sin(ang) * 2.2, 3, seed);
-      const ridges = Math.pow(1 - Math.abs(noise3(Math.cos(ang) * 4 + 9, h01 * 3, Math.sin(ang) * 4, seed + 4)), 3);
-      const k = 1 + n * 0.35 + ridges * 0.25;
-      pos.setX(i, x * k); pos.setZ(i, z * k);
+      const x = pos.getX(i), y = pos.getY(i);
+      const r = Math.hypot(x, y), ang = Math.atan2(y, x);
+      const warp = fbm3(x * sc * 0.6, y * sc * 0.6, seed, 3, seed) * 0.28;
+      const ridges = Math.pow(1 - Math.abs(noise3(Math.cos(ang) * 3 + 5, Math.sin(ang) * 3, r * sc * 0.8, seed + 4)), 2);
+      const rr = r / (radius * (1 + warp + ridges * 0.12));
+      let h01 = Math.max(0, 1 - rr);
+      h01 = Math.pow(h01, 1.35) * (1 + 0.08 * fbm3(x * sc * 2, y * sc * 2, seed + 2, 3, seed)) / (1 + Math.max(0, 0.08 * fbm3(0, 0, seed + 2, 3, seed)));
+      const z = Math.min(1, h01) * height;
+      pos.setZ(i, z);
+      const n = fbm3(x * sc * 3, y * sc * 3, seed + 7, 3, seed);
       tmp.copy(a).lerp(b, Math.max(0, Math.min(1, 0.5 + n)));
       if (h01 > snow + n * 0.08) tmp.lerp(sn, 0.9);
       col[i * 3] = tmp.r; col[i * 3 + 1] = tmp.g; col[i * 3 + 2] = tmp.b;
@@ -124,8 +131,8 @@ export const Mountain: React.FC<{height: number; radius: number; seed?: number; 
     g.setAttribute('color', new THREE.BufferAttribute(col, 3));
     g.computeVertexNormals();
     return g;
-  }, [height, radius, seed, snow, colors.join()]);
-  return <mesh geometry={geo} position={position}><meshStandardMaterial vertexColors roughness={0.88} /></mesh>;
+  }, [height, radius, seed, snow, colors.join(), seg]);
+  return <mesh geometry={geo} position={position} rotation={[-Math.PI / 2, 0, 0]}><meshStandardMaterial vertexColors roughness={0.88} /></mesh>;
 };
 
 /* ───────── luz y atmósfera ───────── */
@@ -214,7 +221,7 @@ export const Label3D: React.FC<{text: string; sub?: string; position: [number, n
   return <sprite position={position} scale={[height * aspect, height, 1]}><spriteMaterial map={tex} transparent opacity={opacity} depthTest={false} fog={false} /></sprite>;
 };
 
-export const MeasureLine: React.FC<{from: [number, number, number]; to: [number, number, number]; color?: string; progress?: number; cap?: number}> = ({from, to, color = '#FFD25A', progress = 1, cap = 0.8}) => {
+export const MeasureLine: React.FC<{from: [number, number, number]; to: [number, number, number]; color?: string; progress?: number; cap?: number; thick?: number}> = ({from, to, color = '#FFD25A', progress = 1, cap = 0.8, thick = 0.05}) => {
   const a = new THREE.Vector3(...from), b = new THREE.Vector3(...to);
   const end = a.clone().lerp(b, progress);
   const mid = a.clone().lerp(end, 0.5), len = a.distanceTo(end);
@@ -222,8 +229,8 @@ export const MeasureLine: React.FC<{from: [number, number, number]; to: [number,
   const q = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir);
   return (
     <group>
-      {len > 0.01 && <mesh position={mid} quaternion={q}><cylinderGeometry args={[0.05, 0.05, len, 6]} /><meshBasicMaterial color={color} fog={false} /></mesh>}
-      {[a, end].map((p, i) => <mesh key={i} position={p} quaternion={q}><boxGeometry args={[cap, 0.06, 0.06]} /><meshBasicMaterial color={color} fog={false} /></mesh>)}
+      {len > 0.01 && <mesh position={mid} quaternion={q}><cylinderGeometry args={[thick, thick, len, 8]} /><meshBasicMaterial color={color} fog={false} /></mesh>}
+      {[a, end].map((p, i) => <mesh key={i} position={p} quaternion={q}><boxGeometry args={[cap, thick * 1.4, thick * 1.4]} /><meshBasicMaterial color={color} fog={false} /></mesh>)}
     </group>
   );
 };
