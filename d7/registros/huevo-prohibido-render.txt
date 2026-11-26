@@ -1,0 +1,11 @@
+episodio=huevo-prohibido
+fecha=2026-11-26T15:17:46Z
+ejecucion=45847071425
+nucleos=4
+duracion_video_s=29.035000
+fotogramas=871
+render_segundos=74
+fps_de_render=11.77
+sync_segundos=14
+clips_segundos=0
+inicio_job=2026-11-26T09:14:21-06:00
