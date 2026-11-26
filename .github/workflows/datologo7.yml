@@ -79,6 +79,7 @@ jobs:
 
       - name: Sincronizar narración (Faster-Whisper)
         if: steps.ep.outputs.sync == 'true'
+        continue-on-error: true
         working-directory: d7
         run: |
           pip install -q -r tools/requirements.txt
