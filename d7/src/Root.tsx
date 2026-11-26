@@ -4,6 +4,7 @@ import './dl/fonts';
 import {PILOT_FRAMES, Piloto} from './episodes/internet-muerto-piloto/Piloto';
 import {EPISODE_FRAMES, Episode} from './episodes/internet-muerto/Episode';
 import {CLIPS} from './clips';
+import {EPISODE_FRAMES as CR_FRAMES, Episode as ContenerRespiracion} from './episodes/contener-respiracion/Episode';
 import {Showcase} from './catalog/Showcase';
 
 /** Formato oficial Datologo 7.0: 1080 × 1200 (9:10) · 30 fps */
@@ -13,6 +14,7 @@ export const H = 1200;
 export const RemotionRoot: React.FC = () => (
   <>
     <Composition id="InternetMuerto" component={Episode} width={W} height={H} fps={30} durationInFrames={EPISODE_FRAMES} />
+    <Composition id="ContenerRespiracion" component={ContenerRespiracion} width={W} height={H} fps={30} durationInFrames={CR_FRAMES} />
     <Composition id="PilotoInternetMuerto" component={Piloto} width={W} height={H} fps={30} durationInFrames={PILOT_FRAMES} />
     <Composition id="Catalogo" component={Showcase} width={W} height={H} fps={30} durationInFrames={60} defaultProps={{piece: 'HumanRig-idle'}} />
     {CLIPS.map((c) => (

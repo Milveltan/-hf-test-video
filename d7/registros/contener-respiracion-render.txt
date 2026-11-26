@@ -1,0 +1,11 @@
+episodio=contener-respiracion
+fecha=2026-11-26T09:59:59Z
+ejecucion=45796402140
+nucleos=4
+duracion_video_s=65.877000
+fotogramas=1976
+render_segundos=158
+fps_de_render=12.51
+sync_segundos=38
+clips_segundos=0
+inicio_job=2026-11-26T03:54:52-06:00

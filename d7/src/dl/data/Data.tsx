@@ -86,3 +86,15 @@ export const IsoGrid: React.FC<{frame: number; at: number; total?: number; marke
     })}
   </div>
 );
+
+/** Escala pH horizontal (ácido ← → básico) con aguja. value 0..1 (0 = extremo ácido); mark = posición de referencia. */
+export const PhScale: React.FC<{value: number; mark?: number; width?: number; label?: string; acid?: string; base?: string; ink?: string}> = ({value, mark, width = 760, label = 'pH', acid = 'ÁCIDO', base = 'BÁSICO', ink = '#F2EEE6'}) => (
+  <div style={{position: 'relative', width, height: 170, fontFamily: '"JetBrains Mono", monospace'}}>
+    <div style={{position: 'absolute', top: 60, left: 0, right: 0, height: 34, borderRadius: 17, background: 'linear-gradient(90deg, #FF2E4D, #FF8A3D 25%, #F6E05E 45%, #5FD38D 55%, #3FA9F5 75%, #6B4BE0)', boxShadow: '0 6px 30px rgba(0,0,0,0.5)'}} />
+    {mark !== undefined && <div style={{position: 'absolute', top: 52, left: mark * width - 2, width: 4, height: 50, background: ink, opacity: 0.45}} />}
+    <div style={{position: 'absolute', top: 18, left: value * width - 22, width: 0, height: 0, borderLeft: '22px solid transparent', borderRight: '22px solid transparent', borderTop: `34px solid ${ink}`, filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.6))'}} />
+    <div style={{position: 'absolute', top: 108, left: 0, fontSize: 30, color: '#FF6A5A', letterSpacing: '0.12em'}}>{acid}</div>
+    <div style={{position: 'absolute', top: 108, right: 0, fontSize: 30, color: '#8FB6FF', letterSpacing: '0.12em'}}>{base}</div>
+    <div style={{position: 'absolute', top: 108, left: width / 2 - 40, width: 80, textAlign: 'center', fontSize: 32, color: ink, fontWeight: 700}}>{label}</div>
+  </div>
+);

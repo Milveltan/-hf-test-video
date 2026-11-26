@@ -8,11 +8,14 @@ import {F} from '../dl/fonts';
 import {HumanRig, POSES, PERSONA_A, PERSONA_B, ATLETA} from '../dl/characters/HumanRig';
 import {Bust, ALTMAN, PERSONA} from '../dl/characters/AltmanBust';
 import {Bot} from '../dl/characters/Bot';
-import {Lungs, Heart, BloodFlow, Brain, Diaphragm} from '../dl/anatomy/Anatomy';
+import {Lungs, Heart, BloodFlow, Brain, Diaphragm, Spleen} from '../dl/anatomy/Anatomy';
+import {VascularBody} from '../dl/anatomy/VascularBody';
+import {Whale, Seal} from '../dl/nature/Marine';
+import {PowerOff} from '../dl/fx/PowerOff';
 import {ParticleForm} from '../dl/render/ParticleForm';
 import {Sky, Hills, Grass, Underwater, Fog, GodRays} from '../dl/nature/Nature';
 import {GovBuilding} from '../dl/environments/GovBuilding';
-import {PercentRing, StreamSplit, IsoGrid, TimelineRuler} from '../dl/data/Data';
+import {PercentRing, StreamSplit, IsoGrid, TimelineRuler, PhScale} from '../dl/data/Data';
 import {EcgTrace} from '../dl/data/EcgTrace';
 import {MagazinePage} from '../dl/editorial/MagazinePage';
 import {LowerThird, Annotation} from '../dl/editorial/Editorial';
@@ -56,6 +59,11 @@ export const PIECES: {id: string; render: (f: number) => React.ReactNode}[] = [
   {id: 'PhoneFrame', render: () => <C><PhoneFrame width={460}><div style={{position: 'absolute', inset: 0, background: 'linear-gradient(#1A2A38,#0A121A)'}} /></PhoneFrame></C>},
   {id: 'Tipografia', render: (f) => <C><div style={{textAlign: 'center'}}><Odometer value={2025} digits={4} style={{fontFamily: F.display, fontSize: 220, color: '#F2EEE6'}} /><br /><SlamWord frame={f} at={0} text="IMPACTO" style={{fontFamily: F.display, fontSize: 160, color: '#F2EEE6'}} /></div></C>},
   {id: 'Stamp-LowerThird-Annotation', render: (f) => <C><Stamp frame={f} at={0} text="SELLO" x={540} y={420} /><LowerThird frame={f} at={0} name="NOMBRE APELLIDO" role="CARGO O DESCRIPCIÓN" y={700} /><Annotation frame={f} at={0} x={600} y={900} tx={800} ty={1100} kicker="ETIQUETA" label="anotación" size={70} /></C>},
+  {id: 'Spleen', render: (f) => <C><Spleen frame={f} squeeze={0.3} scale={2} /></C>},
+  {id: 'VascularBody', render: (f) => <C><VascularBody frame={f} constrict={0.7} core={0.9} scale={1.1} /></C>},
+  {id: 'Marine-ballena-foca', render: (f) => <AbsoluteFill><Underwater frame={f} depth={0.4} /><div style={{position: 'absolute', left: -80, top: 260}}><Whale frame={f} scale={1.3} /></div><div style={{position: 'absolute', left: 300, top: 760}}><Seal frame={f} scale={1.2} /></div></AbsoluteFill>},
+  {id: 'PowerOff', render: () => <PowerOff k={0.6}><C><Heart frame={0} scale={2.4} /></C></PowerOff>},
+  {id: 'PhScale', render: () => <C><PhScale value={0.36} mark={0.5} width={820} /></C>},
 ];
 
 export const Showcase: React.FC<{piece: string}> = ({piece}) => {

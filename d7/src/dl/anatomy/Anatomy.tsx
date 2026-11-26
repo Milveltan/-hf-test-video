@@ -151,3 +151,27 @@ export const Diaphragm: React.FC<{inflate?: number; width?: number; color?: stri
     </svg>
   );
 };
+
+/** Bazo (vista anterior, 240×300). squeeze 0..1 lo contrae (se encoge y oscurece); glow = brillo de contorno. */
+export const Spleen: React.FC<{frame: number; squeeze?: number; glow?: number; scale?: number; id?: string}> = ({frame, squeeze = 0, glow = 0.5, scale = 1, id = 'sp'}) => {
+  const k = 1 - squeeze * 0.22;
+  const wob = Math.sin(frame * 0.09) * 0.012;
+  return (
+    <svg width={240 * scale} height={300 * scale} viewBox="0 0 240 300" style={{overflow: 'visible'}}>
+      <defs>
+        <radialGradient id={`${id}g`} cx="0.38" cy="0.32" r="0.8">
+          <stop offset="0" stopColor={mixHex('#C0566E', '#8E2E4C', squeeze)} />
+          <stop offset="0.6" stopColor={mixHex('#7E2443', '#5A1530', squeeze)} />
+          <stop offset="1" stopColor="#2E0A1A" />
+        </radialGradient>
+        <filter id={`${id}b`}><feGaussianBlur stdDeviation="14" /></filter>
+      </defs>
+      <ellipse cx={120} cy={150} rx={110} ry={130} fill="#FF4D6A" opacity={0.25 * glow} filter={`url(#${id}b)`} />
+      <g transform={`translate(120 150) scale(${k + wob} ${k - wob}) translate(-120 -150)`}>
+        <path d="M70 30 C 140 0 215 40 220 120 C 225 200 180 280 110 285 C 70 288 48 262 58 232 C 66 210 92 205 90 180 C 88 158 52 150 40 120 C 28 88 40 44 70 30 Z" fill={`url(#${id}g)`} stroke="#F5A3B5" strokeOpacity={0.55} strokeWidth={3} />
+        <path d="M95 60 C 150 50 195 90 196 140" stroke="#FFD3DC" strokeOpacity={0.45} strokeWidth={4} fill="none" strokeLinecap="round" />
+        <path d="M92 182 C 104 168 118 166 132 172" stroke="#3A0C1E" strokeOpacity={0.6} strokeWidth={5} fill="none" strokeLinecap="round" />
+      </g>
+    </svg>
+  );
+};

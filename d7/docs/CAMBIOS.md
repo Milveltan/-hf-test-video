@@ -25,3 +25,10 @@ Episodio «Internet muerto» (81 s). Render en GitHub con `swangle` para todo: *
 
 ## v2.1 (26-nov-2026, 03:07)
 - Objetivo permanente de eficiencia de uso: `docs/EFICIENCIA.md` (reparto Sonnet/Opus, lectura mínima, QA acotado). Referenciado en CLAUDE.md y ARQUITECTURA.md.
+
+## v2.2 (26-nov-2026) · Episodio "Contener la respiración"
+- Episodio `contener-respiracion` (composición `ContenerRespiracion`, 14 escenas, ≈ 65,7 s). Dirección artística "Abismo fisiológico".
+- Biblioteca nueva: `Spleen` (Anatomy), `VascularBody`, `Whale`/`Seal` (nature/Marine), `PowerOff` (fx), `PhScale` (Data). Añadidas al catálogo y al Showcase.
+- Efectos nuevos en `public/sfx/` (sintetizados con ffmpeg): breath_in, gasp, heartbeat, alarm, power_off, underwater, spasm, body_ambient.
+- QA local sin acceso a remotion.media: `REMOTION_CHROME=/opt/pw-browsers/chromium_headless_shell-*/chrome-headless-shell-linux64/chrome-headless-shell node tools/qa-stills.mjs …`.
+- `words.json` provisional por pausas del audio; GitHub lo corrige con Whisper (`sync: true`).

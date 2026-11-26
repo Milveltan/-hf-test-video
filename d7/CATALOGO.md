@@ -19,7 +19,7 @@ Todas las piezas son funciones del fotograma (deterministas) y aceptan colores p
 `Glow` (fuente puntual) · `Beam` (haz/reflector) · `Sweep` (reflejo que barre) · `Vignette`.
 
 ## Efectos · `fx/`
-`Fx.tsx`: `Stamp` (sello que golpea) · `Particles` (chispas, polvo, nieve, burbujas) · `Flash` · `Scanline`. `Dust.tsx`: polvo en un haz.
+`Fx.tsx`: `Stamp` (sello que golpea) · `Particles` (chispas, polvo, nieve, burbujas) · `Flash` · `Scanline`. `PowerOff.tsx`: `PowerOff` (apagado de televisor antiguo sobre cualquier escena: línea → punto → negro). `Dust.tsx`: polvo en un haz.
 
 ## Transiciones · `transitions/`
 `Transit` (whip, zoom, iris, fade, drop, wipe) · `GlitchBands`. Además: paneo vertical continuo, entrada a pantalla (match-cut), línea que continúa entre escenas (ver episodio internet-muerto).
@@ -37,10 +37,12 @@ Todas las piezas son funciones del fotograma (deterministas) y aceptan colores p
 `Clip3D` (3D real horneado en clip con alfa; ver docs/RENDER.md) · `ParticleForm` (partículas 3D en Canvas 2D: sphere, torus, helix, ring, disc, cloud, heart; morph, rotX/rotY, colors, spread) — costo medio, sin WebGL.
 
 ## Anatomía · `anatomy/Anatomy.tsx`
-`Lungs` (inflate, o2, glow) · `Heart` (bpm, o2: late solo) · `BloodFlow` (d = trayectoria, o2, speed, cells) · `Brain` (highlight: brainstem/cortex/all) · `Diaphragm` (inflate) · `o2Color(o2)`.
+`Lungs` (inflate, o2, glow) · `Heart` (bpm, o2: late solo) · `BloodFlow` (d = trayectoria, o2, speed, cells) · `Brain` (highlight: brainstem/cortex/all) · `Diaphragm` (inflate) · `Spleen` (squeeze: bazo que se contrae) · `o2Color(o2)`.
+`VascularBody.tsx` → `VascularBody` (silueta 400×960 con red de vasos; constrict = vasoconstricción periférica, core = flujo concentrado en cerebro y corazón).
 
 ## Naturaleza y atmósfera · `nature/Nature.tsx`
 `Sky` (t = hora del día, nubes, sol/luna, estrellas) · `Hills` (capas de paralaje) · `Grass` (viento) · `Underwater` (cáusticas, rayos, burbujas; depth) · `Fog` · `GodRays`.
+`Marine.tsx` → `Whale` (ballena jorobada 900×340) · `Seal` (foca 420×170): siluetas laterales con cola ondulante y luz de contorno.
 
 ## Personajes · `characters/`
 **`HumanRig.tsx` → `HumanRig`** (cuerpo completo articulado 400×960): pose (`POSES`: idle, handsChest, handsUp, holdNose, walkA/B, point; `mixPose` para interpolar), breath, expression (neutral, tense, strain, relief, surprise, smile, eyesClosed), cheeks, flush, blink, look, **xray + inside** (órganos dentro del pecho), person (`PERSONA_A`, `PERSONA_B`, `ATLETA` o ficha propia), rim (color de luz de contorno). Limitación: vista frontal; brazos en 2 segmentos (flL/flR acortan el brazo para simular escorzo).
@@ -60,7 +62,7 @@ Todas las piezas son funciones del fotograma (deterministas) y aceptan colores p
 `Conveyor.tsx` (banda transportadora con rodillos y objetos que viajan).
 
 ## Datos · `data/`
-`EcgTrace.tsx` (`EcgTrace`, `ecgHead`) · `Data.tsx`: `TimelineRuler` · `PercentRing` · `StreamSplit` (flujo que se divide) · `IsoGrid` (n de 100).
+`EcgTrace.tsx` (`EcgTrace`, `ecgHead`) · `Data.tsx`: `TimelineRuler` · `PercentRing` · `StreamSplit` (flujo que se divide) · `IsoGrid` (n de 100) · `PhScale` (escala de pH ácido↔básico con aguja y marca de referencia).
 
 ## Editorial · `editorial/`
 `Editorial.tsx`: `Annotation` (etiqueta + línea guía) · `LowerThird` (nombre y cargo) · `SourceTag` (fuente del dato, obligatoria con cifras). `MagazinePage.tsx` (página de revista con textura de papel).
