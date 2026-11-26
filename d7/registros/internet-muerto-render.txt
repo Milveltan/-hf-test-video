@@ -1,0 +1,11 @@
+episodio=internet-muerto
+fecha=2026-11-26T08:59:01Z
+ejecucion=45786754031
+nucleos=4
+duracion_video_s=81.301000
+fotogramas=2439
+render_segundos=191
+fps_de_render=12.77
+sync_segundos=45
+clips_segundos=92
+inicio_job=2026-11-26T02:51:39-06:00
