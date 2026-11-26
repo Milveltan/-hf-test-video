@@ -1,8 +1,8 @@
 {
-  "slug": "sin-dormir",
-  "composition": "SinDormir",
-  "voice": "public/audio/voz-sin-dormir.wav",
-  "script": "src/episodes/sin-dormir/script.txt",
+  "slug": "sin-dormir-largo",
+  "composition": "SinDormirLargo",
+  "voice": "public/audio/voz-sin-dormir-largo.wav",
+  "script": "src/episodes/sin-dormir-largo/script.txt",
   "sync": true,
-  "qaFrames": "4,41,103,158,226,309,403,465,555,599,745,801"
+  "qaFrames": "4,196,296,602,778,1099,1257,1337,1428,1568,1722,1854"
 }

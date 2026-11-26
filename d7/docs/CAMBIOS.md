@@ -47,3 +47,4 @@ Episodio «Internet muerto» (81 s). Render en GitHub con `swangle` para todo: *
 ## 2026-11-26 · Episodio sin-dormir («Qué pasa en tu cuerpo cuando no duermes en 24 horas», 27,6 s)
 - Composición `SinDormir`, 7 escenas. Dirección artística "Insomnio fluorescente" con cierre de amanecer.
 - Primer episodio corto (~28 s ≈ 82 palabras con la voz Drama 3). Reutiliza `Sala` (Home), `Brain`, `Sky`, `GodRays`, `HumanRig`.
+- Versión larga `sin-dormir-largo` (62,6 s, composición `SinDormirLargo`): reutiliza las escenas de la corta re-ancladas con un mapa de palabras (índice viejo → nuevo, función `remap` en Episode.tsx) + escena nueva `S06Cafe`. Técnica útil para alargar o acortar cualquier episodio sin reescribir escenas.
