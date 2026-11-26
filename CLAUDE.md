@@ -11,6 +11,7 @@ Rama de trabajo: **`datologo-7`** · respaldo estable: `datologo-7-estable` · s
 | Qué piezas existen y cómo se usan | `d7/CATALOGO.md` (índice) + `d7/catalog/hoja.jpg` (vista de todas) |
 | Flujo completo y entrega al usuario | `d7/docs/PRODUCCION.md` |
 | Reglas de render (3D, rendimiento) | `d7/docs/RENDER.md` |
+| **Planificar un episodio** (gancho, narrativa visual, retención) | `d7/docs/DIRECCION_CREATIVA.md` (**consultar antes de planificar cualquier episodio**) |
 | Control de calidad técnico y artístico | `d7/docs/CALIDAD.md` |
 | Ahorro de uso: Sonnet/Opus, lectura mínima | `d7/docs/EFICIENCIA.md` (**leer en cada sesión de producción**) |
 | Historial de cambios y mediciones | `d7/docs/CAMBIOS.md` · `d7/registros/` |

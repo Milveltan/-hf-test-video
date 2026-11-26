@@ -19,6 +19,7 @@ Por escena, responder SÍ a todo:
 - [ ] ¿La transición de salida es distinta de la anterior y está motivada?
 - [ ] ¿La dirección artística corresponde al tema (no a la del episodio anterior)?
 Si una escena falla 2 o más puntos: se rediseña antes de entregar.
+Además, por episodio: checklist creativo de `DIRECCION_CREATIVA.md` §13 (gancho, función narrativa, retención).
 
 ## 4. Después del render (GitHub)
 `qa-sheet.jpg` (fotogramas clave) + `render-report.txt` (tiempos, fps, sincronización ≥ 90 %).
