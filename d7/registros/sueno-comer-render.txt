@@ -1,0 +1,11 @@
+episodio=sueno-comer
+fecha=2026-11-26T22:33:20Z
+ejecucion=45905277713
+nucleos=4
+duracion_video_s=33.109000
+fotogramas=993
+render_segundos=65
+fps_de_render=15.28
+sync_segundos=16
+clips_segundos=0
+inicio_job=2026-11-26T16:30:55-06:00
