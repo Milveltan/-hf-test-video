@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   render:
@@ -67,10 +67,16 @@ jobs:
           python3 -m venv "$RUNNER_TEMP/whisper-env"
           "$RUNNER_TEMP/whisper-env/bin/pip" install --disable-pip-version-check 'faster-whisper==1.2.1'
           "$RUNNER_TEMP/whisper-env/bin/python" - <<'PY'
-          import json, math
+          import json, math, subprocess
+          import numpy as np
           from faster_whisper import WhisperModel
           model = WhisperModel("medium", device="cpu", compute_type="int8", cpu_threads=4)
-          segments, _ = model.transcribe("voice.mp3", language="es", word_timestamps=True, beam_size=5, vad_filter=False, condition_on_previous_text=False)
+          pcm = subprocess.check_output(["ffmpeg", "-v", "error", "-i", "voice.mp3", "-ac", "1", "-ar", "16000", "-f", "f32le", "pipe:1"])
+          audio = np.frombuffer(pcm, dtype="<f4").copy()
+          if not audio.size or not np.isfinite(audio).all():
+              raise SystemExit("PCM invalido")
+          print("PCM decodificado por FFmpeg:", audio.size / 16000, "segundos")
+          segments, _ = model.transcribe(audio, language="es", word_timestamps=True, beam_size=5, vad_filter=False, condition_on_previous_text=False)
           words = []
           for segment in segments:
               for w in segment.words or []:
