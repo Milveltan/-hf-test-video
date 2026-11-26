@@ -1,8 +1,8 @@
 {
-  "slug": "bostezo",
-  "composition": "Bostezo",
-  "voice": "public/audio/voz-bostezo.wav",
-  "script": "src/episodes/bostezo/script.txt",
-  "sync": true,
-  "qaFrames": "20,96,128,140,235,283,316,395,477,524,627,708,781,811"
+  "slug": "piloto-fosa",
+  "composition": "PilotoFosa",
+  "voice": "public/audio/voz-piloto-fosa.wav",
+  "script": "src/episodes/piloto-fosa/script.txt",
+  "sync": false,
+  "qaFrames": "10,60,120,160,200,250,300,330,360,400,430,449"
 }

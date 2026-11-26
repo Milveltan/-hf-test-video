@@ -25,3 +25,9 @@ Todo el episodio se renderiza con `angle`. Es el modo rápido, pero **no puede c
 
 ## Costos relativos (orientativos)
 SVG/HTML simple: bajo · filtros de desenfoque grandes y `feTurbulence` animado: medio · Canvas con miles de partículas: medio · three.js: alto (solo en clip).
+
+## Kit de mundos 3D (`dl/world3d/kit.tsx`) — piloto `piloto-fosa`
+- Toma continua con `World3D` + `camPath` (cámara por llaves), `RockSurface`, `Mountain`, `GodRays`, `Drift`, `Label3D`, `MeasureLine`.
+- La capa 2D (profundímetro, rótulos) usa la MISMA función de cámara (`world.ts`) para quedar sincronizada.
+- ⚠ En el entorno local de Claude el WebGL por software (SwiftShader de /opt/pw-browsers) dibuja solo la mitad de los triángulos
+  de cualquier malla (se reproduce con three.js puro). Las partículas y sprites salen bien. Validar las mallas con la hoja de control de GitHub.
