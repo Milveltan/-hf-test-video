@@ -1,0 +1,8 @@
+{
+  "slug": "internet-muerto",
+  "composition": "InternetMuerto",
+  "voice": "public/audio/voz-internet-muerto.wav",
+  "script": "src/episodes/internet-muerto/script.txt",
+  "sync": true,
+  "qaFrames": "60,200,300,400,500,650,760,850,900,1000,1080,1140,1230,1300,1450,1600,1700,1850,1960,2050,2180,2300,2400"
+}

@@ -1,0 +1,32 @@
+{
+  "name": "datologo7",
+  "version": "7.0.0-pilot",
+  "private": true,
+  "type": "module",
+  "description": "Datologo 7.0 — motor de video Remotion + Opus Motion Library (MIT)",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render": "remotion render src/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@react-three/fiber": "^9.1.2",
+    "@remotion/cli": "4.0.532",
+    "@remotion/fonts": "4.0.532",
+    "@remotion/google-fonts": "4.0.532",
+    "@remotion/layout-utils": "4.0.532",
+    "@remotion/noise": "4.0.532",
+    "@remotion/paths": "4.0.532",
+    "@remotion/three": "^4.0.532",
+    "@remotion/transitions": "4.0.532",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "remotion": "4.0.532",
+    "three": "^0.169.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.1.0",
+    "@types/three": "^0.169.0",
+    "typescript": "^5.6.0"
+  }
+}

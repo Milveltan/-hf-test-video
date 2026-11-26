@@ -1,0 +1,143 @@
+name: Datologo 7 (Remotion)
+
+# Rama experimental: corre solo en la rama datologo-7 y no toca el sistema anterior (render.yml / HyperFrames).
+on:
+  push:
+    branches: [datologo-7]
+    paths:
+      - 'datologo7.zip'
+      - 'd7/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: datologo7
+  cancel-in-progress: true
+
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Descomprimir datologo7.zip sobre d7/
+        run: |
+          if [ -f datologo7.zip ]; then
+            mkdir -p d7
+            unzip -o -q datologo7.zip -d d7
+            echo "datologo7.zip descomprimido en d7/"
+          fi
+          ls -la d7
+
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: d7/package-lock.json
+
+      - name: FFmpeg (para la hoja de control de calidad)
+        run: |
+          if ! command -v ffmpeg >/dev/null; then
+            sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          fi
+          ffmpeg -version | head -1
+
+      - name: Instalar dependencias
+        working-directory: d7
+        run: npm ci --no-audit --no-fund
+
+      - name: Leer episode.json
+        id: ep
+        working-directory: d7
+        run: |
+          echo "comp=$(node -p "require('./episode.json').composition")" >> "$GITHUB_OUTPUT"
+          echo "slug=$(node -p "require('./episode.json').slug")" >> "$GITHUB_OUTPUT"
+          echo "sync=$(node -p "require('./episode.json').sync")" >> "$GITHUB_OUTPUT"
+          echo "voice=$(node -p "require('./episode.json').voice")" >> "$GITHUB_OUTPUT"
+          echo "script=$(node -p "require('./episode.json').script")" >> "$GITHUB_OUTPUT"
+          echo "qa=$(node -p "require('./episode.json').qaFrames")" >> "$GITHUB_OUTPUT"
+
+      - name: Python (Faster-Whisper)
+        if: steps.ep.outputs.sync == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: d7/tools/requirements.txt
+
+      - name: Caché del modelo de Whisper
+        if: steps.ep.outputs.sync == 'true'
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: faster-whisper-medium-v1
+
+      - name: Sincronizar narración (Faster-Whisper)
+        if: steps.ep.outputs.sync == 'true'
+        working-directory: d7
+        run: |
+          pip install -q -r tools/requirements.txt
+          T0=$(date +%s)
+          python tools/sync.py "${{ steps.ep.outputs.voice }}" "${{ steps.ep.outputs.script }}" "src/episodes/${{ steps.ep.outputs.slug }}/words.json" --model medium
+          echo "sync_segundos=$(( $(date +%s) - T0 ))" >> "$GITHUB_ENV"
+
+      - name: Navegador de Remotion
+        working-directory: d7
+        run: npx remotion browser ensure
+
+      - name: Renderizar el video
+        working-directory: d7
+        run: |
+          T0=$(date +%s)
+          npx remotion render src/index.ts "${{ steps.ep.outputs.comp }}" out/video.mp4 --concurrency=4 --log=info
+          T1=$(date +%s)
+          DUR=$(ffprobe -v error -show_entries format=duration -of csv=p=0 out/video.mp4)
+          FR=$(node -p "Math.round($DUR*30)")
+          mkdir -p registros
+          {
+            echo "episodio=${{ steps.ep.outputs.slug }}"
+            echo "fecha=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo "ejecucion=${{ github.run_id }}"
+            echo "nucleos=$(nproc)"
+            echo "duracion_video_s=$DUR"
+            echo "fotogramas=$FR"
+            echo "render_segundos=$((T1 - T0))"
+            echo "fps_de_render=$(node -p "($FR/($T1-$T0)).toFixed(2)")"
+            echo "sync_segundos=${sync_segundos:-0}"
+            echo "inicio_job=${{ github.event.head_commit.timestamp }}"
+          } | tee "registros/${{ steps.ep.outputs.slug }}-render.txt"
+          ffprobe -v error -show_entries stream=codec_name,width,height,r_frame_rate,pix_fmt:format=duration,size -of default=nw=1 out/video.mp4 | tee out/render-report.txt
+          cat "registros/${{ steps.ep.outputs.slug }}-render.txt" >> out/render-report.txt
+
+      - name: Hoja de control de calidad (fotogramas clave)
+        working-directory: d7
+        continue-on-error: true
+        run: node tools/qa-stills.mjs "${{ steps.ep.outputs.comp }}" "${{ steps.ep.outputs.qa }}" out/qa-sheet.jpg
+
+      - name: Entregar video
+        uses: actions/upload-artifact@v4
+        with:
+          name: datologo7-video
+          path: |
+            d7/out/video.mp4
+            d7/out/qa-sheet.jpg
+            d7/out/render-report.txt
+            d7/registros/*.txt
+            d7/src/episodes/*/words-report.txt
+          retention-days: 14
+
+      - name: Guardar el código en la rama (sin el ZIP)
+        if: success()
+        continue-on-error: true
+        run: |
+          git config user.name "datologo-bot"
+          git config user.email "actions@users.noreply.github.com"
+          [ -f datologo7.zip ] && git rm -q --cached datologo7.zip && rm -f datologo7.zip
+          git add d7 ':!d7/node_modules' ':!d7/out'
+          git commit -m "Datologo 7: ${{ steps.ep.outputs.slug }} [skip ci]" || echo "Sin cambios"
+          git push
