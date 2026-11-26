@@ -48,3 +48,7 @@ Episodio «Internet muerto» (81 s). Render en GitHub con `swangle` para todo: *
 - Composición `SinDormir`, 7 escenas. Dirección artística "Insomnio fluorescente" con cierre de amanecer.
 - Primer episodio corto (~28 s ≈ 82 palabras con la voz Drama 3). Reutiliza `Sala` (Home), `Brain`, `Sky`, `GodRays`, `HumanRig`.
 - Versión larga `sin-dormir-largo` (62,6 s, composición `SinDormirLargo`): reutiliza las escenas de la corta re-ancladas con un mapa de palabras (índice viejo → nuevo, función `remap` en Episode.tsx) + escena nueva `S06Cafe`. Técnica útil para alargar o acortar cualquier episodio sin reescribir escenas.
+
+## 2026-11-26 · Episodio huevo-prohibido (27,8 s)
+- Composición `HuevoProhibido`, 7 escenas. Dirección artística "Aduana de caramelo". Productos genéricos (sin marcas). Reutiliza `Conveyor`, `Stamp`, `SourceTag`.
+- Evitar `foreignObject` dentro de SVG: dibujar las piezas como `<g>` (CapsuleG, ToyG).

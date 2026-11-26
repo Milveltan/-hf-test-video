@@ -1,8 +1,8 @@
 {
-  "slug": "sin-dormir-largo",
-  "composition": "SinDormirLargo",
-  "voice": "public/audio/voz-sin-dormir-largo.wav",
-  "script": "src/episodes/sin-dormir-largo/script.txt",
+  "slug": "huevo-prohibido",
+  "composition": "HuevoProhibido",
+  "voice": "public/audio/voz-huevo-prohibido.wav",
+  "script": "src/episodes/huevo-prohibido/script.txt",
   "sync": true,
-  "qaFrames": "4,196,296,602,778,1099,1257,1337,1428,1568,1722,1854"
+  "qaFrames": "4,51,129,177,228,278,343,399,504,577,693,801"
 }
