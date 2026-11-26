@@ -57,14 +57,22 @@ jobs:
 
       - name: Sync captions with real audio
         working-directory: ./video
-        continue-on-error: true
         run: |
-          if [ -f script.txt ] && [ -f tools/align.mjs ]; then
-            hyperframes transcribe voice.mp3 --language es --model medium --engine whisper --timeout 900000
-            node tools/align.mjs
-          else
-            echo "Sin script.txt: se omite la sincronizacion"
-          fi
+          set -euo pipefail
+          test -s script.txt
+          test -s voice.mp3
+          test -s tools/align.mjs
+          rm -f transcript.json voice.json voice.transcript.json sync-report.txt captions/transcript.json
+          hyperframes transcribe voice.mp3 --language es --model medium --engine whisper --timeout 900000
+          node tools/align.mjs
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          report = Path("sync-report.txt").read_text()
+          m = re.search(r"Palabras del guion alineadas:\s*([\d.]+)\s*%", report)
+          if not m or float(m.group(1)) < 95:
+              raise SystemExit("Alineacion insuficiente: " + report)
+          PY
 
       - name: Check composition
         working-directory: ./video
@@ -75,6 +83,22 @@ jobs:
         working-directory: ./video
         run: hyperframes render --output output.mp4 --fps 30 --quality standard
 
+      - name: Verify output
+        working-directory: ./video
+        run: |
+          python3 - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          def probe(p):
+              return json.loads(subprocess.check_output(["ffprobe","-v","error","-show_streams","-show_format","-of","json",p]))
+          d=probe("output.mp4")
+          v=next(s for s in d["streams"] if s["codec_type"]=="video")
+          assert (v["width"],v["height"])==(1080,1080), "Resolucion incorrecta"
+          assert v["avg_frame_rate"]=="30/1", "FPS incorrectos"
+          assert any(s["codec_type"]=="audio" for s in d["streams"]), "Sin audio"
+          assert abs(float(d["format"]["duration"])-float(probe("voice.mp3")["format"]["duration"])) < 0.25, "Duracion incorrecta"
+          PY
+
       - name: Upload video
         uses: actions/upload-artifact@v4
         with:
@@ -84,27 +108,3 @@ jobs:
             video/sync-report.txt
           if-no-files-found: error
 
-      # NUEVO: guarda en el repo la biblioteca (lib, tools, assets) y el archivo del episodio.
-      # Corre solo si el render salió bien y nunca hace fallar el workflow.
-      - name: Save permanent library
-        if: success()
-        continue-on-error: true
-        run: |
-          SLUG=$(cat video/episodio.txt 2>/dev/null | tr -cd 'a-z0-9-' | head -c 60)
-          if [ -n "$SLUG" ]; then
-            mkdir -p "video/episodios/$SLUG"
-            for f in scenes.js script.txt captions.js index.html sync-report.txt; do
-              [ -f "video/$f" ] && cp "video/$f" "video/episodios/$SLUG/"
-            done
-          fi
-          git config user.name "datologo-bot"
-          git config user.email "datologo-bot@users.noreply.github.com"
-          for d in video/lib video/tools video/assets video/episodios; do
-            [ -e "$d" ] && git add "$d"
-          done
-          if git diff --cached --quiet; then
-            echo "Biblioteca sin cambios"
-          else
-            git commit -m "Biblioteca: recursos del video ${SLUG:-sin-nombre}"
-            git push
-          fi
