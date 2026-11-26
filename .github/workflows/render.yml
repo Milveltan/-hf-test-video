@@ -41,16 +41,17 @@ jobs:
             ~/.cache/puppeteer
           key: hyperframes-linux-v2-0.9.91
 
-      - name: Unpack project ZIP
+      - name: Unpack premium pilot
         working-directory: ./video
         run: |
-          if [ -f proyecto.zip ]; then
-            unzip -o proyecto.zip
-            echo "proyecto.zip descomprimido sobre la biblioteca permanente"
-          else
-            echo "No hay proyecto.zip; se usan los archivos sueltos"
-          fi
-          ls -la
+          set -euo pipefail
+          test -s piloto.zip
+          unzip -t piloto.zip
+          unzip -o piloto.zip
+          test "$(cat episodio.txt)" = internet-muerto-premium-piloto
+          test -s pilot.js
+          test -s assets/gsap.min.js
+          node --check pilot.js
 
       - name: Install HyperFrames
         run: npm install -g hyperframes@0.9.91
@@ -81,7 +82,7 @@ jobs:
 
       - name: Render video
         working-directory: ./video
-        run: hyperframes render --output output.mp4 --fps 30 --quality standard
+        run: hyperframes render --output output.mp4 --fps 30 --quality high
 
       - name: Verify output
         working-directory: ./video
