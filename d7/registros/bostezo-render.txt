@@ -1,0 +1,11 @@
+episodio=bostezo
+fecha=2026-11-26T22:51:18Z
+ejecucion=45907066698
+nucleos=4
+duracion_video_s=28.501000
+fotogramas=855
+render_segundos=84
+fps_de_render=10.18
+sync_segundos=15
+clips_segundos=0
+inicio_job=2026-11-26T16:48:07-06:00
