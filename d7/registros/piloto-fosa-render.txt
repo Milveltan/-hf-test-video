@@ -1,0 +1,11 @@
+episodio=piloto-fosa
+fecha=2026-11-26T23:48:20Z
+ejecucion=45912726973
+nucleos=4
+duracion_video_s=15.019000
+fotogramas=451
+render_segundos=32
+fps_de_render=14.09
+sync_segundos=0
+clips_segundos=124
+inicio_job=2026-11-26T17:44:42-06:00
