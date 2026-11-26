@@ -1,0 +1,11 @@
+episodio=olvido-puerta
+fecha=2026-11-26T12:13:43Z
+ejecucion=45816916661
+nucleos=4
+duracion_video_s=62.272000
+fotogramas=1868
+render_segundos=127
+fps_de_render=14.71
+sync_segundos=34
+clips_segundos=0
+inicio_job=2026-11-26T06:08:36-06:00
