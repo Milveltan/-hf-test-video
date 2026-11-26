@@ -11,19 +11,13 @@ import {E, keys, noise1, prog, spr} from '../../../dl/motion';
 import {MaskRise, Odometer} from '../../../dl/type/Type';
 import {Glow} from '../../../dl/light/Light';
 import {P} from './palette';
+import {Clip3D} from '../../../dl/render/Clip3D';
 
-export const S11IA: React.FC<{lw: (i: number, off?: number) => number}> = ({lw}) => {
-  const frame = useCurrentFrame();
-  const yearAt = lw(93, -6);
-  const shrink = prog(frame, yearAt - 6, yearAt + 14, E.inOut);
-  const year = keys(frame, [[yearAt, 2021], [lw(95, 6), 2025]], E.out);
-  const notif = spr(frame, lw(98, -2), {damping: 10, stiffness: 220, mass: 0.7});
-  const shake = frame >= lw(98, -2) ? noise1(frame * 1.1, 6) * 12 * (1 - prog(frame, lw(98, -2), lw(98, 14))) : 0;
-  return (
-    <AbsoluteFill style={{background: '#04070C', overflow: 'hidden', transform: `translate(${shake}px, ${shake * 0.4}px)`}}>
-      {/* esfera de partículas 3D (Opus) que se encoge cuando llega el año */}
-      <AbsoluteFill style={{transform: `translateY(${-60 - shrink * 260}px) scale(${1 - shrink * 0.62})`, opacity: 1 - shrink * 0.35}}>
-        <Sequence from={-8} layout="none">
+
+/** Capa 3D real (three.js) de la escena: se renderiza aparte como clip con alfa (ver dl/render/Clip3D). */
+export const IAParticles: React.FC = () => (
+  <AbsoluteFill>
+    <Sequence from={-8} layout="none">
           <particleShapeMorph.component
             {...particleShapeMorph.defaultProps}
             text="IA"
@@ -44,6 +38,22 @@ export const S11IA: React.FC<{lw: (i: number, off?: number) => number}> = ({lw})
             seed={5}
           />
         </Sequence>
+  </AbsoluteFill>
+);
+export const IA_CLIP_FRAMES = 180;
+
+export const S11IA: React.FC<{lw: (i: number, off?: number) => number}> = ({lw}) => {
+  const frame = useCurrentFrame();
+  const yearAt = lw(93, -6);
+  const shrink = prog(frame, yearAt - 6, yearAt + 14, E.inOut);
+  const year = keys(frame, [[yearAt, 2021], [lw(95, 6), 2025]], E.out);
+  const notif = spr(frame, lw(98, -2), {damping: 10, stiffness: 220, mass: 0.7});
+  const shake = frame >= lw(98, -2) ? noise1(frame * 1.1, 6) * 12 * (1 - prog(frame, lw(98, -2), lw(98, 14))) : 0;
+  return (
+    <AbsoluteFill style={{background: '#04070C', overflow: 'hidden', transform: `translate(${shake}px, ${shake * 0.4}px)`}}>
+      {/* esfera de partículas 3D (Opus) que se encoge cuando llega el año */}
+      <AbsoluteFill style={{transform: `translateY(${-60 - shrink * 260}px) scale(${1 - shrink * 0.62})`, opacity: 1 - shrink * 0.35}}>
+        <Clip3D id="im-ia-particulas" live={<IAParticles />} />
       </AbsoluteFill>
       <Glow x={540} y={540 - shrink * 260} r={460} color="rgba(127,227,255,0.14)" />
       {frame < yearAt + 4 && (

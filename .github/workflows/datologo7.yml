@@ -91,11 +91,31 @@ jobs:
         working-directory: d7
         run: npx remotion browser ensure
 
+      - name: Validación técnica
+        working-directory: d7
+        run: node tools/check.mjs
+
+      - name: Clips 3D aparte (WebGL por software, solo los que faltan)
+        working-directory: d7
+        run: |
+          T0=$(date +%s)
+          mkdir -p public/clips
+          FORCE=$(node -p "require('./episode.json').rerenderClips ? 1 : 0")
+          for id in $(node -e "const s=require('fs').readFileSync('src/clips.ts','utf8');const ep=require('./episode.json').slug;for(const m of s.matchAll(/id: '([^']+)'[^}]*episode: '([^']+)'/g)) if(m[2]===ep) console.log(m[1])"); do
+            if [ "$FORCE" = "1" ] || [ ! -f "public/clips/$id.webm" ]; then
+              echo "Renderizando clip $id"
+              npx remotion render src/index.ts "Clip-$id" "public/clips/$id.webm" --codec=vp8 --pixel-format=yuva420p --image-format=png --gl=swangle --concurrency=4 --log=error
+            else
+              echo "Clip $id ya existe: se reutiliza"
+            fi
+          done
+          echo "clips_segundos=$(( $(date +%s) - T0 ))" >> "$GITHUB_ENV"
+
       - name: Renderizar el video
         working-directory: d7
         run: |
           T0=$(date +%s)
-          npx remotion render src/index.ts "${{ steps.ep.outputs.comp }}" out/video.mp4 --concurrency=4 --gl=swangle --log=info
+          npx remotion render src/index.ts "${{ steps.ep.outputs.comp }}" out/video.mp4 --concurrency=4 --gl=angle --log=info
           T1=$(date +%s)
           DUR=$(ffprobe -v error -show_entries format=duration -of csv=p=0 out/video.mp4)
           FR=$(node -p "Math.round($DUR*30)")
@@ -110,6 +130,7 @@ jobs:
             echo "render_segundos=$((T1 - T0))"
             echo "fps_de_render=$(node -p "($FR/($T1-$T0)).toFixed(2)")"
             echo "sync_segundos=${sync_segundos:-0}"
+            echo "clips_segundos=${clips_segundos:-0}"
             echo "inicio_job=${{ github.event.head_commit.timestamp }}"
           } | tee "registros/${{ steps.ep.outputs.slug }}-render.txt"
           ffprobe -v error -show_entries stream=codec_name,width,height,r_frame_rate,pix_fmt:format=duration,size -of default=nw=1 out/video.mp4 | tee out/render-report.txt

@@ -24,7 +24,7 @@ export const Annotation: React.FC<{frame: number; at: number; x: number; y: numb
         <circle cx={tx} cy={ty} r={6} fill={accent} opacity={prog(frame, at + 16, at + 20)} />
       </svg>
       <div style={{position: 'absolute', left: x, top: y - 30 * (1 - k)}}>
-        {kicker ? <div style={{fontFamily: F.mono, fontSize: 24, letterSpacing: '0.3em', color: accent}}>{kicker}</div> : null}
+        {kicker ? <div style={{fontFamily: F.mono, fontSize: 30, fontWeight: 700, letterSpacing: '0.24em', color: accent}}>{kicker}</div> : null}
         <div style={{fontFamily: F.serif, fontStyle: 'italic', fontSize: size, lineHeight: 1, color, textShadow: '0 10px 30px rgba(0,0,0,0.9)'}}>{label}</div>
       </div>
     </div>
@@ -44,7 +44,7 @@ export const LowerThird: React.FC<{frame: number; at: number; name: string; role
         <div style={{fontFamily: F.display, fontSize: 76, lineHeight: 1, color: '#F2EEE6', transform: `translateY(${(1 - t1) * 100}%)`}}>{name}</div>
       </div>
       <div style={{marginLeft: 28, overflow: 'hidden', marginTop: 8}}>
-        <div style={{fontFamily: F.mono, fontSize: 28, letterSpacing: '0.14em', color: accent, transform: `translateY(${(1 - t2) * 100}%)`}}>{role}</div>
+        <div style={{fontFamily: F.mono, fontSize: 32, fontWeight: 700, letterSpacing: '0.12em', color: accent, transform: `translateY(${(1 - t2) * 100}%)`}}>{role}</div>
       </div>
     </div>
   );
@@ -52,5 +52,5 @@ export const LowerThird: React.FC<{frame: number; at: number; name: string; role
 
 export const SourceTag: React.FC<{frame: number; at: number; text: string; x?: number; y?: number; color?: string}> = ({frame, at, text, x = 70, y = 90, color = '#9FB3C4'}) => {
   const k = prog(frame, at, at + 10, E.out);
-  return <div style={{position: 'absolute', left: x, top: y, fontFamily: F.mono, fontSize: 22, letterSpacing: '0.12em', color, opacity: k, transform: `translateX(${(1 - k) * -20}px)`}}>{text}</div>;
+  return <div style={{position: 'absolute', left: x, top: y, fontFamily: F.mono, fontSize: 30, fontWeight: 700, letterSpacing: '0.1em', color, opacity: k, textShadow: '0 2px 10px rgba(0,0,0,0.8)', transform: `translateX(${(1 - k) * -20}px)`}}>{text}</div>;
 };

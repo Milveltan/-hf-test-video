@@ -10,7 +10,8 @@ import {Captions} from '../../dl/Captions';
 import {SfxTrack, SfxCue} from '../../dl/Sfx';
 import {makeTiming, Word} from '../../dl/timing';
 import {E, prog} from '../../dl/motion';
-import {Transit, TransitType} from '../../dl/transitions/Transit';
+import {TransitType} from '../../dl/transitions/Transit';
+import {EpisodeRunner, SceneDef} from '../../dl/episode/EpisodeRunner';
 import {GlitchBands} from '../../dl/transitions/GlitchBands';
 import {Flash} from '../../dl/fx/Fx';
 import WORDS_JSON from './words.json';
@@ -87,36 +88,27 @@ const sfx: SfxCue[] = [
   {at: w(197), file: 'deadnet_thump', vol: 0.5},
 ];
 
-export const Episode: React.FC = () => {
-  const frame = useCurrentFrame();
-  const glitch = prog(frame, w(54, -8), w(54, 4), E.in) * (1 - prog(frame, w(54, 4), w(54, 8)));
-  const warmFlash = Math.max(0, 1 - Math.abs(frame - w(72, -2)) / 5) * 0.35;
-  const flash332 = Math.max(0, 1 - Math.abs(frame - 334) / 5) * 0.28;
-  return (
-    <AbsoluteFill style={{background: P.void}}>
-      {/* orden inverso: la escena que sale queda encima y su transición revela la siguiente */}
-      {SCENES.map((s, i) => ({s, i})).reverse().map(({s, i}) => {
-        const len = s.outLen ?? 8;
-        const dur = s.to - s.from + (s.out === 'none' ? 2 : len);
-        return (
-          <Sequence key={i} from={s.from} durationInFrames={dur}>
-            <Transit type={s.out} k={prog(frame, s.to - 2, s.to - 2 + len, E.in)} dir={s.dir}>
-              {s.C === 'S1' ? <S1Feed w={w} /> : <s.C lw={(idx, off = 0) => w(idx, off) - s.from} />}
-            </Transit>
-          </Sequence>
-        );
-      })}
-      {glitch > 0 && <GlitchBands k={glitch} frame={frame} />}
-      <Flash k={warmFlash} color="#FFD7A0" />
-      <Flash k={flash332} />
-      <AbsoluteFill style={{pointerEvents: 'none'}}>
-        <filmLook.component {...filmLook.defaultProps} overlay grain={0.07} vignette={0.32} bloom={0} flare={false} letterbox="off" weave={0.3} push={0} fringe={1.2} />
-      </AbsoluteFill>
-      <Captions words={WORDS} bottom={64} size={60} />
-      <Audio src={staticFile('audio/voz-internet-muerto.wav')} volume={1} />
-      <Audio src={staticFile('sfx/deadnet_ambient.wav')} volume={(f) => 0.28 * Math.min(1, f / 15)} loop />
-      <Audio src={staticFile('sfx/music_drone.wav')} volume={0.12} loop />
-      <SfxTrack cues={sfx} />
-    </AbsoluteFill>
-  );
-};
+export const Episode: React.FC = () => (
+  <EpisodeRunner
+    words={WORDS}
+    scenes={SCENES.map((s) => (s.C === 'S1' ? {...s, C: S1Wrap} : s)) as SceneDef[]}
+    sfx={sfx}
+    bg={P.void}
+    mix={{voice: 'audio/voz-internet-muerto.wav', ambient: 'sfx/deadnet_ambient.wav', ambientVol: 0.28, music: 'sfx/music_drone.wav', musicVol: 0.12}}
+    overlays={(frame) => {
+      const glitch = prog(frame, w(54, -8), w(54, 4), E.in) * (1 - prog(frame, w(54, 4), w(54, 8)));
+      const warmFlash = Math.max(0, 1 - Math.abs(frame - w(72, -2)) / 5) * 0.35;
+      const flash332 = Math.max(0, 1 - Math.abs(frame - 334) / 5) * 0.28;
+      return (
+        <>
+          {glitch > 0 && <GlitchBands k={glitch} frame={frame} />}
+          <Flash k={warmFlash} color="#FFD7A0" />
+          <Flash k={flash332} />
+        </>
+      );
+    }}
+  />
+);
+
+// la escena 1 recibe el cronómetro global (empieza en 0)
+const S1Wrap: React.FC<{lw: (i: number, off?: number) => number}> = () => <S1Feed w={w} />;

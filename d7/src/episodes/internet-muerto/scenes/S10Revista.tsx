@@ -43,14 +43,14 @@ export const S10Revista: React.FC<{lw: (i: number, off?: number) => number}> = (
         <AbsoluteFill style={{perspective: 1600}}>
           <div style={{position: 'absolute', left: 110, top: 560, width: 860, height: 300, transform: `translateY(${(1 - cardIn) * 120}px) rotateY(${angle}deg)`, transformStyle: 'preserve-3d', opacity: clamp01(cardIn * 1.5)}}>
             <div style={{position: 'absolute', inset: 0, backfaceVisibility: 'hidden', display: front ? 'flex' : 'none', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', background: '#14110D', borderRadius: 18, boxShadow: '0 40px 80px rgba(0,0,0,0.6)'}}>
-              <div style={{fontFamily: F.mono, fontSize: 26, letterSpacing: '0.3em', color: '#E7B98A'}}>LA TEORÍA ERA…</div>
+              <div style={{fontFamily: F.mono, fontSize: 30, letterSpacing: '0.3em', color: '#E7B98A'}}>LA TEORÍA ERA…</div>
               <div style={{position: 'relative', fontFamily: F.serif, fontSize: 170, lineHeight: 1, color: '#F4EFE4', marginTop: 8}}>
                 «falsa»
                 <div style={{position: 'absolute', left: -10, right: -10, top: '55%', height: 10, background: '#D2452B', transform: `scaleX(${strike})`, transformOrigin: 'left'}} />
               </div>
             </div>
             <div style={{position: 'absolute', inset: 0, backfaceVisibility: 'hidden', transform: 'rotateY(180deg)', display: front ? 'none' : 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', background: '#D2452B', borderRadius: 18, boxShadow: '0 40px 80px rgba(0,0,0,0.6)'}}>
-              <div style={{fontFamily: F.mono, fontSize: 26, letterSpacing: '0.3em', color: '#2A0C06'}}>…PERO</div>
+              <div style={{fontFamily: F.mono, fontSize: 30, letterSpacing: '0.3em', color: '#2A0C06'}}>…PERO</div>
               <MaskRise frame={frame} at={lw(85, -2)} by="word" text="se sentía cierta" each={3} style={{fontFamily: F.serif, fontStyle: 'italic', fontSize: 118, lineHeight: 1.05, color: '#FFF4E8'}} />
             </div>
           </div>

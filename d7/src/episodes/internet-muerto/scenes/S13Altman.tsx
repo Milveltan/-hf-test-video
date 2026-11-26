@@ -81,7 +81,7 @@ export const S13Altman: React.FC<{lw: (i: number, off?: number) => number}> = ({
       {frame >= postAt && (
         <div style={{position: 'absolute', left: 90, top: 340, transform: `scale(${postScale}) translateY(${-60 * pull}px)`, transformOrigin: '450px 260px'}}>
           <PostCard frame={frame} at={postAt} name="Sam Altman" handle="@sama · 2025" text={QUOTE} wps={6.5} accent="#FFB45A" fontSize={44} avatar={<div style={{transform: 'translate(-31px,-38px) scale(0.36)', transformOrigin: '0 0'}}><AltmanBust /></div>} />
-          <div style={{marginTop: 18, fontFamily: F.mono, fontSize: 22, color: '#8399AB', opacity: prog(frame, postAt + 20, postAt + 30)}}>Publicación original en inglés · X</div>
+          <div style={{marginTop: 18, fontFamily: F.mono, fontSize: 28, color: '#8399AB', opacity: prog(frame, postAt + 20, postAt + 30)}}>Publicación original en inglés · X</div>
         </div>
       )}
     </AbsoluteFill>

@@ -36,11 +36,11 @@ export const PostCard: React.FC<{frame: number; at: number; name: string; handle
         <div style={{width: 92, height: 92, borderRadius: 46, overflow: 'hidden', background: '#22313D', flex: '0 0 auto'}}>{avatar}</div>
         <div>
           <div style={{fontFamily: F.ui, fontWeight: 800, fontSize: 36, color: C.ink}}>{name}</div>
-          <div style={{fontFamily: F.mono, fontSize: 24, color: C.muted, marginTop: 4}}>{handle}</div>
+          <div style={{fontFamily: F.mono, fontSize: 28, color: C.muted, marginTop: 4}}>{handle}</div>
         </div>
       </div>
       <div style={{marginTop: 28, fontFamily: F.ui, fontWeight: 600, fontSize, lineHeight: 1.3, color: C.ink}}>{renderEm(text, shown, accent)}</div>
-      {meta ? <div style={{marginTop: 24, fontFamily: F.mono, fontSize: 22, color: C.muted}}>{meta}</div> : null}
+      {meta ? <div style={{marginTop: 24, fontFamily: F.mono, fontSize: 28, color: C.muted}}>{meta}</div> : null}
     </div>
   );
 };

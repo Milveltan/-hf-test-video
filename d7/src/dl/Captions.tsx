@@ -4,6 +4,7 @@
  */
 import React from 'react';
 import {AbsoluteFill, useCurrentFrame, useVideoConfig} from 'remotion';
+import {measureText} from '@remotion/layout-utils';
 import {F} from './fonts';
 import {FPS, clamp01, spr} from './motion';
 import type {Word} from './timing';
@@ -37,6 +38,19 @@ export const Captions: React.FC<{words: Word[]; bottom?: number; size?: number; 
   if (gi < 0 || (endAt !== undefined && frame > endAt)) return null;
   const g = groups[gi];
   const enter = spr(frame, Math.round((g.s - 0.05) * FPS), {damping: 11, stiffness: 220, mass: 0.6});
+  // ajuste automático: si el grupo no cabe en el 86 % del ancho, se reduce (hasta 62 %) y si aún no cabe, pasa a 2 líneas
+  const label = g.words.map((wd) => wd.t.replace(/[¡!.,:;…]/g, '')).join(' ').toUpperCase();
+  const maxW = width * 0.86 - 40;
+  let fit = 1;
+  let wrap = false;
+  try {
+    const m = measureText({text: label, fontFamily: 'Montserrat', fontSize: size, fontWeight: '900', letterSpacing: '-0.01em'});
+    const wTotal = m.width * 1.06 + g.words.length * size * 0.36;
+    if (wTotal > maxW) fit = Math.max(0.62, maxW / wTotal);
+    if (wTotal * fit > maxW) wrap = true;
+  } catch {
+    fit = label.length > 18 ? 0.75 : 1;
+  }
   return (
     <AbsoluteFill style={{justifyContent: 'flex-end', alignItems: 'center', paddingBottom: bottom, pointerEvents: 'none'}}>
       <div
@@ -45,7 +59,7 @@ export const Captions: React.FC<{words: Word[]; bottom?: number; size?: number; 
           textAlign: 'center',
           fontFamily: F.caption,
           fontWeight: 900,
-          fontSize: size,
+          fontSize: size * fit,
           lineHeight: 1.05,
           letterSpacing: '-0.01em',
           color: '#FFFFFF',
@@ -55,7 +69,7 @@ export const Captions: React.FC<{words: Word[]; bottom?: number; size?: number; 
           WebkitTextStroke: '10px rgba(6,8,12,0.92)',
           paintOrder: 'stroke fill',
           textShadow: '0 6px 18px rgba(0,0,0,0.55)',
-          whiteSpace: 'nowrap',
+          whiteSpace: wrap ? 'normal' : 'nowrap',
         }}
       >
         {g.words.map((wd, i) => {

@@ -10,14 +10,14 @@ import {withLocalFonts} from './webpack-fonts.mjs';
 const [id, list, out = 'out/qa-sheet.jpg'] = process.argv.slice(2);
 const frames = list.split(',').map(Number);
 const serveUrl = await bundle({entryPoint: path.resolve('src/index.ts'), publicDir: path.resolve('public'), webpackOverride: (c) => withLocalFonts(c)});
-const browser = await openBrowser('chrome', {browserExecutable: process.env.REMOTION_CHROME || null, chromiumOptions: {gl: 'swangle'}});
+const browser = await openBrowser('chrome', {browserExecutable: process.env.REMOTION_CHROME || null, chromiumOptions: {gl: process.env.QA_GL || 'angle'}});
 const composition = await selectComposition({serveUrl, id, puppeteerInstance: browser});
 fs.mkdirSync('out/qa', {recursive: true});
 const files = [];
 for (const f of frames) {
   const file = `out/qa/${id}-${String(f).padStart(4, '0')}.png`;
   const t0 = Date.now();
-  await renderStill({composition, serveUrl, output: file, frame: f, puppeteerInstance: browser, chromiumOptions: {gl: 'swangle'}});
+  await renderStill({composition, serveUrl, output: file, frame: f, puppeteerInstance: browser, chromiumOptions: {gl: process.env.QA_GL || 'angle'}});
   console.log('frame', f, Date.now() - t0, 'ms');
   files.push(file);
 }

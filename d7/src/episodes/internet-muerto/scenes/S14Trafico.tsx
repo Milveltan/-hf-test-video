@@ -27,7 +27,7 @@ export const S14Trafico: React.FC<{lw: (i: number, off?: number) => number}> = (
       {/* el informe */}
       {reportOut < 1 && (
         <div style={{position: 'absolute', left: 190, top: 190, width: 700, height: 820, transform: `translateY(${(1 - reportK) * 600 - reportOut * 900}px) rotate(${-3 + reportOut * -8}deg)`, background: 'linear-gradient(160deg,#F2F4F6,#D9DEE3)', borderRadius: 10, boxShadow: '0 50px 100px rgba(0,0,0,0.6)', padding: 54, boxSizing: 'border-box'}}>
-          <div style={{fontFamily: F.mono, fontSize: 24, letterSpacing: '0.25em', color: '#C0392B'}}>INFORME ANUAL DE BOTS</div>
+          <div style={{fontFamily: F.mono, fontSize: 30, letterSpacing: '0.25em', color: '#C0392B'}}>INFORME ANUAL DE BOTS</div>
           <div style={{fontFamily: F.display, fontSize: 120, lineHeight: 1, color: '#0D1A26', marginTop: 20}}>THALES</div>
           <div style={{height: 6, width: 120, background: '#C0392B', marginTop: 26}} />
           {Array.from({length: 11}, (_, i) => <div key={i} style={{height: 12, borderRadius: 3, marginTop: 22, background: '#22303C', opacity: 0.25, width: `${[96, 90, 94, 70, 92, 88, 96, 60, 90, 86, 50][i]}%`}} />)}
@@ -43,8 +43,8 @@ export const S14Trafico: React.FC<{lw: (i: number, off?: number) => number}> = (
             <div style={{position: 'absolute', inset: 0, borderRadius: '50%', background: 'rgba(3,6,10,0.88)'}} />
             <PercentRing value={pct} size={500} label="DEL TRÁFICO WEB" />
           </div>
-          <div style={{position: 'absolute', right: 70, top: 260, textAlign: 'right', opacity: split, fontFamily: F.mono, fontSize: 26, letterSpacing: '0.12em', color: P.alarm}}>PROGRAMAS<br />AUTOMÁTICOS</div>
-          <div style={{position: 'absolute', right: 70, top: 930, textAlign: 'right', opacity: split, fontFamily: F.mono, fontSize: 26, letterSpacing: '0.12em', color: P.ui}}>PERSONAS</div>
+          <div style={{position: 'absolute', right: 70, top: 260, textAlign: 'right', opacity: split, fontFamily: F.mono, fontSize: 32, letterSpacing: '0.12em', color: P.alarm}}>PROGRAMAS<br />AUTOMÁTICOS</div>
+          <div style={{position: 'absolute', right: 70, top: 930, textAlign: 'right', opacity: split, fontFamily: F.mono, fontSize: 32, letterSpacing: '0.12em', color: P.ui}}>PERSONAS</div>
           <div style={{position: 'absolute', left: 70, top: 160, fontFamily: F.display, fontSize: 64, color: P.cream, opacity: prog(frame, lw(140), lw(141, 4))}}>2025</div>
         </AbsoluteFill>
       )}
@@ -52,7 +52,7 @@ export const S14Trafico: React.FC<{lw: (i: number, off?: number) => number}> = (
       {/* 100 visitas: 53 bots */}
       {toGrid > 0 && (
         <AbsoluteFill style={{opacity: toGrid}}>
-          <div style={{position: 'absolute', left: 70, top: 170, fontFamily: F.mono, fontSize: 26, letterSpacing: '0.2em', color: '#9FB3C4'}}>DE CADA 100 VISITAS WEB</div>
+          <div style={{position: 'absolute', left: 70, top: 170, fontFamily: F.mono, fontSize: 32, letterSpacing: '0.2em', color: '#9FB3C4'}}>DE CADA 100 VISITAS WEB</div>
           <div style={{position: 'absolute', left: 54, top: 260, transformOrigin: '486px 180px', transform: `scale(${1 + 0.04 * minor})`}}>
             <IsoGrid frame={frame} at={gridAt} marked={53} each={0.42} size={38} cols={20} dimMarked={minor} />
           </div>

@@ -1,4 +1,5 @@
-# CATÁLOGO · Biblioteca permanente Datologo 7 (`src/dl/`)
+# CATÁLOGO · Biblioteca permanente DROGMAN 7.0 (`src/dl/`)
+Vista de todas las piezas: `catalog/hoja.jpg` · miniaturas: `catalog/thumbs/<id>.jpg` · regenerar: `node tools/catalog-thumbs.mjs [ids]`.
 Regla: **antes de dibujar algo nuevo, búscalo aquí.** Lo que se crea para un video y sirve para otros se agrega aquí (nunca se borra; si se mejora, se mantiene la firma).
 Todas las piezas son funciones del fotograma (deterministas) y aceptan colores por props para adaptarse a cualquier tema.
 
@@ -29,7 +30,20 @@ Todas las piezas son funciones del fotograma (deterministas) y aceptan colores p
 ## Interfaces · `ui/`
 `FeedCard.tsx`: `FeedCard`, `makeCards` (feed social con giro humano→bot). `ForumScreen.tsx`: foro con compositor, clic, publicación, respuestas, marcador. `Social.tsx`: `PostCard` (cita real con resaltados) · `CommentBubble` · `ProfileCard` · `ChatThread` · `ChatWindow` (asistente IA) · `PhoneFrame`.
 
+## Motor de episodio · `episode/EpisodeRunner.tsx`
+`EpisodeRunner` (words, scenes[{C, from, to, out, outLen}], sfx, mix, overlays) · `episodeFrames(words)`. El episodio solo declara el mapa de escenas.
+
+## Render · `render/`
+`Clip3D` (3D real horneado en clip con alfa; ver docs/RENDER.md) · `ParticleForm` (partículas 3D en Canvas 2D: sphere, torus, helix, ring, disc, cloud, heart; morph, rotX/rotY, colors, spread) — costo medio, sin WebGL.
+
+## Anatomía · `anatomy/Anatomy.tsx`
+`Lungs` (inflate, o2, glow) · `Heart` (bpm, o2: late solo) · `BloodFlow` (d = trayectoria, o2, speed, cells) · `Brain` (highlight: brainstem/cortex/all) · `Diaphragm` (inflate) · `o2Color(o2)`.
+
+## Naturaleza y atmósfera · `nature/Nature.tsx`
+`Sky` (t = hora del día, nubes, sol/luna, estrellas) · `Hills` (capas de paralaje) · `Grass` (viento) · `Underwater` (cáusticas, rayos, burbujas; depth) · `Fog` · `GodRays`.
+
 ## Personajes · `characters/`
+**`HumanRig.tsx` → `HumanRig`** (cuerpo completo articulado 400×960): pose (`POSES`: idle, handsChest, handsUp, holdNose, walkA/B, point; `mixPose` para interpolar), breath, expression (neutral, tense, strain, relief, surprise, smile, eyesClosed), cheeks, flush, blink, look, **xray + inside** (órganos dentro del pecho), person (`PERSONA_A`, `PERSONA_B`, `ATLETA` o ficha propia), rim (color de luz de contorno). Limitación: vista frontal; brazos en 2 segmentos (flL/flR acortan el brazo para simular escorzo).
 | Pieza | Notas |
 |---|---|
 | `Avatars.tsx` → `HumanFace`, `BotFace` | avatares de perfil |
