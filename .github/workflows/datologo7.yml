@@ -139,6 +139,6 @@ jobs:
           git config user.name "datologo-bot"
           git config user.email "actions@users.noreply.github.com"
           [ -f datologo7.zip ] && git rm -q --cached datologo7.zip && rm -f datologo7.zip
-          git add d7 ':!d7/node_modules' ':!d7/out'
+          git add d7
           git commit -m "Datologo 7: ${{ steps.ep.outputs.slug }} [skip ci]" || echo "Sin cambios"
           git push
