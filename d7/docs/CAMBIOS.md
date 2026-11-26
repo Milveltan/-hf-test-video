@@ -32,3 +32,8 @@ Episodio «Internet muerto» (81 s). Render en GitHub con `swangle` para todo: *
 - Efectos nuevos en `public/sfx/` (sintetizados con ffmpeg): breath_in, gasp, heartbeat, alarm, power_off, underwater, spasm, body_ambient.
 - QA local sin acceso a remotion.media: `REMOTION_CHROME=/opt/pw-browsers/chromium_headless_shell-*/chrome-headless-shell-linux64/chrome-headless-shell node tools/qa-stills.mjs …`.
 - `words.json` provisional por pausas del audio; GitHub lo corrige con Whisper (`sync: true`).
+
+## 2026-11-26 · Episodio sacudida-al-dormir
+- Narración con las reglas nuevas de DIRECCION_CREATIVA §0 (gancho hablado, cierre explícito, sin datos técnicos).
+- Piezas nuevas en la biblioteca: `environments/NightHouse.tsx` (House, ApartmentBlock) y `fx/FallVoid.tsx`.
+- Con la voz Relator Narrativo Dinámico (Drama 3), ~150 palabras = 51 s; 199 palabras = 75 s.

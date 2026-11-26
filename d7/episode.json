@@ -1,8 +1,8 @@
 {
-  "slug": "contener-respiracion",
-  "composition": "ContenerRespiracion",
-  "voice": "public/audio/voz-contener-respiracion.wav",
-  "script": "src/episodes/contener-respiracion/script.txt",
+  "slug": "sacudida-al-dormir",
+  "composition": "SacudidaDormir",
+  "voice": "public/audio/voz-sacudida-al-dormir.wav",
+  "script": "src/episodes/sacudida-al-dormir/script.txt",
   "sync": true,
-  "qaFrames": "10,90,180,280,400,540,700,880,1000,1160,1320,1450,1620,1690,1760,1900"
+  "qaFrames": "8,95,240,620,800,1020,1150,1300,1420,1530,1620,1760,1900,2050,2190,2290"
 }

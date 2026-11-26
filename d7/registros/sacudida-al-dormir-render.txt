@@ -1,0 +1,11 @@
+episodio=sacudida-al-dormir
+fecha=2026-11-26T11:41:05Z
+ejecucion=45811788031
+nucleos=4
+duracion_video_s=76.651000
+fotogramas=2300
+render_segundos=265
+fps_de_render=8.68
+sync_segundos=57
+clips_segundos=0
+inicio_job=2026-11-26T05:34:12-06:00

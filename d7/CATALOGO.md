@@ -19,7 +19,7 @@ Todas las piezas son funciones del fotograma (deterministas) y aceptan colores p
 `Glow` (fuente puntual) · `Beam` (haz/reflector) · `Sweep` (reflejo que barre) · `Vignette`.
 
 ## Efectos · `fx/`
-`Fx.tsx`: `Stamp` (sello que golpea) · `Particles` (chispas, polvo, nieve, burbujas) · `Flash` · `Scanline`. `PowerOff.tsx`: `PowerOff` (apagado de televisor antiguo sobre cualquier escena: línea → punto → negro). `Dust.tsx`: polvo en un haz.
+`Fx.tsx`: `Stamp` (sello que golpea) · `Particles` (chispas, polvo, nieve, burbujas) · `Flash` · `Scanline`. `PowerOff.tsx`: `PowerOff` (apagado de televisor antiguo sobre cualquier escena: línea → punto → negro). `Dust.tsx`: polvo en un haz. `FallVoid.tsx`: túnel de caída con estelas radiales (k, speed, colores).
 
 ## Transiciones · `transitions/`
 `Transit` (whip, zoom, iris, fade, drop, wipe) · `GlitchBands`. Además: paneo vertical continuo, entrada a pantalla (match-cut), línea que continúa entre escenas (ver episodio internet-muerto).
@@ -56,7 +56,7 @@ Todas las piezas son funciones del fotograma (deterministas) y aceptan colores p
 **Fichas registradas:** `ALTMAN` (cabello castaño claro corto, ojos claros, suéter gris de cuello redondo) · `PERSONA` (genérica: pelo oscuro, suéter mostaza).
 
 ## Escenarios · `environments/`
-`DarkRoom.tsx` → `Room`, `SCR` (cuarto nocturno con monitor, ventana con lluvia) · `GovBuilding.tsx` (edificio de gobierno genérico con ventanas que se encienden).
+`DarkRoom.tsx` → `Room`, `SCR` (cuarto nocturno con monitor, ventana con lluvia) · `GovBuilding.tsx` (edificio de gobierno genérico con ventanas que se encienden). `NightHouse.tsx` → `House` (casa nocturna: `off[i]` apaga ventanas una por una; 8 = ático) · `ApartmentBlock` (edificio cols×rows con siluetas que se sacuden: `lit(i)`, `jolt(i)`).
 
 ## Mecanismos · `mechanisms/`
 `Conveyor.tsx` (banda transportadora con rodillos y objetos que viajan).
