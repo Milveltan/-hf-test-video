@@ -9,7 +9,7 @@ Config.setPixelFormat('yuv420p');
 Config.setColorSpace('bt709');
 Config.setCodec('h264');
 Config.setCrf(15);
-Config.setChromiumOpenGlRenderer('angle');
+Config.setChromiumOpenGlRenderer('swangle');
 Config.setTimeoutInMilliseconds(120000);
 // Las motions de Opus importan @remotion/google-fonts (descarga en cada render): las sustituimos por fuentes locales OFL.
 Config.overrideWebpackConfig((c) => withLocalFonts(c));

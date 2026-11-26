@@ -95,7 +95,7 @@ jobs:
         working-directory: d7
         run: |
           T0=$(date +%s)
-          npx remotion render src/index.ts "${{ steps.ep.outputs.comp }}" out/video.mp4 --concurrency=4 --log=info
+          npx remotion render src/index.ts "${{ steps.ep.outputs.comp }}" out/video.mp4 --concurrency=4 --gl=swangle --log=info
           T1=$(date +%s)
           DUR=$(ffprobe -v error -show_entries format=duration -of csv=p=0 out/video.mp4)
           FR=$(node -p "Math.round($DUR*30)")
