@@ -1,0 +1,4 @@
+Transcript: transcript.json (194 palabras reconocidas)
+Palabras del guion alineadas: 97.0 % (192/198)
+Primera palabra: 0.06s · Última palabra: 80.68s · Audio: 80.953s
+Efectos de sonido reubicados: 26
