@@ -13,4 +13,12 @@ Episodio «Internet muerto» (81 s). Render en GitHub con `swangle` para todo: *
 - Subtítulos con ajuste automático (`measureText`), mínimos de legibilidad subidos (fuentes, rótulos, kicker 30 px).
 - Catálogo visual: `src/catalog/Showcase.tsx` + `tools/catalog-thumbs.mjs` → 32 miniaturas.
 - Biblioteca nueva: `HumanRig` (cuerpo completo, 7 expresiones, poses, rayos X), anatomía (pulmones, corazón, flujo sanguíneo, cerebro, diafragma), naturaleza (cielo, colinas, pasto, bajo el agua, niebla, rayos de luz).
-- Medición del render híbrido: ver registros/internet-muerto-render.txt (se escribe al terminar el render en GitHub).
+- **Medición en GitHub (ejecución 45786754031, mismo episodio de 81 s):**
+  | Paso | v1 | v2 |
+  |---|---|---|
+  | Render del episodio | 1859 s (1.31 fps) | **191 s (12.77 fps)** ✅ |
+  | Clip 3D (solo la 1.ª vez; luego se reutiliza) | — | 92 s ✅ |
+  | Sync Faster-Whisper | 50 s | 45 s ✅ |
+  | Ejecución completa del workflow | ≈ 34 min | **≈ 7.7 min** ✅ |
+  Guardado automático de clips y registros en la rama: ✅ funcionando.
+- El workflow ya no renderiza cuando solo cambian documentos (docs, .md, registros, catálogo).
