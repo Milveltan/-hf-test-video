@@ -62,6 +62,8 @@ Todas las piezas son funciones del fotograma (deterministas) y aceptan colores p
 
 **`anatomy/Stomach.tsx`**: `Stomach` (estómago 2.5D; `churn` contracciones, `fill` comida, `glow`). Va bien dentro de `HumanRig` con `xray`.
 
+**`characters/Face.tsx`**: `FaceCloseUp` (primer plano de rostro 600×720 con `yawn` 0–1 real: mandíbula, lengua, ojos apretados, lágrima; `blink`, `gaze`, `tilt`, `rim`; looks con pelo short/long/bun/curly) · `DogHead` (perro con `yawn`) · `yawnCurve(f, at, dur)`. Para reacciones y emociones en primer plano.
+
 ## Cine · `film/Film.tsx`
 `Idea` (bombilla luminosa con rayos; `glow` < 1 la apaga en gris) · `FilmCard` (fotograma con perforaciones que encierra cualquier contenido 1080×1200 escalado a `w`; `glow`, `dim`) · `Clapper` (claqueta, `k` 0 abierta → 1 cerrada). Útiles para "capítulos", archivo, recuerdos, escenas dentro de escenas.
 

@@ -1,8 +1,8 @@
 {
-  "slug": "sueno-comer",
-  "composition": "SuenoComer",
-  "voice": "public/audio/voz-sueno-comer.wav",
-  "script": "src/episodes/sueno-comer/script.txt",
+  "slug": "bostezo",
+  "composition": "Bostezo",
+  "voice": "public/audio/voz-bostezo.wav",
+  "script": "src/episodes/bostezo/script.txt",
   "sync": true,
-  "qaFrames": "6,110,276,418,511,588,635,693,754,819,867,920"
+  "qaFrames": "20,96,128,140,235,283,316,395,477,524,627,708,781,811"
 }

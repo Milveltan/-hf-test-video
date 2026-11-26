@@ -56,3 +56,7 @@ Episodio «Internet muerto» (81 s). Render en GitHub con `swangle` para todo: *
 ## 2026-11-26 · Episodio sueno-comer (31,8 s)
 - Composición `SuenoComer`, 6 escenas. Dirección artística "Siesta de sobremesa". Pieza nueva: `anatomy/Stomach.tsx`.
 - Persona acostada en el sofá: `Person` con `rot={-90}` (gira sobre los pies), s ≈ 0.46, pies en x≈600, y≈770 de la `Sala`.
+
+## 2026-11-26 · Episodio bostezo (27,6 s)
+- Composición `Bostezo`, 6 escenas. Dirección artística "Termografía nocturna". Pieza nueva: `characters/Face.tsx` (FaceCloseUp con bostezo, DogHead, yawnCurve).
+- No existe la transición `glitch`: usar whip/zoom/iris/drop/fade/wipe.
