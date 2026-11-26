@@ -7,7 +7,8 @@ Meta: gastar el mínimo del límite de uso de Claude **sin bajar la calidad**. L
 | Producción habitual de un episodio con piezas existentes (narración aprobada → escenas → validación → entrega) | **Sonnet** |
 | Correcciones por escena, títulos, descripción SEO | **Sonnet** |
 | Arquitectura, piezas nuevas complejas (personajes, sistemas), cambios de workflow, dirección artística de un tema nuevo, auditorías | **Opus** |
-Si Sonnet necesita una pieza que no existe y es compleja, la construye en versión simple y anota en CAMBIOS.md «pendiente de mejora (Opus)».
+Si falta un componente complejo, Sonnet **no simplifica la calidad de la escena**: primero la resuelve creativamente con las piezas existentes o desarrolla el componente nuevo. Solo si de verdad supera sus capacidades, describe el problema y recomienda una intervención puntual de Opus antes de entregar.
+**Ahorrar = eliminar trabajo redundante, nunca reducir la calidad audiovisual.**
 
 ## Reglas de lectura (contexto mínimo)
 1. Leer **solo** CLAUDE.md al arrancar. Abrir otros docs únicamente cuando la tarea lo pida.
