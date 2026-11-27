@@ -1,8 +1,8 @@
 {
-  "slug": "piloto-fosa",
-  "composition": "PilotoFosa",
-  "voice": "public/audio/voz-piloto-fosa.wav",
-  "script": "src/episodes/piloto-fosa/script.txt",
-  "sync": false,
-  "qaFrames": "10,60,120,160,200,250,300,330,360,400,430,449"
+  "slug": "ola-lituya",
+  "composition": "OlaLituya",
+  "voice": "public/audio/voz-ola-lituya.wav",
+  "script": "src/episodes/ola-lituya/script.txt",
+  "sync": true,
+  "qaFrames": "10,82,142,193,210,272,348,389,446,512,581,676"
 }

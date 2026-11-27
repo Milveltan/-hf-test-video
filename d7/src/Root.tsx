@@ -14,6 +14,7 @@ import {EPISODE_FRAMES as SC_FRAMES, Episode as SuenoComer} from './episodes/sue
 import {EPISODE_FRAMES as BZ_FRAMES, Episode as Bostezo} from './episodes/bostezo/Episode';
 import {Piloto as PilotoFosa} from './episodes/piloto-fosa/Piloto';
 import {FRAMES as PF_FRAMES} from './episodes/piloto-fosa/world';
+import {EPISODE_FRAMES as OL_FRAMES, Episode as OlaLituya} from './episodes/ola-lituya/Episode';
 import {Showcase} from './catalog/Showcase';
 
 /** Formato oficial Datologo 7.0: 1080 × 1200 (9:10) · 30 fps */
@@ -32,6 +33,7 @@ export const RemotionRoot: React.FC = () => (
     <Composition id="SuenoComer" component={SuenoComer} width={W} height={H} fps={30} durationInFrames={SC_FRAMES} />
     <Composition id="Bostezo" component={Bostezo} width={W} height={H} fps={30} durationInFrames={BZ_FRAMES} />
     <Composition id="PilotoFosa" component={PilotoFosa} width={W} height={H} fps={30} durationInFrames={PF_FRAMES} />
+    <Composition id="OlaLituya" component={OlaLituya} width={W} height={H} fps={30} durationInFrames={OL_FRAMES} />
     <Composition id="PilotoInternetMuerto" component={Piloto} width={W} height={H} fps={30} durationInFrames={PILOT_FRAMES} />
     <Composition id="Catalogo" component={Showcase} width={W} height={H} fps={30} durationInFrames={60} defaultProps={{piece: 'HumanRig-idle'}} />
     {CLIPS.map((c) => (

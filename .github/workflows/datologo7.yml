@@ -108,7 +108,7 @@ jobs:
           for id in $(node -e "const s=require('fs').readFileSync('src/clips.ts','utf8');const ep=require('./episode.json').slug;for(const m of s.matchAll(/id: '([^']+)'[^}]*episode: '([^']+)'/g)) if(m[2]===ep) console.log(m[1])"); do
             if [ "$FORCE" = "1" ] || [ ! -f "public/clips/$id.webm" ]; then
               echo "Renderizando clip $id"
-              npx remotion render src/index.ts "Clip-$id" "public/clips/$id.webm" --codec=vp8 --pixel-format=yuva420p --image-format=png --gl=swangle --concurrency=4 --log=error
+              npx remotion render src/index.ts "Clip-$id" "public/clips/$id.webm" --codec=vp8 --pixel-format=yuva420p --image-format=png --video-bitrate=40M --gl=swangle --concurrency=4 --log=error
             else
               echo "Clip $id ya existe: se reutiliza"
             fi
@@ -119,7 +119,7 @@ jobs:
         working-directory: d7
         run: |
           T0=$(date +%s)
-          npx remotion render src/index.ts "${{ steps.ep.outputs.comp }}" out/video.mp4 --concurrency=4 --gl=angle --log=info
+          npx remotion render src/index.ts "${{ steps.ep.outputs.comp }}" out/video.mp4 --concurrency=4 --crf=14 --gl=angle --log=info
           T1=$(date +%s)
           DUR=$(ffprobe -v error -show_entries format=duration -of csv=p=0 out/video.mp4)
           FR=$(node -p "Math.round($DUR*30)")

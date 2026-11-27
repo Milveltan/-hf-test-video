@@ -16,7 +16,8 @@ import React, {useMemo} from 'react';
 import * as THREE from 'three';
 import {useThree} from '@react-three/fiber';
 import {ThreeCanvas} from '@remotion/three';
-import {useCurrentFrame} from 'remotion';
+import {continueRender, delayRender, useCurrentFrame} from 'remotion';
+import '../fonts';
 
 /* ───────── ruido ───────── */
 const hash = (x: number, y: number, z: number, s: number) => {
@@ -69,7 +70,17 @@ const CamRig: React.FC<{camAt: (f: number) => CamKey; fog?: (f: number) => {colo
   return null;
 };
 
-export const World3D: React.FC<{camAt: (f: number) => CamKey; fog?: (f: number) => {color: string; density: number}; children: React.ReactNode; transparent?: boolean}> = ({camAt, fog, children, transparent}) => (
+export const World3D: React.FC<{camAt: (f: number) => CamKey; fog?: (f: number) => {color: string; density: number}; children: React.ReactNode; transparent?: boolean}> = ({camAt, fog, children, transparent}) => {
+  // espera a que las fuentes estén listas: las etiquetas 3D se dibujan en canvas con Anton / JetBrains Mono
+  const [handle] = React.useState(() => delayRender('fuentes 3D'));
+  const [ready, setReady] = React.useState(false);
+  React.useEffect(() => {
+    Promise.all([document.fonts.load('400 96px Anton'), document.fonts.load('700 40px "JetBrains Mono"')]).catch(() => null).then(() => { setReady(true); continueRender(handle); });
+  }, [handle]);
+  if (!ready) return null;
+  return <World3DInner camAt={camAt} fog={fog} transparent={transparent}>{children}</World3DInner>;
+};
+const World3DInner: React.FC<{camAt: (f: number) => CamKey; fog?: (f: number) => {color: string; density: number}; children: React.ReactNode; transparent?: boolean}> = ({camAt, fog, children, transparent}) => (
   <ThreeCanvas width={1080} height={1200} camera={{fov: 50, near: 0.5, far: 1200, position: [0, 0, 5]}} gl={{antialias: false, alpha: !!transparent, preserveDrawingBuffer: true, logarithmicDepthBuffer: false}} style={{background: transparent ? 'transparent' : '#000'}}>
     <CamRig camAt={camAt} fog={fog} />
     {children}
@@ -204,14 +215,14 @@ const labelTex = (text: string, accent: string, sub?: string) => {
   if (labelCache.has(key)) return labelCache.get(key)!;
   const c = document.createElement('canvas'); const g = c.getContext('2d')!;
   const fs = 96, pad = 40;
-  g.font = `700 ${fs}px Anton, Impact, sans-serif`; const w1 = g.measureText(text).width;
-  g.font = `600 ${fs * 0.42}px "JetBrains Mono", monospace`; const w2 = sub ? g.measureText(sub).width : 0;
+  g.font = `400 ${fs}px Anton, Impact, sans-serif`; const w1 = g.measureText(text).width;
+  g.font = `700 ${fs * 0.42}px "JetBrains Mono", monospace`; const w2 = sub ? g.measureText(sub).width : 0;
   c.width = Math.ceil(Math.max(w1, w2) + pad * 2 + 20); c.height = sub ? 220 : 160;
   g.fillStyle = 'rgba(6,14,24,0.78)'; g.strokeStyle = accent; g.lineWidth = 6;
   const r = 30; g.beginPath(); g.roundRect(3, 3, c.width - 6, c.height - 6, r); g.fill(); g.stroke();
   g.fillStyle = accent; g.fillRect(pad - 18, 40, 8, c.height - 80);
-  g.fillStyle = '#FFFFFF'; g.font = `700 ${fs}px Anton, Impact, sans-serif`; g.textBaseline = 'middle'; g.fillText(text, pad, sub ? 78 : c.height / 2 + 4);
-  if (sub) { g.fillStyle = accent; g.font = `600 ${fs * 0.42}px "JetBrains Mono", monospace`; g.fillText(sub, pad, 162); }
+  g.fillStyle = '#FFFFFF'; g.font = `400 ${fs}px Anton, Impact, sans-serif`; g.textBaseline = 'middle'; g.fillText(text, pad, sub ? 78 : c.height / 2 + 4);
+  if (sub) { g.fillStyle = accent; g.font = `700 ${fs * 0.42}px "JetBrains Mono", monospace`; g.fillText(sub, pad, 162); }
   const tex = new THREE.CanvasTexture(c); tex.anisotropy = 4;
   const v = {tex, aspect: c.width / c.height}; labelCache.set(key, v); return v;
 };
@@ -229,7 +240,7 @@ export const MeasureLine: React.FC<{from: [number, number, number]; to: [number,
   const q = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir);
   return (
     <group>
-      {len > 0.01 && <mesh position={mid} quaternion={q}><cylinderGeometry args={[thick, thick, len, 8]} /><meshBasicMaterial color={color} fog={false} /></mesh>}
+      {len > 0.01 && <mesh position={mid} quaternion={q}><boxGeometry args={[thick * 2, len, thick * 2]} /><meshBasicMaterial color={color} fog={false} /></mesh>}
       {[a, end].map((p, i) => <mesh key={i} position={p} quaternion={q}><boxGeometry args={[cap, thick * 1.4, thick * 1.4]} /><meshBasicMaterial color={color} fog={false} /></mesh>)}
     </group>
   );

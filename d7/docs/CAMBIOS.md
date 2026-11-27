@@ -60,3 +60,8 @@ Episodio «Internet muerto» (81 s). Render en GitHub con `swangle` para todo: *
 ## 2026-11-26 · Episodio bostezo (27,6 s)
 - Composición `Bostezo`, 6 escenas. Dirección artística "Termografía nocturna". Pieza nueva: `characters/Face.tsx` (FaceCloseUp con bostezo, DogHead, yawnCurve).
 - No existe la transición `glitch`: usar whip/zoom/iris/drop/fade/wipe.
+
+## 2026-11-26 · Episodio ola-lituya (23,5 s) — primer episodio con el kit 3D
+- Todo el video es un clip 3D continuo (`Bay3D`) anclado a words.json (Whisper lo corrige antes de hornear el clip). Agua desplazada por CPU cada fotograma, bosque instanciado que se arranca bajo la marca, holograma de escala.
+- Calidad: clips 3D con `--video-bitrate=40M` (antes ~0,5 Mbps, se veía pixeleado) y video final con `--crf=14`.
+- Etiquetas 3D: esperar `document.fonts.load` (Anton 400) antes de dibujar el canvas. `MeasureLine` usa cajas (no cilindros).
