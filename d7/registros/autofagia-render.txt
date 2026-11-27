@@ -1,0 +1,11 @@
+episodio=autofagia
+fecha=2026-11-27T04:32:02Z
+ejecucion=45938162549
+nucleos=4
+duracion_video_s=147.072000
+fotogramas=4412
+render_segundos=350
+fps_de_render=12.61
+sync_segundos=74
+clips_segundos=886
+inicio_job=2026-11-26T22:08:12-06:00
