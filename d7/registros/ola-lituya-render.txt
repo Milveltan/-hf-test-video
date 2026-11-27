@@ -1,11 +1,11 @@
 episodio=ola-lituya
-fecha=2026-11-27T00:23:29Z
-ejecucion=45915692958
+fecha=2026-11-27T00:32:00Z
+ejecucion=45916579925
 nucleos=4
 duracion_video_s=24.469000
 fotogramas=734
-render_segundos=64
-fps_de_render=11.47
+render_segundos=68
+fps_de_render=10.79
 sync_segundos=12
-clips_segundos=306
-inicio_job=
+clips_segundos=225
+inicio_job=2026-11-26T18:24:55-06:00
