@@ -65,3 +65,7 @@ Episodio «Internet muerto» (81 s). Render en GitHub con `swangle` para todo: *
 - Todo el video es un clip 3D continuo (`Bay3D`) anclado a words.json (Whisper lo corrige antes de hornear el clip). Agua desplazada por CPU cada fotograma, bosque instanciado que se arranca bajo la marca, holograma de escala.
 - Calidad: clips 3D con `--crf=4` (máxima calidad VP8; antes ~0,5 Mbps, se veía pixeleado) y video final con `--crf=14`.
 - Etiquetas 3D: esperar `document.fonts.load` (Anton 400) antes de dibujar el canvas. `MeasureLine` usa cajas (no cilindros).
+
+## 2026-11-27 · Episodio autofagia (2:26) — 3D continuo dentro de una célula
+- Composición `Autofagia`; clip 3D `autofagia-celula` (tejido → célula → fábrica → fagóforo → lisosoma → reciclaje → levaduras → falla → tejido). Capa 2D: Nobel, publicaciones virales genéricas, sellos.
+- Fagóforo = casquete de esfera (`thetaLength` animado). Sin retrato de la persona real.

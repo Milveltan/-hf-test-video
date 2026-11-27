@@ -1,8 +1,8 @@
 {
-  "slug": "ola-lituya",
-  "composition": "OlaLituya",
-  "voice": "public/audio/voz-ola-lituya.wav",
-  "script": "src/episodes/ola-lituya/script.txt",
+  "slug": "autofagia",
+  "composition": "Autofagia",
+  "voice": "public/audio/voz-autofagia.wav",
+  "script": "src/episodes/autofagia/script.txt",
   "sync": true,
-  "qaFrames": "10,82,142,193,210,272,348,389,446,512,581,676"
+  "qaFrames": "83,329,416,627,1001,1305,1655,1942,2043,2212,2403,2711,2880,3130,3456,3868,4038,4295"
 }
