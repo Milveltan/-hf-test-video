@@ -108,7 +108,7 @@ jobs:
           for id in $(node -e "const s=require('fs').readFileSync('src/clips.ts','utf8');const ep=require('./episode.json').slug;for(const m of s.matchAll(/id: '([^']+)'[^}]*episode: '([^']+)'/g)) if(m[2]===ep) console.log(m[1])"); do
             if [ "$FORCE" = "1" ] || [ ! -f "public/clips/$id.webm" ]; then
               echo "Renderizando clip $id"
-              npx remotion render src/index.ts "Clip-$id" "public/clips/$id.webm" --codec=vp8 --pixel-format=yuva420p --image-format=png --video-bitrate=40M --gl=swangle --concurrency=4 --log=error
+              npx remotion render src/index.ts "Clip-$id" "public/clips/$id.webm" --codec=vp8 --pixel-format=yuva420p --image-format=png --crf=4 --gl=swangle --concurrency=4 --log=error
             else
               echo "Clip $id ya existe: se reutiliza"
             fi
