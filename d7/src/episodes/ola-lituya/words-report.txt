@@ -1,0 +1,2 @@
+Palabras del guion alineadas: 100.0 % (53/53)
+Primera: 0.00s · Última: 23.06s
